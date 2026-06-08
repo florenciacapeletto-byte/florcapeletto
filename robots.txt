@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /servicios_interno/
+
+# Sitemap Link
+Sitemap: https://www.florcapeletto.com/sitemap.xml
