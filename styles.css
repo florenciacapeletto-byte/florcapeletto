@@ -49,6 +49,8 @@ html {
     scroll-behavior: smooth;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -2623,7 +2625,16 @@ section {
     }
 
     .hero-title {
-        font-size: 2.8rem;
+        font-size: clamp(1.8rem, 8vw, 2.6rem); /* Escala de tamaño fluido para evitar desbordes con palabras largas */
+        line-height: 1.25;
+    }
+
+    .hero-title .text-highlight {
+        display: inline; /* Permitir saltos de línea naturales */
+        transform: none; /* Quitar rotación en móviles para evitar recortes raros */
+        font-size: 1.2em;
+        margin-left: 4px;
+        white-space: normal;
     }
 
     .hero-subtitle {
@@ -2631,6 +2642,18 @@ section {
     }
 
     .hero-actions {
+        justify-content: center;
+        flex-direction: column; /* Botones apilados verticalmente en móvil */
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .hero-actions .btn-primary,
+    .hero-actions .btn-secondary {
+        width: 100%;
+        max-width: 280px; /* Ancho consistente y limpio en pantallas pequeñas */
+        text-align: center;
         justify-content: center;
     }
 
