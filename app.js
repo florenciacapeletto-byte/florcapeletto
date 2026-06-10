@@ -188,8 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!name || !email || !config) return;
 
-        // Guardar localmente
-        saveLead(name, email, config.title);
+        // Guardar localmente y enviar a Make/Supabase
+        saveLead(name, email, config.title, config.link);
 
         // Configurar el enlace de descarga exitoso
         modalDownloadLink.href = config.link;
@@ -230,15 +230,41 @@ document.addEventListener("DOMContentLoaded", () => {
         modalSuccessState.style.display = "flex";
     });
 
-    const saveLead = async (name, email, resourceTitle) => {
+    const saveLead = async (name, email, resourceTitle, downloadLink = "") => {
         let leads = JSON.parse(localStorage.getItem("leads_database")) || [];
+        const dateStr = new Date().toLocaleDateString("es-ES") + " " + new Date().toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'});
         leads.push({
-            date: new Date().toLocaleDateString("es-ES") + " " + new Date().toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'}),
+            date: dateStr,
             name: name,
             email: email,
             resource: resourceTitle
         });
         localStorage.setItem("leads_database", JSON.stringify(leads));
+
+        // Enviar datos al Webhook de Make
+        try {
+            let absoluteLink = downloadLink;
+            if (downloadLink && !downloadLink.startsWith("http")) {
+                absoluteLink = `https://www.florcapeletto.com/${downloadLink}`;
+            }
+            
+            fetch("https://hook.eu1.make.com/5r6rnkfrwanu7xc51zaxh5x8nk5u6ii5", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    resource: resourceTitle,
+                    link: absoluteLink,
+                    date: dateStr
+                })
+            });
+            console.log("📨 Lead enviado a Make con éxito.");
+        } catch (err) {
+            console.error("❌ Error al enviar lead a Make:", err);
+        }
 
         if (supabaseClient) {
             try {
