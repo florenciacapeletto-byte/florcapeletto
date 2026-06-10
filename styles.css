@@ -1864,7 +1864,8 @@ section {
     max-width: 500px;
     box-shadow: var(--shadow-lg);
     position: relative;
-    overflow: hidden;
+    max-height: 90vh;
+    overflow-y: auto;
     border: 1px solid rgba(63, 98, 91, 0.08);
 }
 
