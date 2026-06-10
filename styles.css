@@ -2077,6 +2077,44 @@ section {
     box-shadow: var(--shadow-accent);
 }
 
+.modal-social-follow {
+    border-top: 1px solid rgba(78, 96, 116, 0.12);
+    padding-top: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.modal-social-follow p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.btn-modal-instagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 0;
+    background-color: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-modal-instagram:hover {
+    background-color: var(--accent);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-accent);
+}
+
 /* Dashboard de Leads (Panel Admin) */
 .admin-body {
     text-align: left;
