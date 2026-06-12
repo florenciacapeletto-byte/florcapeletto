@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             subtitle: "Ingresa tus datos y descarga el eBook de 80 páginas en formato PDF.",
             icon: "fa-solid fa-book-open-reader",
             successMsg: "¡Registro exitoso! Haz clic en el botón de abajo para iniciar la descarga del PDF de tu Guía estratégica.",
-            link: "assets/GUIA_LINKEDIN_2026.pdf",
+            link: "assets/guia-linkedin-2026-flor-capeletto.pdf",
             btnText: "Descargar Guía en PDF"
         },
         talleres: {
