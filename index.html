@@ -50,6 +50,7 @@
                 <a href="#sobre-mi" class="nav-item">Sobre Mí</a>
                 <!-- <a href="#metodo" class="nav-item">Método NEXO</a> -->
                 <a href="#recursos" class="nav-item">Recursos</a>
+                <a href="https://hotmart.com/es/club/flor-capeletto/community/15287700" class="nav-item" target="_blank">Comunidad</a>
                 <a href="#blog" class="nav-item">Reflexiones</a>
                 <a href="#contacto" class="nav-btn">Hablemos</a>
             </nav>
@@ -515,7 +516,12 @@
 
                 <!-- Lead Magnet 2: Guía LinkedIn (Free) -->
                 <div class="recurso-card" data-category="free">
-                    <div class="recurso-badge free">EBOOK GRATUITO</div>
+                    <!-- VERSIÓN GRATUITA (ACTIVA POR MES INAUGURACIÓN) -->
+                    <div class="recurso-badge free" id="linkedin-badge-gratis">EBOOK GRATUITO</div>
+                    
+                    <!-- VERSIÓN DE PAGO (COMENTADA PARA EL FUTURO) -->
+                    <!-- <div class="recurso-badge premium" id="linkedin-badge-pago" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">EBOOK PREMIUM</div> -->
+                    
                     <div class="recurso-icon-bg">
                         <i class="fa-solid fa-book-open-reader"></i>
                     </div>
@@ -527,9 +533,38 @@
                             <span class="meta-item"><i class="fa-solid fa-file-pdf"></i> 80 Páginas Prácticas</span>
                             <span class="meta-item"><i class="fa-solid fa-circle-check"></i> Trucos de Selección</span>
                         </div>
-                        <button class="btn-card-action open-modal-btn" data-resource="linkedin">
+                        
+                        <!-- BOTÓN DESCARGA GRATUITA (ACTIVO) -->
+                        <button class="btn-card-action open-modal-btn" id="btn-linkedin-gratis" data-resource="linkedin">
                             Descargar Guía <i class="fa-solid fa-arrow-down"></i>
                         </button>
+
+                        <!-- BOTÓN DE COMPRA HOTMART (COMENTADO PARA EL FUTURO) -->
+                        <!-- 
+                        <a href="https://go.hotmart.com/F106293567O" class="btn-card-action-premium" id="btn-linkedin-comprar" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%;">
+                            Comprar Guía (9.99 USD) <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        -->
+                    </div>
+                </div>
+
+                <!-- Comunidad Exclusiva (Free) -->
+                <div class="recurso-card" data-category="free">
+                    <div class="recurso-badge free" style="background-color: rgba(144, 181, 163, 0.15); color: var(--primary);">COMUNIDAD GRATUITA</div>
+                    <div class="recurso-icon-bg" style="color: var(--steel-blue); background-color: rgba(78, 96, 116, 0.05);">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="recurso-card-content">
+                        <h3>Comunidad Reinvención & Bienestar</h3>
+                        <p class="recurso-type">Espacio de Networking e Intercambio</p>
+                        <p class="recurso-desc">Únete a nuestro foro privado para conectar con otros profesionales en procesos de cambio. Comparte experiencias, haz preguntas y accede a debates semanales en un entorno de apoyo mutuo.</p>
+                        <div class="recurso-meta">
+                            <span class="meta-item"><i class="fa-solid fa-circle-check"></i> Acceso 100% Gratis</span>
+                            <span class="meta-item"><i class="fa-solid fa-comments"></i> Debates y Soporte</span>
+                        </div>
+                        <a href="https://hotmart.com/es/club/flor-capeletto/community/15287700" class="btn-card-action" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%;">
+                            Unirme a la Comunidad <i class="fa-solid fa-right-to-bracket"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -596,7 +631,12 @@
 
                 <!-- Premium Item 3: Talleres Pregrabados -->
                 <div class="recurso-card" data-category="premium">
-                    <div class="recurso-badge premium" style="background-color: rgba(78, 96, 116, 0.1); color: var(--steel-blue);">LISTA DE ESPERA</div>
+                    <!-- PASO 1 (LISTA DE ESPERA - ACTIVO): -->
+                    <div class="recurso-badge premium" id="taller-badge-espera" style="background-color: rgba(78, 96, 116, 0.1); color: var(--steel-blue);">LISTA DE ESPERA</div>
+                    
+                    <!-- PASO 1 (LANZAMIENTO - COMENTADO): Descomenta la línea de abajo y borra/comenta la de LISTA DE ESPERA cuando lances en Hotmart -->
+                    <!-- <div class="recurso-badge premium" id="taller-badge-lanzado" style="background-color: rgba(63, 98, 91, 0.12); color: var(--primary);">TALLER ONLINE</div> -->
+
                     <div class="recurso-icon-bg">
                         <i class="fa-solid fa-photo-film"></i>
                     </div>
@@ -608,9 +648,18 @@
                             <span class="meta-item"><i class="fa-solid fa-circle-play"></i> Clases de por vida</span>
                             <span class="meta-item"><i class="fa-solid fa-book"></i> Hojas de Ruta Prácticas</span>
                         </div>
-                        <button class="btn-card-action open-modal-btn" data-resource="talleres" style="width: 100%;">
+                        
+                        <!-- PASO 2 (LISTA DE ESPERA - ACTIVO): Formulario de captura para avisar al lanzar -->
+                        <button class="btn-card-action open-modal-btn" id="btn-taller-espera" data-resource="talleres" style="width: 100%;">
                             Avisarme al lanzar <i class="fa-solid fa-bell"></i>
                         </button>
+
+                        <!-- PASO 2 (LANZAMIENTO - COMENTADO): Botón de compra directa de Hotmart. Descomenta y pon tu HotLink real en href cuando esté listo -->
+                        <!-- 
+                        <a href="https://pay.hotmart.com/TU_CODIGO_PRODUCTO" class="btn-card-action-premium" id="btn-taller-comprar" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%;">
+                            Inscribirme al Taller <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        -->
                     </div>
                 </div>
 
