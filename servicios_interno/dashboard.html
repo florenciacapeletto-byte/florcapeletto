@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Métricas y Analíticas | Flor Capeletto</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --primary: #3F625B;
+            --primary-light: #4E736B;
+            --accent: #D98757;
+            --accent-hover: #C57345;
+            --secondary: #90B5A3;
+            --steel-blue: #4E6074;
+            --peach: #EFAA89;
+            --bg-warm: #FCFBF9;
+            --white: #FFFFFF;
+            --text-main: #2C3531;
+            --text-muted: #5D6D66;
+            --border-color: rgba(144, 181, 163, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-md: 0 10px 30px rgba(63, 98, 91, 0.06);
+            --shadow-lg: 0 15px 35px rgba(63, 98, 91, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-warm);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Access Locked Screen */
+        .locked-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .locked-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .locked-card i.lock-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .locked-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .locked-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid rgba(144, 181, 163, 0.3);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            background-color: var(--bg-warm);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(217, 135, 87, 0.1);
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(217, 135, 87, 0.2);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: rgba(78, 96, 116, 0.08);
+            color: var(--steel-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(78, 96, 116, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Dashboard Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .badge-private {
+            display: inline-block;
+            background-color: rgba(78, 96, 116, 0.1);
+            color: var(--steel-blue);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background-color: rgba(144, 181, 163, 0.08);
+            padding: 6px;
+            border-radius: 14px;
+            border: 1px solid rgba(144, 181, 163, 0.15);
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(63, 98, 91, 0.05);
+        }
+
+        /* Cards Layout */
+        .dashboard-content {
+            display: none;
+        }
+
+        .dashboard-content.active {
+            display: block;
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .kpi-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+
+        .kpi-card.accent::before {
+            background-color: var(--accent);
+        }
+
+        .kpi-card.blue::before {
+            background-color: var(--steel-blue);
+        }
+
+        .kpi-icon {
+            align-self: flex-end;
+            font-size: 1.8rem;
+            color: rgba(63, 98, 91, 0.15);
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .kpi-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .kpi-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Analytics Visual Chart */
+        .chart-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .chart-header h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chart-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .chart-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .chart-name {
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-count {
+            color: var(--primary);
+        }
+
+        .chart-bar-bg {
+            background-color: rgba(144, 181, 163, 0.12);
+            height: 14px;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .chart-bar-fill {
+            background-color: var(--secondary);
+            height: 100%;
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+
+        .chart-item.accent .chart-bar-fill {
+            background-color: var(--accent);
+        }
+
+        .chart-item.blue .chart-bar-fill {
+            background-color: var(--steel-blue);
+        }
+
+        /* Data Tables styling */
+        .table-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .table-header h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 10px 15px 10px 38px;
+            border: 1.5px solid rgba(144, 181, 163, 0.3);
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            width: 250px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            width: 280px;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid rgba(144, 181, 163, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        th {
+            background-color: rgba(63, 98, 91, 0.04);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 15px 20px;
+            border-bottom: 1.5px solid var(--border-color);
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(144, 181, 163, 0.1);
+            color: var(--text-main);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(144, 181, 163, 0.02);
+        }
+
+        .badge-resource {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-resource.tracker {
+            background-color: rgba(144, 181, 163, 0.15);
+            color: var(--primary);
+        }
+
+        .badge-resource.linkedin {
+            background-color: rgba(217, 135, 87, 0.12);
+            color: var(--accent);
+        }
+
+        .badge-resource.contacto {
+            background-color: rgba(78, 96, 116, 0.1);
+            color: var(--steel-blue);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Help setup guide */
+        .help-box {
+            background-color: rgba(63, 98, 91, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 30px;
+            font-size: 0.88rem;
+        }
+
+        .help-box h4 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-box ol {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .help-box code {
+            background-color: rgba(217, 135, 87, 0.08);
+            color: var(--accent-hover);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-weight: 600;
+        }
+
+        /* Settings card */
+        .settings-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-input {
+                width: 100%;
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px 28px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--peach);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- SCREEN 1: LOCKED (SETUP KEYS) -->
+        <div id="locked-view" class="locked-screen">
+            <div class="locked-card">
+                <i class="fa-solid fa-shield-halved lock-icon"></i>
+                <h2>Acceso Seguro a Métricas</h2>
+                <p>Para ver los resultados de visitas, leads y contactos, introduce tu <strong>Supabase Service Key</strong>. Esta llave es privada y se guarda de forma segura en tu navegador local (nunca se envía a internet).</p>
+                
+                <form id="setup-form">
+                    <div class="input-group">
+                        <label for="setup-key"><i class="fa-solid fa-key"></i> Supabase Service Role Key (service_role)</label>
+                        <input type="password" id="setup-key" class="form-control" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-unlock"></i> Desbloquear Dashboard</button>
+                </form>
+
+                <div class="help-box" style="text-align: left;">
+                    <h4><i class="fa-solid fa-circle-question"></i> ¿Cómo consigo esta clave?</h4>
+                    <ol>
+                        <li>Inicia sesión en tu panel de **[Supabase](https://supabase.com)**.</li>
+                        <li>Entra a tu proyecto **`flor capeletto web`**.</li>
+                        <li>Haz clic en la rueda de engranaje **Project Settings** (abajo a la izquierda).</li>
+                        <li>Entra a **API**.</li>
+                        <li>Busca la sección de claves y copia el código de **`service_role`** (haz clic en *Reveal* para mostrarla).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: ACTIVE DASHBOARD (VISIBLE ONCE UNLOCKED) -->
+        <div id="dashboard-view" style="display: none;">
+            
+            <!-- Dashboard Header -->
+            <header>
+                <div class="logo-area">
+                    <i class="fa-solid fa-chart-line logo-icon"></i>
+                    <h1>Panel de Métricas y Analíticas</h1>
+                </div>
+                <p class="subtitle">Monitoreo de visitas, conversiones e interacciones en tiempo real</p>
+                <span class="badge-private"><i class="fa-solid fa-lock"></i> Acceso Privado del Administrador</span>
+                
+                <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
+                    <a href="editor.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.8rem; border-radius: 20px;">
+                        <i class="fa-solid fa-compass-drafting"></i> Planificador
+                    </a>
+                </div>
+            </header>
+
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="resumen">
+                    <i class="fa-solid fa-gauge-high"></i> Resumen General
+                </button>
+                <button class="tab-btn" data-tab="leads">
+                    <i class="fa-solid fa-file-arrow-down"></i> Descargas (Leads)
+                </button>
+                <button class="tab-btn" data-tab="contactos">
+                    <i class="fa-solid fa-envelope"></i> Consultas (Mensajes)
+                </button>
+                <button class="tab-btn" data-tab="ajustes">
+                    <i class="fa-solid fa-sliders"></i> Ajustes
+                </button>
+            </div>
+
+            <!-- TAB 1: RESUMEN GENERAL -->
+            <div class="dashboard-content active" id="tab-resumen">
+                
+                <!-- KPIs Grid -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <span class="kpi-title">Visitas Totales</span>
+                        <div class="kpi-value" id="kpi-views">0</div>
+                        <span class="kpi-desc">Carga de páginas registradas</span>
+                        <i class="fa-solid fa-eye kpi-icon"></i>
+                    </div>
+                    <div class="kpi-card accent">
+                        <span class="kpi-title">Visitantes Únicos</span>
+                        <div class="kpi-value" id="kpi-visitors">0</div>
+                        <span class="kpi-desc">Visitantes en base a UUID local</span>
+                        <i class="fa-solid fa-users kpi-icon"></i>
+                    </div>
+                    <div class="kpi-card blue">
+                        <span class="kpi-title">Descargas Totales</span>
+                        <div class="kpi-value" id="kpi-leads">0</div>
+                        <span class="kpi-desc">Leads que descargaron el Tracker</span>
+                        <i class="fa-solid fa-download kpi-icon"></i>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-title">Tasa de Conversión</span>
+                        <div class="kpi-value" id="kpi-conversion">0%</div>
+                        <span class="kpi-desc">Descargas / Visitantes únicos</span>
+                        <i class="fa-solid fa-percent kpi-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Clics por enlace Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fa-solid fa-arrow-pointer"></i> Clics e Interacciones en Enlaces Clave</h3>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Eventos acumulados totales</span>
+                    </div>
+                    <div class="chart-list" id="clicks-chart-list">
+                        <!-- Chart item template -->
+                        <div class="chart-item accent">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-solid fa-cart-shopping"></i> Clics en "Comprar Guía" (Hotmart)</span>
+                                <span class="chart-count" id="count-linkedin-buy">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-linkedin-buy" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-solid fa-clipboard-list"></i> Clics en "Obtener Tracker" (Abrir Modal)</span>
+                                <span class="chart-count" id="count-notion-open">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-notion-open" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-solid fa-circle-down"></i> Clics en "Duplicar Notion" (Enlace Directo)</span>
+                                <span class="chart-count" id="count-notion-duplicate">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-notion-duplicate" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-item blue">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-solid fa-calendar-check"></i> Clics en "Reservar Sesión Gratuita" (Zoom)</span>
+                                <span class="chart-count" id="count-diagnostic-zoom">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-diagnostic-zoom" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-item blue">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-solid fa-comments"></i> Consultas de Consultoría Táctica</span>
+                                <span class="chart-count" id="count-tactical-consult">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-tactical-consult" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-item blue">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-brands fa-whatsapp"></i> Clics a WhatsApp Directo</span>
+                                <span class="chart-count" id="count-whatsapp">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-whatsapp" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-item">
+                            <div class="chart-label-row">
+                                <span class="chart-name"><i class="fa-brands fa-instagram"></i> Clics al Perfil de Instagram</span>
+                                <span class="chart-count" id="count-instagram">0</span>
+                            </div>
+                            <div class="chart-bar-bg">
+                                <div class="chart-bar-fill" id="bar-instagram" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referrer List -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3><i class="fa-solid fa-compass"></i> Fuentes de Tráfico (Referidos)</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="referrer-table">
+                            <thead>
+                                <tr>
+                                    <th>Origen del Visitante</th>
+                                    <th>Cantidad de Visitas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dinámico -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 2: LEADS (DESCARGAS) -->
+            <div class="dashboard-content" id="tab-leads">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3><i class="fa-solid fa-users"></i> Historial de Descargas (Leads)</h3>
+                        <div class="table-actions">
+                            <div class="search-container">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="leads-search" class="search-input" placeholder="Buscar por nombre o email...">
+                            </div>
+                            <button id="btn-export-leads" class="btn btn-secondary" style="padding: 10px 18px; border-radius: 20px; font-size: 0.8rem;">
+                                <i class="fa-solid fa-file-excel"></i> Exportar CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="leads-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Recurso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dinámico -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: CONTACTOS (CONSULTAS) -->
+            <div class="dashboard-content" id="tab-contactos">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3><i class="fa-solid fa-envelope-open-text"></i> Mensajes y Consultas Recibidas</h3>
+                        <div class="table-actions">
+                            <div class="search-container">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="contacts-search" class="search-input" placeholder="Buscar consulta...">
+                            </div>
+                            <button id="btn-export-contacts" class="btn btn-secondary" style="padding: 10px 18px; border-radius: 20px; font-size: 0.8rem;">
+                                <i class="fa-solid fa-file-excel"></i> Exportar CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="contacts-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Asunto</th>
+                                    <th>Mensaje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dinámico -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: AJUSTES -->
+            <div class="dashboard-content" id="tab-ajustes">
+                <div class="settings-card">
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                        <i class="fa-solid fa-sliders"></i> Ajustes de Conexión
+                    </h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                        Tu llave de Supabase está guardada de manera local. Si deseas cerrarla, desconectarla o actualizarla, puedes hacerlo a continuación.
+                    </p>
+                    
+                    <div style="background-color: rgba(144,181,163,0.1); padding: 15px; border-radius: 12px; font-size: 0.82rem; margin-bottom: 25px; border-left: 4px solid var(--primary); word-break: break-all;">
+                        <strong>Llave Activa en este navegador:</strong><br>
+                        <code id="active-key-preview" style="font-family: monospace; color: var(--text-muted);"></code>
+                    </div>
+
+                    <button id="btn-disconnect" class="btn" style="background-color: #E74C3C; color: white; width: 100%;">
+                        <i class="fa-solid fa-power-off"></i> Desconectar y Eliminar Llave
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-text">Métricas actualizadas</span>
+    </div>
+
+    <!-- Dashboard App Logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const SUPABASE_URL = "https://ihpmpobduoprtgxmdpwo.supabase.co";
+            
+            // UI elements
+            const lockedView = document.getElementById("locked-view");
+            const dashboardView = document.getElementById("dashboard-view");
+            const setupForm = document.getElementById("setup-form");
+            const setupKeyInput = document.getElementById("setup-key");
+            const tabButtons = document.querySelectorAll(".tab-btn");
+            const contents = document.querySelectorAll(".dashboard-content");
+            const toast = document.getElementById("toast");
+            const toastText = document.getElementById("toast-text");
+            
+            // Settings UI
+            const activeKeyPreview = document.getElementById("active-key-preview");
+            const btnDisconnect = document.getElementById("btn-disconnect");
+
+            // Cache data globally for filtering and exporting
+            let cachedLeads = [];
+            let cachedContacts = [];
+
+            // 1. Toast Alerts
+            const showToast = (message) => {
+                toastText.innerText = message;
+                toast.classList.add("show");
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+            };
+
+            // 2. Navigation Logic
+            tabButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    tabButtons.forEach(b => b.classList.remove("active"));
+                    contents.forEach(c => c.classList.remove("active"));
+                    btn.classList.add("active");
+                    const target = btn.getAttribute("data-tab");
+                    document.getElementById(`tab-${target}`).classList.add("active");
+                });
+            });
+
+            // 3. Setup / Check authentication status
+            const savedKey = localStorage.getItem("flor_supabase_service_key");
+            if (savedKey) {
+                initializeDashboard(savedKey);
+            } else {
+                lockedView.style.display = "flex";
+                dashboardView.style.display = "none";
+            }
+
+            // Handle Setup Submit
+            setupForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const inputKey = setupKeyInput.value.trim();
+                if (inputKey) {
+                    localStorage.setItem("flor_supabase_service_key", inputKey);
+                    initializeDashboard(inputKey);
+                }
+            });
+
+            // Handle Disconnect
+            btnDisconnect.addEventListener("click", () => {
+                if (confirm("¿Estás segura de que deseas eliminar la llave de Supabase de este navegador? Tendrás que volver a ingresarla la próxima vez para ver tus métricas.")) {
+                    localStorage.removeItem("flor_supabase_service_key");
+                    showToast("Llave eliminada correctamente.");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                }
+            });
+
+            // 4. Main Initialize Dashboard
+            function initializeDashboard(serviceKey) {
+                // Hide locked screen, show dashboard
+                lockedView.style.display = "none";
+                dashboardView.style.display = "block";
+                
+                // Set key preview in settings
+                activeKeyPreview.innerText = serviceKey.substring(0, 15) + "..." + serviceKey.substring(serviceKey.length - 15);
+
+                try {
+                    // Create Supabase Client with service role key (bypasses RLS secure reading)
+                    const supabaseClient = supabase.createClient(SUPABASE_URL, serviceKey);
+                    
+                    // Fetch data
+                    loadDashboardData(supabaseClient);
+                } catch (err) {
+                    console.error(err);
+                    alert("Error al inicializar la base de datos de Supabase. Revisa que la clave introducida sea correcta.");
+                    localStorage.removeItem("flor_supabase_service_key");
+                    window.location.reload();
+                }
+            }
+
+            // 5. Fetch and Render Data
+            async function loadDashboardData(client) {
+                showToast("Cargando métricas...");
+                
+                try {
+                    // A. Fetch analytics events
+                    const { data: events, error: errEvents } = await client
+                        .from('analytics_events')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    
+                    if (errEvents) throw errEvents;
+
+                    // B. Fetch leads
+                    const { data: leads, error: errLeads } = await client
+                        .from('leads')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    
+                    if (errLeads) throw errLeads;
+                    cachedLeads = leads || [];
+
+                    // C. Fetch contacts
+                    const { data: contacts, error: errContacts } = await client
+                        .from('contacts')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    
+                    if (errContacts) throw errContacts;
+                    cachedContacts = contacts || [];
+
+                    // D. Calculate metrics
+                    renderResumen(events || [], leads || []);
+                    renderLeads(cachedLeads);
+                    renderContacts(cachedContacts);
+
+                    showToast("Métricas actualizadas");
+
+                } catch (err) {
+                    console.error("Error al consultar tablas:", err);
+                    alert("No pudimos leer los datos de Supabase. Esto generalmente ocurre si la clave que ingresaste es inválida o no tienes permisos de acceso en tu base de datos.\n\nPor favor, verifica la llave e inténtalo de nuevo.");
+                    localStorage.removeItem("flor_supabase_service_key");
+                    window.location.reload();
+                }
+            }
+
+            // 6. Render Dashboard Tab (Summary & Charts)
+            function renderResumen(events, leads) {
+                const totalViews = events.filter(e => e.event_type === 'page_view').length;
+                
+                // Count unique visitor_ids
+                const uniqueVisitorsSet = new Set(events.map(e => e.visitor_id));
+                const uniqueVisitors = uniqueVisitorsSet.size;
+
+                const totalLeads = leads.length;
+                
+                // Conversion rate
+                let convRate = 0;
+                if (uniqueVisitors > 0) {
+                    convRate = ((totalLeads / uniqueVisitors) * 100).toFixed(1);
+                }
+
+                // Update KPIs in DOM
+                document.getElementById("kpi-views").innerText = totalViews;
+                document.getElementById("kpi-visitors").innerText = uniqueVisitors;
+                document.getElementById("kpi-leads").innerText = totalLeads;
+                document.getElementById("kpi-conversion").innerText = convRate + "%";
+
+                // Click counts
+                const clickEvents = events.filter(e => e.event_type === 'click');
+                
+                const countBuy = clickEvents.filter(e => e.event_name === 'click_linkedin_buy').length;
+                const countNotionOpen = clickEvents.filter(e => e.event_name === 'click_notion_tracker_open').length;
+                const countNotionDuplicate = clickEvents.filter(e => e.event_name === 'click_notion_tracker_duplicate').length;
+                const countZoom = clickEvents.filter(e => e.event_name === 'click_diagnostic_zoom').length;
+                const countTactical = clickEvents.filter(e => e.event_name === 'click_tactical_consult').length;
+                const countWhatsapp = clickEvents.filter(e => e.event_name === 'click_whatsapp').length;
+                const countInstagram = clickEvents.filter(e => e.event_name === 'click_instagram').length;
+
+                // Update Chart Counts
+                document.getElementById("count-linkedin-buy").innerText = countBuy;
+                document.getElementById("count-notion-open").innerText = countNotionOpen;
+                document.getElementById("count-notion-duplicate").innerText = countNotionDuplicate;
+                document.getElementById("count-diagnostic-zoom").innerText = countZoom;
+                document.getElementById("count-tactical-consult").innerText = countTactical;
+                document.getElementById("count-whatsapp").innerText = countWhatsapp;
+                document.getElementById("count-instagram").innerText = countInstagram;
+
+                // Update Visual Chart Bars (calculate percentages of the maximum click count to scale bars)
+                const counts = [countBuy, countNotionOpen, countNotionDuplicate, countZoom, countTactical, countWhatsapp, countInstagram];
+                const maxCount = Math.max(...counts, 1); // Avoid division by zero
+
+                document.getElementById("bar-linkedin-buy").style.width = ((countBuy / maxCount) * 100) + "%";
+                document.getElementById("bar-notion-open").style.width = ((countNotionOpen / maxCount) * 100) + "%";
+                document.getElementById("bar-notion-duplicate").style.width = ((countNotionDuplicate / maxCount) * 100) + "%";
+                document.getElementById("bar-diagnostic-zoom").style.width = ((countZoom / maxCount) * 100) + "%";
+                document.getElementById("bar-tactical-consult").style.width = ((countTactical / maxCount) * 100) + "%";
+                document.getElementById("bar-whatsapp").style.width = ((countWhatsapp / maxCount) * 100) + "%";
+                document.getElementById("bar-instagram").style.width = ((countInstagram / maxCount) * 100) + "%";
+
+                // Referrers compilation
+                const referrers = {};
+                events.forEach(e => {
+                    if (e.event_type === 'page_view') {
+                        let ref = e.referrer || "Visita Directa (o escrita)";
+                        // Clean domain referrers to make them readable
+                        if (ref.includes("instagram.com")) ref = "Instagram (App / Web)";
+                        if (ref.includes("linkedin.com")) ref = "LinkedIn (In/Post)";
+                        if (ref.includes("google.")) ref = "Google Search";
+                        if (ref.includes("facebook.com")) ref = "Facebook Link";
+                        if (ref.includes("t.co")) ref = "Twitter / X";
+                        
+                        referrers[ref] = (referrers[ref] || 0) + 1;
+                    }
+                });
+
+                // Render Referrer Table
+                const referrerBody = document.querySelector("#referrer-table tbody");
+                referrerBody.innerHTML = "";
+                
+                const sortedRefs = Object.entries(referrers).sort((a, b) => b[1] - a[1]);
+                if (sortedRefs.length === 0) {
+                    referrerBody.innerHTML = `<tr><td colspan="2" class="no-data">No hay datos de tráfico aún</td></tr>`;
+                } else {
+                    sortedRefs.forEach(([name, count]) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td style="font-weight: 500;">${name}</td>
+                            <td style="font-weight: 700; color: var(--primary);">${count}</td>
+                        `;
+                        referrerBody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 7. Render Leads Tab
+            function renderLeads(leads) {
+                const leadsBody = document.querySelector("#leads-table tbody");
+                leadsBody.innerHTML = "";
+
+                if (leads.length === 0) {
+                    leadsBody.innerHTML = `<tr><td colspan="4" class="no-data">Aún no se han registrado descargas</td></tr>`;
+                    return;
+                }
+
+                leads.forEach(l => {
+                    const date = new Date(l.created_at || l.date);
+                    const formattedDate = date.toLocaleDateString("es-ES") + " " + date.toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'});
+                    const tr = document.createElement("tr");
+                    
+                    let resourceBadgeClass = "contacto";
+                    let cleanResourceName = l.resource || "Recurso";
+                    if (cleanResourceName.toLowerCase().includes("tracker")) {
+                        resourceBadgeClass = "tracker";
+                    } else if (cleanResourceName.toLowerCase().includes("guía") || cleanResourceName.toLowerCase().includes("guia") || cleanResourceName.toLowerCase().includes("ebook")) {
+                        resourceBadgeClass = "linkedin";
+                    }
+
+                    tr.innerHTML = `
+                        <td style="color: var(--text-muted); font-size: 0.8rem; white-space: nowrap;">${formattedDate}</td>
+                        <td style="font-weight: 600; color: var(--primary);">${l.name}</td>
+                        <td><a href="mailto:${l.email}" style="color: var(--steel-blue); font-weight: 500; text-decoration: none;">${l.email}</a></td>
+                        <td><span class="badge-resource ${resourceBadgeClass}">${cleanResourceName}</span></td>
+                    `;
+                    leadsBody.appendChild(tr);
+                });
+            }
+
+            // 8. Render Contacts Tab
+            function renderContacts(contacts) {
+                const contactsBody = document.querySelector("#contacts-table tbody");
+                contactsBody.innerHTML = "";
+
+                if (contacts.length === 0) {
+                    contactsBody.innerHTML = `<tr><td colspan="5" class="no-data">Aún no se han recibido consultas</td></tr>`;
+                    return;
+                }
+
+                contacts.forEach(c => {
+                    const date = new Date(c.created_at || c.date);
+                    const formattedDate = date.toLocaleDateString("es-ES") + " " + date.toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'});
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td style="color: var(--text-muted); font-size: 0.8rem; white-space: nowrap;">${formattedDate}</td>
+                        <td style="font-weight: 600; color: var(--primary);">${c.name}</td>
+                        <td><a href="mailto:${c.email}" style="color: var(--steel-blue); font-weight: 500; text-decoration: none;">${c.email}</a></td>
+                        <td style="font-weight: 600;">${c.subject || 'Sin Asunto'}</td>
+                        <td style="font-size: 0.82rem; max-width: 350px; word-break: break-word; white-space: pre-line;">${c.message}</td>
+                    `;
+                    contactsBody.appendChild(tr);
+                });
+            }
+
+            // 9. Table Search Filters
+            document.getElementById("leads-search").addEventListener("input", (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                const filtered = cachedLeads.filter(l => 
+                    (l.name || '').toLowerCase().includes(term) || 
+                    (l.email || '').toLowerCase().includes(term) ||
+                    (l.resource || '').toLowerCase().includes(term)
+                );
+                renderLeads(filtered);
+            });
+
+            document.getElementById("contacts-search").addEventListener("input", (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                const filtered = cachedContacts.filter(c => 
+                    (c.name || '').toLowerCase().includes(term) || 
+                    (c.email || '').toLowerCase().includes(term) ||
+                    (c.subject || '').toLowerCase().includes(term) ||
+                    (c.message || '').toLowerCase().includes(term)
+                );
+                renderContacts(filtered);
+            });
+
+            // 10. CSV Export Logic
+            const exportToCSV = (filename, headers, rows) => {
+                // Format rows: join with comma, handle string escaping (quotes)
+                const csvContent = "data:text/csv;charset=utf-8,\uFEFF" // Add UTF-8 BOM
+                    + [headers.join(",")].concat(
+                        rows.map(row => 
+                            row.map(val => {
+                                const cleanVal = (val || "").toString().replace(/"/g, '""'); // Double double quotes for CSV escape
+                                return `"${cleanVal}"`;
+                            }).join(",")
+                        )
+                    ).join("\r\n");
+                
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", filename);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showToast("Descarga de CSV iniciada");
+            };
+
+            // Export Leads
+            document.getElementById("btn-export-leads").addEventListener("click", () => {
+                if (cachedLeads.length === 0) {
+                    alert("No hay leads cargados para exportar.");
+                    return;
+                }
+                const headers = ["Fecha", "Nombre", "Email", "Recurso"];
+                const rows = cachedLeads.map(l => {
+                    const date = new Date(l.created_at || l.date);
+                    const formattedDate = date.toLocaleDateString("es-ES") + " " + date.toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'});
+                    return [formattedDate, l.name, l.email, l.resource];
+                });
+                exportToCSV("leads_flor_capeletto.csv", headers, rows);
+            });
+
+            // Export Contacts
+            document.getElementById("btn-export-contacts").addEventListener("click", () => {
+                if (cachedContacts.length === 0) {
+                    alert("No hay consultas cargadas para exportar.");
+                    return;
+                }
+                const headers = ["Fecha", "Nombre", "Email", "Asunto", "Mensaje"];
+                const rows = cachedContacts.map(c => {
+                    const date = new Date(c.created_at || c.date);
+                    const formattedDate = date.toLocaleDateString("es-ES") + " " + date.toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'});
+                    return [formattedDate, c.name, c.email, c.subject, c.message];
+                });
+                exportToCSV("consultas_flor_capeletto.csv", headers, rows);
+            });
+
+        });
+    </script>
+</body>
+</html>

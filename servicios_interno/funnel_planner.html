@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador & Simulador de Embudo | Flor Capeletto</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #3F625B;
+            --primary-light: #4E736B;
+            --accent: #D98757;
+            --accent-hover: #C57345;
+            --secondary: #90B5A3;
+            --steel-blue: #4E6074;
+            --peach: #EFAA89;
+            --bg-warm: #FCFBF9;
+            --white: #FFFFFF;
+            --text-main: #2C3531;
+            --text-muted: #5D6D66;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-md: 0 10px 30px rgba(63, 98, 91, 0.06);
+            --shadow-lg: 0 15px 35px rgba(63, 98, 91, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-warm);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(144, 181, 163, 0.2);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .logo-img {
+            width: 48px;
+            height: 48px;
+            filter: drop-shadow(0 4px 6px rgba(63,98,91,0.15));
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .badge-private {
+            display: inline-block;
+            background-color: rgba(217, 135, 87, 0.1);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 12px;
+            border: 1px dashed rgba(217,135,87,0.3);
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 35px;
+            background-color: rgba(144, 181, 163, 0.08);
+            padding: 6px;
+            border-radius: 16px;
+            border: 1px solid rgba(144, 181, 163, 0.15);
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 4px 15px rgba(63, 98, 91, 0.06);
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Visual Funnel Display */
+        .funnel-visualizer {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .funnel-stage {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-align: center;
+            border: 1px solid rgba(144, 181, 163, 0.12);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .funnel-stage::after {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            font-size: 1.5rem;
+            z-index: 5;
+        }
+
+        .funnel-stage:last-child::after {
+            display: none;
+        }
+
+        .stage-num {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .stage-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .stage-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .stage-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Grid Layout for Calculator */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .panel-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(144, 181, 163, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .panel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px dashed rgba(144, 181, 163, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .panel-title i {
+            color: var(--accent);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-value-badge {
+            font-size: 0.82rem;
+            font-weight: 700;
+            background-color: rgba(63, 98, 91, 0.08);
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .form-control-range {
+            width: 100%;
+            height: 6px;
+            background: rgba(144, 181, 163, 0.3);
+            outline: none;
+            border-radius: 5px;
+            -webkit-appearance: none;
+            accent-color: var(--accent);
+        }
+
+        .form-control-number {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.5px solid rgba(144, 181, 163, 0.3);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            background-color: var(--bg-warm);
+            transition: var(--transition);
+        }
+
+        .form-control-number:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: var(--white);
+        }
+
+        /* Results Display */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .result-box {
+            background-color: var(--bg-warm);
+            border: 1px solid rgba(144, 181, 163, 0.12);
+            border-radius: 14px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .result-box:hover {
+            transform: translateY(-2px);
+            border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(63, 98, 91, 0.04);
+        }
+
+        .result-lbl {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .result-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .total-revenue-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(63, 98, 91, 0.15);
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .total-revenue-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .total-revenue-lbl {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--peach);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .total-revenue-val {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        /* Toggle Switches for Future Simulation */
+        .toggle-container {
+            border-top: 1px dashed rgba(144, 181, 163, 0.2);
+            margin-top: 25px;
+            padding-top: 20px;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: rgba(144, 181, 163, 0.05);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(144,181,163,0.1);
+        }
+
+        .toggle-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-info i {
+            font-size: 1.15rem;
+            color: var(--steel-blue);
+        }
+
+        .toggle-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .toggle-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Switch UI */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Dynamic simulated inputs */
+        .future-inputs-panel {
+            display: none;
+            background: rgba(217, 135, 87, 0.03);
+            border-left: 3px solid var(--accent);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .future-inputs-panel.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Playbook & Timelines */
+        .playbook-step {
+            margin-bottom: 25px;
+            padding-left: 25px;
+            border-left: 2px solid var(--secondary);
+            position: relative;
+        }
+
+        .playbook-step::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 2px solid var(--white);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .playbook-step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .playbook-step p, .playbook-step ul {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .playbook-step ul {
+            margin-left: 20px;
+            list-style-type: square;
+        }
+
+        .playbook-step ul li {
+            margin-bottom: 5px;
+        }
+
+        .tip-box {
+            background-color: rgba(78, 96, 116, 0.06);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border: 1px solid rgba(78, 96, 116, 0.1);
+            margin-top: 10px;
+        }
+
+        /* Email Copy Accordions */
+        .accordion-item {
+            background-color: var(--white);
+            border: 1px solid rgba(144, 181, 163, 0.15);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .accordion-header {
+            background-color: rgba(144, 181, 163, 0.05);
+            padding: 18px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background-color: rgba(144, 181, 163, 0.1);
+        }
+
+        .accordion-header h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .accordion-header h3 span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+
+        .accordion-icon {
+            font-size: 0.85rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 25px;
+            border-top: 1px solid rgba(144, 181, 163, 0.1);
+            background-color: var(--white);
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .email-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background-color: var(--bg-warm);
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(78,96,116,0.06);
+        }
+
+        .email-meta div {
+            margin-bottom: 4px;
+        }
+
+        .email-meta div:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-body {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-warm);
+            border: 1px solid rgba(78,96,116,0.06);
+            border-radius: 10px;
+            padding: 22px;
+            white-space: pre-line; /* Mantiene saltos de línea */
+            font-family: inherit;
+        }
+
+        .copy-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .btn-copy {
+            padding: 8px 16px;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--peach);
+        }
+
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+            .funnel-visualizer {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .funnel-stage::after {
+                content: '\f107';
+                right: 50%;
+                bottom: -15px;
+                top: auto;
+                transform: translateX(50%);
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <img src="../assets/logo_transparent.png" alt="Logo Triskelion" class="logo-img">
+                <h1>Planificador de Ventas</h1>
+            </div>
+            <p class="subtitle">Estructura tu embudo de ventas, simula proyecciones financieras y consulta tus playbooks</p>
+            <span class="badge-private"><i class="fa-solid fa-lock"></i> Panel Estratégico Privado</span>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="simulator">
+                <i class="fa-solid fa-chart-line"></i> Simulador de Embudo
+            </button>
+            <button class="tab-btn" data-tab="playbook">
+                <i class="fa-solid fa-book-open"></i> Playbook de Ventas
+            </button>
+            <button class="tab-btn" data-tab="emails">
+                <i class="fa-solid fa-envelope-open-text"></i> Secuencia de Emails
+            </button>
+        </div>
+
+        <!-- TAB 1: SIMULADOR DE EMBUDO -->
+        <div class="tab-content active" id="tab-simulator">
+            
+            <!-- Funnel Flow Visualizer -->
+            <div class="funnel-visualizer">
+                <!-- Stage 1 -->
+                <div class="funnel-stage">
+                    <span class="stage-num">ToFU</span>
+                    <div class="stage-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                    <h4 class="stage-title">Tránsito</h4>
+                    <p class="stage-desc">Visitas a tu web desde LinkedIn e Instagram.</p>
+                </div>
+                <!-- Stage 2 -->
+                <div class="funnel-stage">
+                    <span class="stage-num">MoFU</span>
+                    <div class="stage-icon"><i class="fa-solid fa-gift"></i></div>
+                    <h4 class="stage-title">Leads</h4>
+                    <p class="stage-desc">Descargas de la Guía o Notion Tracker.</p>
+                </div>
+                <!-- Stage 3 -->
+                <div class="funnel-stage">
+                    <span class="stage-num">MoFU</span>
+                    <div class="stage-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                    <h4 class="stage-title">Diagnóstico</h4>
+                    <p class="stage-desc">Llamada agendada de 30 min por Calendly.</p>
+                </div>
+                <!-- Stage 4 -->
+                <div class="funnel-stage">
+                    <span class="stage-num">BoFU</span>
+                    <div class="stage-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h4 class="stage-title">Propuesta</h4>
+                    <p class="stage-desc">Diagnóstico y oferta en vivo de tu sesión.</p>
+                </div>
+                <!-- Stage 5 -->
+                <div class="funnel-stage">
+                    <span class="stage-num">BoFU</span>
+                    <div class="stage-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <h4 class="stage-title">Conversión</h4>
+                    <p class="stage-desc">Clientes de Consultoría Táctica y a medida.</p>
+                </div>
+            </div>
+
+            <div class="calc-grid">
+                <!-- Left: Inputs -->
+                <div class="panel-card">
+                    <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> Parámetros del Embudo</h2>
+                    
+                    <!-- Input: Traffic -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <span class="form-label"><i class="fa-solid fa-eye"></i> Visitas Web Mensuales (Tráfico)</span>
+                            <span class="form-value-badge" id="val-traffic">1,000</span>
+                        </div>
+                        <input type="range" class="form-control-range" id="traffic" min="100" max="10000" step="100" value="1000">
+                    </div>
+
+                    <!-- Input: Lead Opt-in Rate -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <span class="form-label"><i class="fa-solid fa-download"></i> Tasa de Descarga de Regalos (Lead Rate)</span>
+                            <span class="form-value-badge" id="val-lead-rate">8%</span>
+                        </div>
+                        <input type="range" class="form-control-range" id="lead-rate" min="1" max="25" step="0.5" value="8">
+                    </div>
+
+                    <!-- Input: Call Booking Rate -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <span class="form-label"><i class="fa-solid fa-phone-volume"></i> Agendamiento de Llamada Gratis</span>
+                            <span class="form-value-badge" id="val-book-rate">10%</span>
+                        </div>
+                        <input type="range" class="form-control-range" id="book-rate" min="1" max="30" step="0.5" value="10">
+                    </div>
+
+                    <!-- Input: Closing Rate -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <span class="form-label"><i class="fa-solid fa-handshake"></i> Tasa de Cierre de Sesión de Pago</span>
+                            <span class="form-value-badge" id="val-close-rate">35%</span>
+                        </div>
+                        <input type="range" class="form-control-range" id="close-rate" min="5" max="70" step="1" value="35">
+                    </div>
+
+                    <!-- Input: Session Price -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <span class="form-label"><i class="fa-solid fa-euro-sign"></i> Precio Promedio de Consultoría / Sesión</span>
+                        </div>
+                        <input type="number" class="form-control-number" id="session-price" min="50" max="500" value="150">
+                    </div>
+
+                    <!-- FUTURE EXPANSION MODULE -->
+                    <div class="toggle-container">
+                        <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-chart-line"></i> Simular Expansiones del Futuro</h3>
+                        
+                        <!-- Toggle Tracker Pro -->
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                                <div>
+                                    <span class="toggle-title">Notion Job Tracker PRO</span>
+                                    <span class="toggle-desc">Venta directa de bajo coste tras descarga gratuita.</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-tracker">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="future-inputs-panel" id="panel-tracker">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <div class="form-label-row">
+                                    <span class="form-label">Tasa de Conversión Notion PRO (Tripwire)</span>
+                                    <span class="form-value-badge" id="val-rate-pro">2%</span>
+                                </div>
+                                <input type="range" class="form-control-range" id="rate-pro" min="0.5" max="10" step="0.5" value="2">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">Precio del Notion PRO (€)</label>
+                                <input type="number" class="form-control-number" id="price-pro" value="15">
+                            </div>
+                        </div>
+
+                        <!-- Toggle Workshops -->
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fa-solid fa-video"></i>
+                                <div>
+                                    <span class="toggle-title">Talleres Pregrabados</span>
+                                    <span class="toggle-desc">Formaciones grabadas automatizadas (Hotmart).</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-workshops">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="future-inputs-panel" id="panel-workshops">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <div class="form-label-row">
+                                    <span class="form-label">Tasa de Conversión a Talleres (de leads)</span>
+                                    <span class="form-value-badge" id="val-rate-workshops">3%</span>
+                                </div>
+                                <input type="range" class="form-control-range" id="rate-workshops" min="0.5" max="15" step="0.5" value="3">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">Precio del Taller (€)</label>
+                                <input type="number" class="form-control-number" id="price-workshops" value="29">
+                            </div>
+                        </div>
+
+                        <!-- Toggle Método NEXO -->
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <i class="fa-solid fa-compass"></i>
+                                <div>
+                                    <span class="toggle-title">Método NEXO (Mentoría Premium)</span>
+                                    <span class="toggle-desc">Tu programa estrella individual (Alto Ticket).</span>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-nexo">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="future-inputs-panel" id="panel-nexo">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <div class="form-label-row">
+                                    <span class="form-label">Cierre de Mentorías (sobre llamadas de diagnóstico)</span>
+                                    <span class="form-value-badge" id="val-rate-nexo">15%</span>
+                                </div>
+                                <input type="range" class="form-control-range" id="rate-nexo" min="5" max="50" step="1" value="15">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">Precio de Mentoría Premium NEXO (€)</label>
+                                <input type="number" class="form-control-number" id="price-nexo" value="500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Outputs -->
+                <div>
+                    <div class="panel-card" style="margin-bottom: 0;">
+                        <h2 class="panel-title"><i class="fa-solid fa-chart-pie"></i> Resultados Proyectados (Mensual)</h2>
+                        
+                        <div class="results-grid">
+                            <!-- Box 1 -->
+                            <div class="result-box">
+                                <span class="result-lbl">Leads Captados</span>
+                                <div class="result-val" id="res-leads">80</div>
+                            </div>
+                            <!-- Box 2 -->
+                            <div class="result-box">
+                                <span class="result-lbl">Llamadas Agendadas</span>
+                                <div class="result-val" id="res-calls">8</div>
+                            </div>
+                            <!-- Box 3 -->
+                            <div class="result-box">
+                                <span class="result-lbl">Clientes de Consultoría</span>
+                                <div class="result-val" id="res-clients">3</div>
+                            </div>
+                            <!-- Box 4 -->
+                            <div class="result-box">
+                                <span class="result-lbl">Ingresos Consultoría</span>
+                                <div class="result-val" id="res-revenue-consulting">€450</div>
+                            </div>
+                        </div>
+
+                        <!-- Results Expansion Boxes -->
+                        <div id="results-future-wrapper" style="border-top: 1px dashed rgba(144, 181, 163, 0.2); padding-top: 20px; display: none;">
+                            <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-cubes"></i> Desglose de Expansión Futura</h3>
+                            
+                            <div class="results-grid">
+                                <!-- Box Pro -->
+                                <div class="result-box" id="res-box-pro" style="display: none;">
+                                    <span class="result-lbl">Ventas Notion PRO</span>
+                                    <div class="result-val" id="res-val-pro">€0</div>
+                                </div>
+                                <!-- Box Workshops -->
+                                <div class="result-box" id="res-box-workshops" style="display: none;">
+                                    <span class="result-lbl">Ventas Talleres</span>
+                                    <div class="result-val" id="res-val-workshops">€0</div>
+                                </div>
+                                <!-- Box Nexo -->
+                                <div class="result-box" id="res-box-nexo" style="display: none;">
+                                    <span class="result-lbl">Ventas Método NEXO</span>
+                                    <div class="result-val" id="res-val-nexo">€0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Revenue -->
+                        <div class="total-revenue-card">
+                            <span class="total-revenue-lbl">Ingreso Proyectado Estimado</span>
+                            <div class="total-revenue-val" id="res-total-revenue">€450</div>
+                        </div>
+
+                        <div class="tip-box" style="margin-top: 20px;">
+                            <strong style="color: var(--primary); display: block; margin-bottom: 4px;"><i class="fa-solid fa-graduation-cap"></i> Interpretando las métricas:</strong>
+                            El Valor del Ciclo de Vida del Cliente (LTV) aumenta drásticamente cuando logras retener leads y ofrecerles productos digitales antes o después de la consultoría presencial. Fíjate en cómo añadir el Notion Tracker PRO y el Método NEXO eleva el negocio a otro nivel sin requerir más tráfico web.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: PLAYBOOK DE VENTAS -->
+        <div class="tab-content" id="tab-playbook">
+            <div class="panel-card">
+                <h2 class="panel-title"><i class="fa-solid fa-graduation-cap"></i> Metodología de Venta Genuina</h2>
+                
+                <div class="playbook-step">
+                    <h3>1. El Propósito del Diagnóstico Gratuito</h3>
+                    <p>La videollamada de 30 minutos (agendada vía Calendly y realizada en Google Meet) **NO es una llamada de consultoría gratuita**. Es un espacio exclusivo de diagnóstico y selección comercial. Su propósito es:</p>
+                    <ul>
+                        <li>Entender el momento profesional del candidato y sus principales bloqueos.</li>
+                        <li>Evaluar si el candidato es el perfil ideal para tus servicios (empleabilidad o sesión a medida).</li>
+                        <li>Establecer autoridad con empatía y cercanía cimentando la confianza mutua.</li>
+                    </ul>
+                </div>
+
+                <div class="playbook-step">
+                    <h3>2. Estructura de la Llamada de 30 Minutos</h3>
+                    <p>Divide la videollamada estratégicamente utilizando psicología del comportamiento:</p>
+                    <ul>
+                        <li><strong>Fase 1: Conexión Inicial (5 min):</strong> Saluda cordialmente, rompe el hielo y enmarca la llamada: *"El objetivo de hoy es que me cuentes dónde estás hoy profesionalmente, dónde quieres llegar y ver si te puedo ayudar con mis sesiones tácticas o diseñando algo a medida."*</li>
+                        <li><strong>Fase 2: Diagnóstico Profundo (15 min):</strong> Haz preguntas abiertas e investiga:
+                            <br>- *"¿Qué es lo que más te frustra hoy de tu búsqueda laboral o de tu perfil actual?"*
+                            <br>- *"¿Qué has intentado hacer para cambiarlo y qué resultados has tenido?"*
+                            <br>- *"Si pudieras resolver esto mañana, ¿cómo cambiaría tu día a día?"*
+                            <br><em>Escucha activamente el 80% del tiempo y toma notas físicas.</em>
+                        </li>
+                        <li><strong>Fase 3: Prescripción de Solución (5 min):</strong> Haz el puente vinculando su problema a tu propuesta: *"Basado en lo que me cuentas, el CV y el perfil de LinkedIn están bloqueando tus oportunidades. Lo que tú necesitas es mi **Sesión LinkedIn & CV Boost** para reescribirlo juntos ATS-ready y..."*</li>
+                        <li><strong>Fase 4: Cierre y Gestión de Dudas (5 min):</strong> Presenta precios y logística. Establece urgencia genuina fijando fechas disponibles de inicio: *"El valor de la sesión es de €120 (o €200 por el pack completo), y tengo espacio para arrancar la próxima semana. ¿Cómo te suena?"*</li>
+                    </ul>
+                </div>
+
+                <div class="playbook-step">
+                    <h3>3. Manejo de Objeciones Comunes</h3>
+                    <ul>
+                        <li><strong>"No tengo el dinero ahora":</strong> No discutas el precio. Valida su emoción y reencuadra la inversión: *"Entiendo perfectamente que el dinero sea un factor de peso. Pregúntate: ¿cuánto te está costando a nivel emocional y financiero estar dos meses más sin entrevistas? Podemos fraccionar el pago en dos cuotas si te ayuda a arrancar."*</li>
+                        <li><strong>"Prefiero intentarlo por mi cuenta":</strong> Valida y contrasta la velocidad: *"Es una opción totalmente válida. La diferencia es el tiempo. Por tu cuenta te tomará meses de prueba y error descifrar el filtro ATS y el algoritmo. Conmigo, en 90 minutos lo dejamos optimizado con la mirada de una seleccionadora con más de 10 años de experiencia."*</li>
+                    </ul>
+                </div>
+
+                <div class="playbook-step">
+                    <h3>4. Especificación para Crear el Notion Job Tracker PRO</h3>
+                    <p>Cuando decidas desarrollar y vender el Notion Tracker PRO en el futuro (ej. a €14.90), esta debe ser su composición para justificar el salto frente a la versión básica gratuita:</p>
+                    <ul>
+                        <li><strong>Planner de Hábitos Integrado:</strong> Calendario de objetivos semanales de postulaciones, formaciones y networking.</li>
+                        <li><strong>Bóveda de Copy-Paste:</strong> Plantillas redactadas de mensajes de presentación para recruiters y plantillas de seguimiento post-entrevista (en español e inglés).</li>
+                        <li><strong>CRM de Reclutadores Avanzado:</strong> Registro de contactos clave con fórmulas de alerta automática (ej. "Toca escribirle hoy" si pasaron 5 días sin contacto).</li>
+                        <li><strong>Biblioteca de Preguntas de Entrevistas:</strong> Las 15 preguntas difíciles estructuradas bajo el método STAR para rellenar en la misma plantilla.</li>
+                        <li><strong>Sección Mindfulness para el Desempleo:</strong> Registro diario de auto-cuidado para controlar los picos de estrés durante la transición laboral.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: SECUENCIA DE EMAILS -->
+        <div class="tab-content" id="tab-emails">
+            <div class="panel-card">
+                <h2 class="panel-title"><i class="fa-solid fa-paper-plane"></i> Secuencia Automática de Bienvenida</h2>
+                <p style="margin-bottom: 25px; font-size: 0.9rem; color: var(--text-muted);">
+                    Esta secuencia de 5 correos automatizados se activa en el momento en que un usuario descarga uno de tus recursos gratuitos en la web. Su objetivo es generar valor, construir afinidad emocional y guiar al suscriptor a reservar la llamada gratuita de diagnóstico para contratar tus consultorías o sesiones a medida.
+                </p>
+
+                <!-- Email 1 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><span>Día 0</span> Email 1: Entrega del Recurso & Mi Historia</h3>
+                        <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="email-meta">
+                            <div><strong>Asunto:</strong> Aquí tienes tu recurso gratuito + una historia de reinvención real</div>
+                            <div><strong>Disparador:</strong> Inmediatamente tras la suscripción.</div>
+                        </div>
+                        <pre class="email-body" id="email-body-1">¡Hola {{name}}!
+
+Qué alegría tenerte en este espacio. Primero lo primero: en el enlace de abajo puedes descargar y acceder a tu recurso gratuito para ordenar tu carrera hoy mismo:
+
+👉 [Enlace de descarga del PDF o Notion Tracker]
+
+Te recomiendo guardarlo y dedicarle 15 minutos hoy mismo para familiarizarte con él.
+
+Pero antes de que te pongas a trabajar, me gustaría presentarme y contarte por qué hago lo que hago.
+
+Hace un par de años, mi carrera dio un giro absoluto. Trabajaba en el ámbito corporativo de Recursos Humanos en Argentina. Tenía estabilidad, un buen puesto y más de diez años de trayectoria seleccionando perfiles y coordinando personas. 
+
+Pero en 2024 decidí armar las valijas y emigrar a Italia.
+
+Ese cambio "pateó el tablero" de mi vida. Me obligó a experimentar en mi propia piel lo que significa reinventarse desde cero, no ser nadie en un mercado laboral nuevo, lidiar con la incertidumbre, el miedo a exponerme y la desorientación. Tuve que adaptarme a la fuerza y rediseñar mi carrera en mis propios términos.
+
+Ahí entendí que buscar trabajo o reinventarse profesionalmente no es solo un proceso técnico de "escribir un CV". Es una transición que requiere una estrategia clara, pero también una sólida regulación emocional ante el estrés de lo desconocido.
+
+Por eso hoy combino mis más de 10 años de experiencia técnica en RR.HH. con herramientas de bienestar emocional, acompañando a profesionales que están transitando un cambio de rumbo a dar el salto con claridad y seguridad.
+
+En los próximos días te compartiré un par de trucos reales que las empresas no te dicen para que tu búsqueda sea efectiva. 
+
+¡Por ahora, disfruta de tu recurso gratuito!
+
+Un abrazo grande,
+Flor Capeletto
+Estratega de Carrera</pre>
+                        <div class="copy-btn-container">
+                            <button class="btn-copy" onclick="copyEmailText('email-body-1')">
+                                <i class="fa-solid fa-copy"></i> Copiar Correo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email 2 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><span>Día 2</span> Email 2: El error #1 del CV (Valor Técnico)</h3>
+                        <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="email-meta">
+                            <div><strong>Asunto:</strong> El error técnico que hace que las empresas descarten tu CV al instante</div>
+                            <div><strong>Disparador:</strong> 2 días después de descargar el recurso.</div>
+                        </div>
+                        <pre class="email-body" id="email-body-2">¡Hola {{name}}!
+
+Espero que estés muy bien y que ya estés utilizando el recurso que te envié el otro día.
+
+Hoy quiero ir directo al grano con algo técnico que frustra a miles de profesionales: envías decenas de CVs y nadie te responde. Entras en un espiral de dudas sobre tu capacidad profesional. ¿Verdad?
+
+Como seleccionadora que ha evaluado miles de postulaciones, tengo que decirte algo: muchas veces el problema no son tus capacidades profesionales. Es un intermediario invisible llamado **filtro ATS (Applicant Tracking System)**.
+
+Las medianas y grandes empresas usan estos software automáticos para procesar las postulaciones. El sistema lee tu CV antes de que llegue a un ojo humano. Si tu documento no está adaptado para que este lector automático lo entienda, te descarta sin que nadie lo lea.
+
+¿El error número uno que cometen los candidatos?
+
+**El exceso de diseño y gráficos.**
+
+Columnas complejas, barras de progreso de habilidades en porcentajes (tipo: 80% inglés), iconos coloridos o formatos de imagen. A los humanos les puede parecer bonito, pero para el software ATS eso es un muro de código ilegible. 
+
+Si el robot no puede leer tu texto de corrido, no te asocia palabras clave y descarta el CV.
+
+**¿Cómo corregirlo hoy mismo?**
+1. Utiliza plantillas de estructura simple y de una sola columna.
+2. Evita las barras e iconos para representar habilidades. Escribe las palabras literales.
+3. Guarda y envía tu documento en PDF, pero asegúrate de que el texto se pueda seleccionar con el cursor (si es una imagen exportada como PDF, no servirá).
+
+En mi blog profundizo detalladamente sobre la adaptabilidad al cambio y cómo superar las parálisis mentales de la búsqueda. Te invito a leerlo si quieres entender qué bloquea tu mentalidad ante estas situaciones de fricción laboral:
+
+👉 [Saber qué hacer no alcanza: leer artículo en la web]
+
+En el correo de pasado mañana te contaré cómo organizar tu tiempo diario para no quemar tu sistema nervioso en el intento.
+
+¡Seguimos!
+Un abrazo,
+Flor</pre>
+                        <div class="copy-btn-container">
+                            <button class="btn-copy" onclick="copyEmailText('email-body-2')">
+                                <i class="fa-solid fa-copy"></i> Copiar Correo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email 3 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><span>Día 4</span> Email 3: Salud Mental & Organización (Foco)</h3>
+                        <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="email-meta">
+                            <div><strong>Asunto:</strong> La trampa de la productividad total (y cómo no quemarte buscando empleo)</div>
+                            <div><strong>Disparador:</strong> 4 días después del primer email.</div>
+                        </div>
+                        <pre class="email-body" id="email-body-3">¡Hola {{name}}!
+
+En mi experiencia trabajando con profesionales, he notado un patrón destructivo en momentos de transición o búsqueda laboral: la culpa por parar.
+
+Sentimos que si no estamos actualizando el CV, buscando en LinkedIn o postulándonos las 24 horas del día, estamos perdiendo el tiempo. Nos convertimos en nuestros propios jefes autoexigentes.
+
+El resultado es el desgaste mental extremo, la rumiación sobre el futuro y, finalmente, la parálisis.
+
+Tu cerebro y tu sistema nervioso necesitan inactividad real para procesar el aprendizaje y regular los niveles de estrés que genera la incertidumbre de no tener trabajo o querer cambiar de rumbo.
+
+Estar en el sillón deslizando la pantalla de LinkedIn no es descansar; es sobreestimular tu mente.
+
+Para evitar esto y sostener tu búsqueda de forma sana, te recomiendo aplicar **bloques de tiempo tácticos**:
+- Dedica un bloque de 2 horas en la mañana a postularte y conectar con profesionales.
+- Al terminar ese tiempo, cierra la computadora. Sal a caminar, haz ejercicio o lee un libro sin auriculares. 
+- Resta exigencia. Si tu día laboral demandó mucha energía de búsqueda, tu día personal necesita descansar en serio.
+
+La búsqueda laboral no es una carrera de velocidad, es una carrera de fondo. Cuidar tu energía no es un lujo, es una estrategia clave para no tirar la toalla antes de tiempo.
+
+Si sientes que el estrés te está ganando, te invito a leer esta reflexión sobre el equilibrio personal que escribí hace poco:
+
+👉 [Equilibrando la balanza: leer reflexión en la web]
+
+En el siguiente correo hablaremos de cómo llamar la atención de los reclutadores de forma estratégica a través de LinkedIn.
+
+Un abrazo grande,
+Flor</pre>
+                        <div class="copy-btn-container">
+                            <button class="btn-copy" onclick="copyEmailText('email-body-3')">
+                                <i class="fa-solid fa-copy"></i> Copiar Correo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email 4 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><span>Día 6</span> Email 4: LinkedIn Estratégico (Valor Empleabilidad)</h3>
+                        <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="email-meta">
+                            <div><strong>Asunto:</strong> ¿Tu perfil de LinkedIn es un imán o un cementerio digital?</div>
+                            <div><strong>Disparador:</strong> 6 días después del primer email.</div>
+                        </div>
+                        <pre class="email-body" id="email-body-4">¡Hola {{name}}!
+
+Hablemos de LinkedIn. Hoy en día, casi el 90% de los procesos de selección profesionales pasan de una forma u otra por esta plataforma. 
+
+Pero la mayoría de las personas tratan su perfil como si fuera un simple currículum estático en línea. Un "cementerio digital" que solo actualizan cuando se quedan sin empleo.
+
+Eso es desaprovechar la mayor red de contactos profesionales del mundo.
+
+Cuando un reclutador busca perfiles en LinkedIn, utiliza un motor de búsqueda interno similar a Google. Utiliza palabras clave para filtrar candidatos en base al puesto, habilidades y sector.
+
+Si tu perfil no tiene las palabras clave correctas en tu **Titular**, en tu extracto **"Acerca de"** o en tu experiencia, sencillamente eres invisible para el algoritmo.
+
+**Mis 3 tips rápidos para destacar:**
+1. **Tu Titular no es tu cargo actual:** No pongas "Buscando oportunidades" o "Desempleado". Pon tu especialidad y las tecnologías/áreas que dominas (Ej: *Especialista en Reclutamiento IT | Atracción de Talento | Gestión del Cambio*).
+2. **Usa el "Acerca de" para contar tu valor:** Explica qué problemas sabes resolver y cuál es tu valor añadido en lugar de redactar una aburrida biografía formal en tercera persona. Habla en primera persona con honestidad.
+3. **Sé activo sin publicar posts:** Puedes interactuar. Comenta publicaciones de líderes de tu sector aportando tu mirada experta. Los reclutadores ven las interacciones públicas de valor.
+
+Dejar el perfil optimizado y profesional requiere ojo clínico. Si quieres que lo revisemos juntos en pantalla, analizando tu perfil línea por línea en vivo y reescribiendo tu extracto, mi **Sesión Táctica de LinkedIn & CV Boost** está diseñada exactamente para eso.
+
+Y como regalo de bienvenida por estar en mi comunidad, tienes un **15% de descuento** exclusivo si la reservas esta semana usando el código **BIENVENIDA15**.
+
+Puedes consultar los detalles de mis sesiones individuales y contactarme aquí:
+
+👉 [Ver Sesiones de Consultoría en la Web]
+
+En mi próximo correo te contaré cómo podemos planificar juntos tu inserción laboral de forma totalmente personalizada.
+
+¡Un abrazo!
+Flor</pre>
+                        <div class="copy-btn-container">
+                            <button class="btn-copy" onclick="copyEmailText('email-body-4')">
+                                <i class="fa-solid fa-copy"></i> Copiar Correo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email 5 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3><span>Día 8</span> Email 5: Pitch del Diagnóstico Gratis & Sesión Táctica</h3>
+                        <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="email-meta">
+                            <div><strong>Asunto:</strong> Diseñemos tu plan de carrera (Conversación de 30 minutos sin costo)</div>
+                            <div><strong>Disparador:</strong> 8 días después del primer email.</div>
+                        </div>
+                        <pre class="email-body" id="email-body-5">¡Hola {{name}}!
+
+A lo largo de estos días te he compartido consejos de CV, filtros automáticos, organización de tiempos y trucos de LinkedIn.
+
+Pero sé muy bien que cada caso profesional es único. No es lo mismo reinventarse en tu propio país que emigrar y tener que adaptar tu trayectoria a un mercado europeo, ni es igual buscar recolocación corporativa que diseñar una transición hacia el autoempleo y sesiones a medida.
+
+Por eso, quiero hacerte una invitación especial.
+
+Abro espacios exclusivos en mi agenda cada lunes para realizar **Sesiones de Diagnóstico Gratis de 30 minutos** vía Zoom.
+
+El objetivo de esta sesión es claro y sin rodeos:
+1. Me cuentas en qué momento profesional estás y qué te está trabando.
+2. Analizamos si tus objetivos son realistas con el mercado actual.
+3. Te doy mi mirada objetiva y trazamos la mejor estrategia para ti.
+
+Sin compromisos. Si al terminar la sesión sentimos que hacemos un buen equipo y quieres que te acompañe en la reescritura de tu perfil o preparación de simulacros de entrevistas, te propondré una de mis consultorías 1a1 (o diseñaremos una sesión a medida para tu caso). Y si no, te llevarás un diagnóstico claro de tu situación para avanzar a tu ritmo.
+
+Los cupos para los lunes se llenan rápido ya que son limitados. Puedes reservar directamente tu día y hora en mi Calendario sincronizado aquí:
+
+👉 [Reservar mi Sesión de Diagnóstico Gratis de 30 minutos]
+
+O si ya tienes claro que quieres optimizar tu CV y LinkedIn al hueso para salir al mercado con todo, responde a este mismo correo indicándome tu caso y agendamos tu Sesión Táctica con el **15% de descuento de bienvenida (código: BIENVENIDA15)**.
+
+Hagamos que el cambio empiece a moverse.
+
+Te mando un abrazo grande y espero verte pronto en pantalla,
+Flor Capeletto
+Estratega de Carrera & RR.HH.</pre>
+                        <div class="copy-btn-container">
+                            <button class="btn-copy" onclick="copyEmailText('email-body-5')">
+                                <i class="fa-solid fa-copy"></i> Copiar Correo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Texto copiado al portapapeles</span>
+    </div>
+
+    <!-- Calculations Logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Tab switching logic
+            const tabButtons = document.querySelectorAll(".tab-btn");
+            const tabContents = document.querySelectorAll(".tab-content");
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    tabButtons.forEach(b => b.classList.remove("active"));
+                    tabContents.forEach(c => c.classList.remove("active"));
+
+                    btn.classList.add("active");
+                    const targetTab = btn.getAttribute("data-tab");
+                    document.getElementById(`tab-${targetTab}`).classList.add("active");
+                });
+            });
+
+            // Accordion logic for email templates
+            const accordionHeaders = document.querySelectorAll(".accordion-header");
+            accordionHeaders.forEach(header => {
+                header.addEventListener("click", () => {
+                    const item = header.parentElement;
+                    item.classList.toggle("active");
+                });
+            });
+
+            // Toggle Switches for simulated expansions
+            const toggles = {
+                tracker: document.getElementById("toggle-tracker"),
+                workshops: document.getElementById("toggle-workshops"),
+                nexo: document.getElementById("toggle-nexo")
+            };
+
+            const panels = {
+                tracker: document.getElementById("panel-tracker"),
+                workshops: document.getElementById("panel-workshops"),
+                nexo: document.getElementById("panel-nexo")
+            };
+
+            const boxes = {
+                wrapper: document.getElementById("results-future-wrapper"),
+                tracker: document.getElementById("res-box-pro"),
+                workshops: document.getElementById("res-box-workshops"),
+                nexo: document.getElementById("res-box-nexo")
+            };
+
+            // Bind toggle change events to activate panels and result boxes
+            Object.keys(toggles).forEach(key => {
+                toggles[key].addEventListener("change", () => {
+                    if (toggles[key].checked) {
+                        panels[key].classList.add("active");
+                        boxes[key].style.display = "block";
+                    } else {
+                        panels[key].classList.remove("active");
+                        boxes[key].style.display = "none";
+                    }
+
+                    // Check if any toggle is active to display the breakdown wrapper
+                    const anyActive = Object.values(toggles).some(t => t.checked);
+                    boxes.wrapper.style.display = anyActive ? "block" : "none";
+                    
+                    calculateFunnel();
+                });
+            });
+
+            // Input element references
+            const inputs = {
+                traffic: document.getElementById("traffic"),
+                leadRate: document.getElementById("lead-rate"),
+                bookRate: document.getElementById("book-rate"),
+                closeRate: document.getElementById("close-rate"),
+                sessionPrice: document.getElementById("session-price"),
+                ratePro: document.getElementById("rate-pro"),
+                pricePro: document.getElementById("price-pro"),
+                rateWorkshops: document.getElementById("rate-workshops"),
+                priceWorkshops: document.getElementById("price-workshops"),
+                rateNexo: document.getElementById("rate-nexo"),
+                priceNexo: document.getElementById("price-nexo")
+            };
+
+            // Bind inputs change events to trigger calculations
+            Object.values(inputs).forEach(input => {
+                input.addEventListener("input", () => {
+                    updateValueBadges();
+                    calculateFunnel();
+                });
+            });
+
+            // Update label badges for range values
+            const updateValueBadges = () => {
+                document.getElementById("val-traffic").innerText = Number(inputs.traffic.value).toLocaleString("es-ES");
+                document.getElementById("val-lead-rate").innerText = `${inputs.leadRate.value}%`;
+                document.getElementById("val-book-rate").innerText = `${inputs.bookRate.value}%`;
+                document.getElementById("val-close-rate").innerText = `${inputs.closeRate.value}%`;
+                document.getElementById("val-rate-pro").innerText = `${inputs.ratePro.value}%`;
+                document.getElementById("val-rate-workshops").innerText = `${inputs.rateWorkshops.value}%`;
+                document.getElementById("val-rate-nexo").innerText = `${inputs.rateNexo.value}%`;
+            };
+
+            // Perform funnel projections calculations
+            const calculateFunnel = () => {
+                // Get values
+                const traffic = parseInt(inputs.traffic.value);
+                const leadRate = parseFloat(inputs.leadRate.value) / 100;
+                const bookRate = parseFloat(inputs.bookRate.value) / 100;
+                const closeRate = parseFloat(inputs.closeRate.value) / 100;
+                const sessionPrice = parseFloat(inputs.sessionPrice.value) || 0;
+
+                // Calculate active funnel path
+                const leads = Math.round(traffic * leadRate);
+                const calls = Math.round(leads * bookRate);
+                const clients = Math.round(calls * closeRate);
+                const revenueConsulting = clients * sessionPrice;
+
+                // Display active path results
+                document.getElementById("res-leads").innerText = leads;
+                document.getElementById("res-calls").innerText = calls;
+                document.getElementById("res-clients").innerText = clients;
+                document.getElementById("res-revenue-consulting").innerText = `€${revenueConsulting.toLocaleString("es-ES")}`;
+
+                // Calculate and compile future simulated revenues
+                let futureTotal = 0;
+
+                // 1. Notion Job Tracker PRO
+                if (toggles.tracker.checked) {
+                    const ratePro = parseFloat(inputs.ratePro.value) / 100;
+                    const pricePro = parseFloat(inputs.pricePro.value) || 0;
+                    const salesPro = Math.round(leads * ratePro);
+                    const revPro = salesPro * pricePro;
+                    document.getElementById("res-val-pro").innerText = `€${revPro.toLocaleString("es-ES")}`;
+                    document.getElementById("res-box-pro").querySelector(".result-lbl").innerText = `Notion PRO (${salesPro} vtas)`;
+                    futureTotal += revPro;
+                }
+
+                // 2. Workshops
+                if (toggles.workshops.checked) {
+                    const rateWork = parseFloat(inputs.rateWorkshops.value) / 100;
+                    const priceWork = parseFloat(inputs.priceWorkshops.value) || 0;
+                    const salesWork = Math.round(leads * rateWork);
+                    const revWork = salesWork * priceWork;
+                    document.getElementById("res-val-workshops").innerText = `€${revWork.toLocaleString("es-ES")}`;
+                    document.getElementById("res-box-workshops").querySelector(".result-lbl").innerText = `Talleres (${salesWork} vtas)`;
+                    futureTotal += revWork;
+                }
+
+                // 3. Método NEXO
+                if (toggles.nexo.checked) {
+                    const rateNexo = parseFloat(inputs.rateNexo.value) / 100;
+                    const priceNexo = parseFloat(inputs.priceNexo.value) || 0;
+                    const salesNexo = Math.round(calls * rateNexo);
+                    const revNexo = salesNexo * priceNexo;
+                    document.getElementById("res-val-nexo").innerText = `€${revNexo.toLocaleString("es-ES")}`;
+                    document.getElementById("res-box-nexo").querySelector(".result-lbl").innerText = `Método NEXO (${salesNexo} cltes)`;
+                    futureTotal += revNexo;
+                }
+
+                // Calculate Grand Total
+                const grandTotal = revenueConsulting + futureTotal;
+                document.getElementById("res-total-revenue").innerText = `€${grandTotal.toLocaleString("es-ES")}`;
+            };
+
+            // Copy to clipboard helper
+            window.copyEmailText = (elementId) => {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+
+                const textToCopy = element.innerText;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showToast();
+                }).catch(err => {
+                    console.error("No se pudo copiar el texto: ", err);
+                });
+            };
+
+            // Show Toast Alert
+            const showToast = () => {
+                const toast = document.getElementById("toast");
+                toast.classList.add("show");
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+            };
+
+            // Run initial updates and calculations
+            updateValueBadges();
+            calculateFunnel();
+        });
+    </script>
+</body>
+</html>

@@ -22,6 +22,92 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("❌ Error al inicializar Supabase:", err);
     }
 
+    // ==========================================
+    // 0.1. Sistema de Analíticas y Tracking Privado
+    // ==========================================
+    let visitorId = localStorage.getItem("flor_visitor_id");
+    if (!visitorId) {
+        visitorId = "visitor_" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        localStorage.setItem("flor_visitor_id", visitorId);
+    }
+
+    const logEvent = async (eventType, eventName) => {
+        if (supabaseClient) {
+            try {
+                await supabaseClient
+                    .from('analytics_events')
+                    .insert([
+                        {
+                            event_type: eventType,
+                            event_name: eventName,
+                            visitor_id: visitorId,
+                            referrer: document.referrer || null
+                        }
+                    ]);
+            } catch (err) {
+                console.error("Error logging event:", err);
+            }
+        }
+    };
+
+    // Registrar visita a la Home
+    logEvent("page_view", "home_view");
+
+    // Registro de clics delegados (para evitar re-enlazar listeners individuales)
+    document.addEventListener("click", (e) => {
+        // 1. Clic en compra de Guía de LinkedIn (Hotmart)
+        const buyBtn = e.target.closest("#btn-linkedin-comprar");
+        if (buyBtn) {
+            logEvent("click", "click_linkedin_buy");
+            return;
+        }
+
+        // 2. Clic en el botón para duplicar Tracker en Notion (desde el modal de éxito)
+        const trackerBtn = e.target.closest('a[href*="notion.site"]');
+        if (trackerBtn) {
+            logEvent("click", "click_notion_tracker_duplicate");
+            return;
+        }
+
+        // 3. Clic en abrir modal de Tracker de Notion
+        const openTrackerModalBtn = e.target.closest('.open-modal-btn[data-resource="tracker"]');
+        if (openTrackerModalBtn) {
+            logEvent("click", "click_notion_tracker_open");
+            return;
+        }
+
+        // 4. Clic en reservar sesión de diagnóstico gratuita
+        const bookingBtn = e.target.closest("#open-booking-card-btn") || e.target.closest(".open-booking-btn");
+        if (bookingBtn) {
+            logEvent("click", "click_diagnostic_zoom");
+            return;
+        }
+
+        // 5. Clic en consultar disponibilidad de Consultoría Táctica
+        const tacticalBtn = e.target.closest(".open-tactical-session-btn");
+        if (tacticalBtn) {
+            logEvent("click", "click_tactical_consult");
+            return;
+        }
+
+        // 6. Clic en WhatsApp Directo
+        const whatsappBtn = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+        if (whatsappBtn) {
+            logEvent("click", "click_whatsapp");
+            return;
+        }
+
+        // 7. Redes sociales
+        const socialLink = e.target.closest('a[href*="instagram.com"], a[href*="linkedin.com/in"]');
+        if (socialLink) {
+            let socialName = "click_other_social";
+            if (socialLink.href.includes("instagram.com")) socialName = "click_instagram";
+            if (socialLink.href.includes("linkedin.com")) socialName = "click_linkedin_profile";
+            logEvent("click", socialName);
+            return;
+        }
+    });
+
     // Enlace permanente de Google Meet para sesiones de diagnóstico
     const PERMANENT_MEET_LINK = "https://meet.google.com/wki-npgi-cyn";
 
@@ -230,6 +316,64 @@ document.addEventListener("DOMContentLoaded", () => {
         modalSuccessState.style.display = "flex";
     });
 
+    // Manejo de botones de conversión dentro de la pantalla de éxito del modal de leads
+    const modalSuccessBookingBtn = document.getElementById("modal-success-booking-btn");
+    const modalSuccessTacticalBtn = document.getElementById("modal-success-tactical-btn");
+
+    if (modalSuccessBookingBtn) {
+        modalSuccessBookingBtn.addEventListener("click", () => {
+            closeLeadModal(); // Cerrar el modal actual de lead
+            setTimeout(() => {
+                // Abrir el modal de reserva (Calendly)
+                if (typeof bookingModal !== "undefined" && bookingModal) {
+                    bookingModal.classList.add("active");
+                    document.body.style.overflow = "hidden";
+                }
+            }, 350); // Pequeño delay para que la transición visual sea suave
+        });
+    }
+
+    if (modalSuccessTacticalBtn) {
+        modalSuccessTacticalBtn.addEventListener("click", () => {
+            closeLeadModal(); // Cerrar modal actual
+            setTimeout(() => {
+                // Hacer scroll suave hacia la sección de contacto
+                const contactSection = document.getElementById("contacto");
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: "smooth" });
+                    
+                    // Auto-seleccionar "Optimización de CV / LinkedIn / Entrevistas"
+                    const hiddenSubjectInput = document.getElementById("form-subject");
+                    const selectTrigger = document.getElementById("select-trigger-subject");
+                    const customOptions = document.querySelectorAll(".custom-option");
+                    
+                    if (hiddenSubjectInput && selectTrigger) {
+                        hiddenSubjectInput.value = "corporativo";
+                        const triggerTextEl = selectTrigger.querySelector(".custom-select-trigger-text");
+                        if (triggerTextEl) triggerTextEl.innerText = "Optimización de CV / LinkedIn / Entrevistas";
+                        selectTrigger.classList.add("has-value");
+                        selectTrigger.classList.remove("invalid");
+                        
+                        customOptions.forEach(opt => {
+                            if (opt.getAttribute("data-value") === "corporativo") {
+                                opt.classList.add("selected");
+                            } else {
+                                opt.classList.remove("selected");
+                            }
+                        });
+                    }
+                    
+                    // Pre-rellenar el mensaje del formulario con el cupón
+                    const formMessage = document.getElementById("form-message");
+                    if (formMessage) {
+                        formMessage.value = "Hola Flor, acabo de descargar tu recurso y me interesa agendar una Sesión Táctica de Empleo (CV & LinkedIn Boost / Simulacro) aprovechando el cupón de bienvenida BIENVENIDA15. ¡Hablemos!";
+                        formMessage.focus();
+                    }
+                }
+            }, 400); // Delay para esperar a que el modal se cierre
+        });
+    }
+
     const saveLead = async (name, email, resourceTitle, downloadLink = "") => {
         let leads = JSON.parse(localStorage.getItem("leads_database")) || [];
         const dateStr = new Date().toLocaleDateString("es-ES") + " " + new Date().toLocaleTimeString("es-ES", {hour: '2-digit', minute:'2-digit'});
@@ -275,6 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ]);
                 if (error) throw error;
                 console.log("📝 Lead guardado exitosamente en Supabase.");
+                logEvent("conversion", "lead_tracker_" + resourceTitle.toLowerCase().replace(/\s+/g, '_'));
             } catch (err) {
                 console.error("❌ Error al guardar lead en Supabase:", err);
             }
@@ -357,6 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             ]);
                         if (error) throw error;
                         console.log("📝 Contacto guardado exitosamente en Supabase.");
+                        logEvent("conversion", "contact_form_submit");
                     } catch (err) {
                         console.error("❌ Error al guardar contacto en Supabase:", err);
                     }

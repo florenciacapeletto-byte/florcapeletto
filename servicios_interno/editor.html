@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador Interno de Servicios | Flor Capeletto</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #3F625B;
+            --primary-light: #4E736B;
+            --accent: #D98757;
+            --accent-hover: #C57345;
+            --secondary: #90B5A3;
+            --steel-blue: #4E6074;
+            --peach: #EFAA89;
+            --bg-warm: #FCFBF9;
+            --white: #FFFFFF;
+            --text-main: #2C3531;
+            --text-muted: #5D6D66;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-md: 0 10px 30px rgba(63, 98, 91, 0.06);
+            --shadow-lg: 0 15px 35px rgba(63, 98, 91, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-warm);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(144, 181, 163, 0.2);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .badge-private {
+            display: inline-block;
+            background-color: rgba(78, 96, 116, 0.1);
+            color: var(--steel-blue);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background-color: rgba(144, 181, 163, 0.08);
+            padding: 6px;
+            border-radius: 14px;
+            border: 1px solid rgba(144, 181, 163, 0.15);
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(63, 98, 91, 0.05);
+        }
+
+        /* Editor Section Card */
+        .card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(144, 181, 163, 0.15);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .card.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-intro {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed rgba(144, 181, 163, 0.2);
+            padding-bottom: 20px;
+        }
+
+        .section-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-intro p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Form Layout */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group label i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1.5px solid rgba(144, 181, 163, 0.3);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            color: var(--text-main);
+            background-color: var(--bg-warm);
+            transition: var(--transition);
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(217, 135, 87, 0.1);
+        }
+
+        /* Input specific layout */
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Actions Footer */
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(217, 135, 87, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 135, 87, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: rgba(78, 96, 116, 0.1);
+            color: var(--steel-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(78, 96, 116, 0.18);
+            transform: translateY(-2px);
+        }
+
+        /* Toast Alert */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px 28px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--peach);
+            font-size: 1.2rem;
+        }
+
+        /* Guidance Alert */
+        .guidance-box {
+            background-color: rgba(239, 170, 137, 0.08);
+            border-left: 4px solid var(--peach);
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .guidance-box strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .input-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .card {
+                padding: 25px 20px;
+            }
+        }
+
+        /* Sync Banner styling */
+        .sync-banner {
+            background-color: rgba(217, 135, 87, 0.08);
+            border: 1.5px dashed var(--accent);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .sync-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.88rem;
+            color: var(--text-main);
+        }
+
+        .sync-banner-content .warning-icon {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .sync-banner-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sync-action {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-sync-action.load-file-btn {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-sync-action.load-file-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-sync-action.dismiss-btn {
+            background-color: rgba(78, 96, 116, 0.1);
+            color: var(--steel-blue);
+        }
+
+        .btn-sync-action.dismiss-btn:hover {
+            background-color: rgba(78, 96, 116, 0.18);
+        }
+
+        /* Modal Overlay and Cards for Editor Export */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 53, 49, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 35px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(144, 181, 163, 0.2);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(78, 96, 116, 0.08);
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background-color: rgba(78, 96, 116, 0.15);
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <i class="fa-solid fa-compass-drafting logo-icon"></i>
+                <h1>Planificador de Servicios</h1>
+            </div>
+            <p class="subtitle">Borrador privado de propuestas, contenidos y precios para tu marca</p>
+            <span class="badge-private"><i class="fa-solid fa-lock"></i> Solo visible en tu máquina</span>
+            
+            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
+                <a href="dashboard.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.8rem; border-radius: 20px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-chart-line"></i> Ver Métricas
+                </a>
+            </div>
+        </header>
+
+        <!-- Sync Banner Alerta de Cambios -->
+        <div id="sync-banner" class="sync-banner" style="display: none;">
+            <div class="sync-banner-content">
+                <i class="fa-solid fa-circle-exclamation warning-icon"></i>
+                <span>Estás viendo un borrador del navegador. El archivo en tu PC (<code>servicios_data.js</code>) tiene otros datos.</span>
+            </div>
+            <div class="sync-banner-actions">
+                <button type="button" class="btn-sync-action load-file-btn" id="load-file-banner-btn">
+                    <i class="fa-solid fa-file-import"></i> Usar datos del archivo
+                </button>
+                <button type="button" class="btn-sync-action dismiss-btn" id="dismiss-banner-btn">
+                    <i class="fa-solid fa-xmark"></i> Omitir
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="nexo">
+                <i class="fa-solid fa-users"></i> Mentoría & Consultoría 1a1
+            </button>
+            <button class="tab-btn" data-tab="infoproductos">
+                <i class="fa-solid fa-book"></i> Infoproductos
+            </button>
+            <button class="tab-btn" data-tab="talleres">
+                <i class="fa-solid fa-video"></i> Talleres Pregrabados
+            </button>
+        </div>
+
+        <form id="editor-form">
+
+            <!-- TAB 1: Mentoría & Consultoría 1a1 -->
+            <div class="card active" id="tab-nexo">
+                <div class="section-intro">
+                    <h2><i class="fa-solid fa-users"></i> Mentoría & Consultoría 1a1</h2>
+                    <p>Estructura tus acompañamientos premium y tus sesiones de consultoría táctica de empleo.</p>
+                </div>
+
+                <div class="guidance-box">
+                    <strong>💡 Estrategia de Posicionamiento</strong>
+                    El <strong>Método NEXO</strong> es tu servicio estrella (Premium) enfocado en Marca Personal y Emprender. Las <strong>Sesiones de Consultoría</strong> son de enfoque táctico rápido (CV, LinkedIn y Simulaciones) para profesionales buscando empleo.
+                </div>
+
+                <!-- SUBSECCIÓN A: Método NEXO -->
+                <h3 style="color: var(--primary); margin: 30px 0 20px 0; border-bottom: 1.5px solid rgba(144, 181, 163, 0.25); padding-bottom: 8px; font-family: 'Playfair Display', serif; font-size: 1.25rem;"><i class="fa-solid fa-compass" style="color: var(--accent);"></i> A. Método NEXO (Emprender y Marca Personal)</h3>
+
+                <div class="form-group">
+                    <label for="nexo-concepto"><i class="fa-solid fa-lightbulb"></i> Concepto y Propósito General</label>
+                    <textarea class="form-control" id="nexo-concepto" rows="4" placeholder="¿De qué trata este acompañamiento y a quién ayuda idealmente?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="nexo-estructura"><i class="fa-solid fa-sitemap"></i> Modalidad y Estructura del Proceso</label>
+                    <textarea class="form-control" id="nexo-estructura" rows="6" placeholder="Ejes de trabajo del proceso premium..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="nexo-incluye"><i class="fa-solid fa-circle-check"></i> Qué Incluye el Programa</label>
+                    <textarea class="form-control" id="nexo-incluye" rows="4" placeholder="Ej: Notion Hub, soporte de dudas por WhatsApp, acceso a guías premium, etc."></textarea>
+                </div>
+
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="nexo-precio"><i class="fa-solid fa-tags"></i> Precio Estimado</label>
+                        <input type="text" class="form-control" id="nexo-precio" placeholder="Ej. A consultar">
+                    </div>
+                    <div class="form-group">
+                        <label for="nexo-pasarelas"><i class="fa-solid fa-credit-card"></i> Métodos de Pago</label>
+                        <input type="text" class="form-control" id="nexo-pasarelas" placeholder="Ej. Stripe, Wise, Transferencia">
+                    </div>
+                </div>
+
+                <!-- SUBSECCIÓN B: Sesiones de Consultoría Táctica -->
+                <h3 style="color: var(--primary); margin: 40px 0 20px 0; border-bottom: 1.5px solid rgba(144, 181, 163, 0.25); padding-bottom: 8px; font-family: 'Playfair Display', serif; font-size: 1.25rem;"><i class="fa-solid fa-comments" style="color: var(--accent);"></i> B. Sesiones de Consultoría Enfocadas (Táctico / Búsqueda Empleo)</h3>
+
+                <div class="form-group">
+                    <label for="consultoria-concepto"><i class="fa-solid fa-lightbulb"></i> Concepto General</label>
+                    <textarea class="form-control" id="consultoria-concepto" rows="3" placeholder="Descripción corta del servicio táctico de inserción laboral..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="consultoria-estructura"><i class="fa-solid fa-sitemap"></i> Modalidades y Duración</label>
+                    <textarea class="form-control" id="consultoria-estructura" rows="4" placeholder="Ej: 1. Sesión LinkedIn & CV Boost. 2. Sesión Simulación de Entrevistas."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="consultoria-precio"><i class="fa-solid fa-tags"></i> Precio por Sesión</label>
+                    <input type="text" class="form-control" id="consultoria-precio" placeholder="Ej. €120 / Sesión">
+                </div>
+            </div>
+
+            <!-- TAB 2: Infoproductos -->
+            <div class="card" id="tab-infoproductos">
+                <div class="section-intro">
+                    <h2><i class="fa-solid fa-book"></i> Infoproductos (Ebooks y Plantillas)</h2>
+                    <p>Planifica tus guías descargables de captación o tus plantillas de venta directa.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="info-tracker"><i class="fa-solid fa-clipboard-list"></i> Notion Job Tracker</label>
+                    <textarea class="form-control" id="info-tracker" rows="4" placeholder="Detalle e información sobre tu organizador de Notion. ¿Crearás una versión Pro de pago?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="info-guia"><i class="fa-solid fa-book-open"></i> Guía Estratégica de LinkedIn 2026</label>
+                    <textarea class="form-control" id="info-guia" rows="4" placeholder="Información del Ebook PDF. ¿Qué actualizaciones o anexos incorporarás en el futuro?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="info-nuevas"><i class="fa-solid fa-circle-plus"></i> Nuevas Ideas de Recursos</label>
+                    <textarea class="form-control" id="info-nuevas" rows="4" placeholder="Ideas futuras: Ej. Guía de entrevistas internacionales, plantillas de cartas de presentación listas para rellenar, etc."></textarea>
+                </div>
+            </div>
+
+            <!-- TAB 3: Talleres -->
+            <div class="card" id="tab-talleres">
+                <div class="section-intro">
+                    <h2><i class="fa-solid fa-video"></i> Talleres y Cursos Pregrabados</h2>
+                    <p>Detalla el material educativo autogestionado para vender de forma automatizada.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="talleres-lista"><i class="fa-solid fa-list-check"></i> Talleres en Planificación</label>
+                    <textarea class="form-control" id="talleres-lista" rows="5" placeholder="Ej. Taller de gestión emocional ante la reinvención, Taller intensivo de optimización de perfil paso a paso, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="talleres-hosting"><i class="fa-solid fa-server"></i> Plataforma de Alojamiento y Entrega</label>
+                    <textarea class="form-control" id="talleres-hosting" rows="4" placeholder="¿Dónde hospedarás los videos? Ej. Hotmart (gestión de impuestos automática), Google Drive privado, etc."></textarea>
+                </div>
+
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="talleres-precio"><i class="fa-solid fa-tag"></i> Precio Estimado por Taller</label>
+                        <input type="text" class="form-control" id="talleres-precio" placeholder="Ej. €39 por curso pregrabado">
+                    </div>
+                    <div class="form-group">
+                        <label for="talleres-promo"><i class="fa-solid fa-percent"></i> Promoción Lista de Espera</label>
+                        <input type="text" class="form-control" id="talleres-promo" placeholder="Ej. 20% descuento a registrados en la web">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Bar Actions -->
+            <div class="actions-bar">
+                <button type="button" class="btn btn-secondary" id="reset-btn">
+                    <i class="fa-solid fa-rotate-left"></i> Cargar Plantilla Base
+                </button>
+                <button type="submit" class="btn btn-primary" id="save-btn">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios en mi PC
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>¡Borrador guardado con éxito localmente!</span>
+    </div>
+
+    <!-- Export Modal Structure -->
+    <div class="modal-overlay" id="export-modal">
+        <div class="modal-card">
+            <button type="button" class="modal-close-btn" id="export-close-btn">&times;</button>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.45rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-floppy-disk" style="color: var(--accent);"></i> ¡Borrador guardado!
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">
+                Tus cambios se guardaron en el navegador. Para que queden grabados permanentemente en tu archivo de PC, descarga el archivo actualizado y reemplaza el anterior en tu carpeta:
+            </p>
+            
+            <div style="background: rgba(144, 181, 163, 0.08); padding: 16px; border-radius: 12px; margin-bottom: 22px; border-left: 4px solid var(--accent);">
+                <strong style="display: block; font-size: 0.88rem; color: var(--primary); margin-bottom: 6px;"><i class="fa-solid fa-circle-info"></i> Paso final:</strong>
+                <ol style="margin-left: 20px; font-size: 0.82rem; color: var(--text-main); display: flex; flex-direction: column; gap: 5px; padding-left: 5px;">
+                    <li>Haz clic en <strong>"Descargar Archivo"</strong>.</li>
+                    <li>Guárdalo en la carpeta <code>servicios_interno/</code> reemplazando al archivo anterior.</li>
+                </ol>
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                <button type="button" class="btn btn-secondary" id="export-cancel-btn" style="padding: 10px 20px; font-size: 0.88rem; border-radius: 20px;">
+                    Cerrar ventana
+                </button>
+                <button type="button" class="btn btn-primary" id="download-file-btn" style="padding: 10px 22px; font-size: 0.88rem; background-color: var(--accent); border-radius: 20px;">
+                    <i class="fa-solid fa-file-arrow-down"></i> Descargar Archivo (servicios_data.js)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fuente de Datos de Servicios (Código) -->
+    <script src="servicios_data.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Tab switching logic
+            const tabButtons = document.querySelectorAll(".tab-btn");
+            const cards = document.querySelectorAll(".card");
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    tabButtons.forEach(b => b.classList.remove("active"));
+                    cards.forEach(c => c.classList.remove("active"));
+
+                    btn.classList.add("active");
+                    const targetTab = btn.getAttribute("data-tab");
+                    document.getElementById(`tab-${targetTab}`).classList.add("active");
+                });
+            });
+
+            // Fallback en caso de que servicios_data.js no cargue correctamente
+            const DEFAULT_DATA = typeof SERVICIOS_DATA !== "undefined" ? SERVICIOS_DATA : {
+                nexoConcepto: "", nexoEstructura: "", nexoIncluye: "", nexoPrecio: "", nexoPasarelas: "",
+                consultoriaConcepto: "", consultoriaEstructura: "", consultoriaPrecio: "",
+                infoTracker: "", infoGuia: "", infoNuevas: "",
+                talleresLista: "", talleresHosting: "", talleresPrecio: "", talleresPromo: ""
+            };
+
+            const keys = [
+                "nexoConcepto", "nexoEstructura", "nexoIncluye", "nexoPrecio", "nexoPasarelas",
+                "consultoriaConcepto", "consultoriaEstructura", "consultoriaPrecio",
+                "infoTracker", "infoGuia", "infoNuevas",
+                "talleresLista", "talleresHosting", "talleresPrecio", "talleresPromo"
+            ];
+
+            // Compara dos objetos de datos
+            const hasDifferences = (d1, d2) => {
+                for (const key of keys) {
+                    if ((d1[key] || "").trim() !== (d2[key] || "").trim()) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            // Elementos del Banner de Sincronización
+            const syncBanner = document.getElementById("sync-banner");
+            const loadFileBannerBtn = document.getElementById("load-file-banner-btn");
+            const dismissBannerBtn = document.getElementById("dismiss-banner-btn");
+
+            // Elementos del Modal de Exportación
+            const exportModal = document.getElementById("export-modal");
+            const exportCloseBtn = document.getElementById("export-close-btn");
+            const exportCancelBtn = document.getElementById("export-cancel-btn");
+            const downloadFileBtn = document.getElementById("download-file-btn");
+
+            // Comprobar estado de sincronización al cargar la página
+            const checkSyncStatus = () => {
+                const saved = localStorage.getItem("flor_servicios_draft");
+                if (saved) {
+                    const savedData = JSON.parse(saved);
+                    if (hasDifferences(savedData, DEFAULT_DATA)) {
+                        syncBanner.style.display = "flex";
+                    } else {
+                        syncBanner.style.display = "none";
+                    }
+                } else {
+                    syncBanner.style.display = "none";
+                }
+            };
+
+            // Cargar datos guardados
+            const loadData = (forceFromFile = false) => {
+                let data = DEFAULT_DATA;
+                
+                if (!forceFromFile) {
+                    const saved = localStorage.getItem("flor_servicios_draft");
+                    if (saved) {
+                        data = JSON.parse(saved);
+                    }
+                } else {
+                    localStorage.removeItem("flor_servicios_draft");
+                    syncBanner.style.display = "none";
+                }
+
+                document.getElementById("nexo-concepto").value = data.nexoConcepto || "";
+                document.getElementById("nexo-estructura").value = data.nexoEstructura || "";
+                document.getElementById("nexo-incluye").value = data.nexoIncluye || "";
+                document.getElementById("nexo-precio").value = data.nexoPrecio || "";
+                document.getElementById("nexo-pasarelas").value = data.nexoPasarelas || "";
+
+                document.getElementById("consultoria-concepto").value = data.consultoriaConcepto || "";
+                document.getElementById("consultoria-estructura").value = data.consultoriaEstructura || "";
+                document.getElementById("consultoria-precio").value = data.consultoriaPrecio || "";
+
+                document.getElementById("info-tracker").value = data.infoTracker || "";
+                document.getElementById("info-guia").value = data.infoGuia || "";
+                document.getElementById("info-nuevas").value = data.infoNuevas || "";
+
+                document.getElementById("talleres-lista").value = data.talleresLista || "";
+                document.getElementById("talleres-hosting").value = data.talleresHosting || "";
+                document.getElementById("talleres-precio").value = data.talleresPrecio || "";
+                document.getElementById("talleres-promo").value = data.talleresPromo || "";
+
+                checkSyncStatus();
+            };
+
+            // Acciones del Banner de Sincronización
+            loadFileBannerBtn.addEventListener("click", () => {
+                if (confirm("¿Deseas descartar tu borrador actual del navegador y cargar los datos definidos en el archivo del código (servicios_data.js)?")) {
+                    loadData(true);
+                    showToast("¡Datos cargados desde el archivo!");
+                }
+            });
+
+            dismissBannerBtn.addEventListener("click", () => {
+                syncBanner.style.display = "none";
+            });
+
+            // Guardar datos en LocalStorage y abrir Modal de Exportación
+            const editorForm = document.getElementById("editor-form");
+            editorForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const data = {
+                    nexoConcepto: document.getElementById("nexo-concepto").value,
+                    nexoEstructura: document.getElementById("nexo-estructura").value,
+                    nexoIncluye: document.getElementById("nexo-incluye").value,
+                    nexoPrecio: document.getElementById("nexo-precio").value,
+                    nexoPasarelas: document.getElementById("nexo-pasarelas").value,
+                    consultoriaConcepto: document.getElementById("consultoria-concepto").value,
+                    consultoriaEstructura: document.getElementById("consultoria-estructura").value,
+                    consultoriaPrecio: document.getElementById("consultoria-precio").value,
+                    infoTracker: document.getElementById("info-tracker").value,
+                    infoGuia: document.getElementById("info-guia").value,
+                    infoNuevas: document.getElementById("info-nuevas").value,
+                    talleresLista: document.getElementById("talleres-lista").value,
+                    talleresHosting: document.getElementById("talleres-hosting").value,
+                    talleresPrecio: document.getElementById("talleres-precio").value,
+                    talleresPromo: document.getElementById("talleres-promo").value
+                };
+
+                localStorage.setItem("flor_servicios_draft", JSON.stringify(data));
+                checkSyncStatus();
+                
+                // Mostrar Modal de Exportación
+                exportModal.classList.add("active");
+            });
+
+            // Cerrar Modal de Exportación
+            const closeExportModal = () => {
+                exportModal.classList.remove("active");
+            };
+
+            exportCloseBtn.addEventListener("click", closeExportModal);
+            exportCancelBtn.addEventListener("click", closeExportModal);
+            exportModal.addEventListener("click", (e) => {
+                if (e.target === exportModal) {
+                    closeExportModal();
+                }
+            });
+
+            // Descargar el archivo servicios_data.js
+            downloadFileBtn.addEventListener("click", () => {
+                const data = {
+                    nexoConcepto: document.getElementById("nexo-concepto").value,
+                    nexoEstructura: document.getElementById("nexo-estructura").value,
+                    nexoIncluye: document.getElementById("nexo-incluye").value,
+                    nexoPrecio: document.getElementById("nexo-precio").value,
+                    nexoPasarelas: document.getElementById("nexo-pasarelas").value,
+                    consultoriaConcepto: document.getElementById("consultoria-concepto").value,
+                    consultoriaEstructura: document.getElementById("consultoria-estructura").value,
+                    consultoriaPrecio: document.getElementById("consultoria-precio").value,
+                    infoTracker: document.getElementById("info-tracker").value,
+                    infoGuia: document.getElementById("info-guia").value,
+                    infoNuevas: document.getElementById("info-nuevas").value,
+                    talleresLista: document.getElementById("talleres-lista").value,
+                    talleresHosting: document.getElementById("talleres-hosting").value,
+                    talleresPrecio: document.getElementById("talleres-precio").value,
+                    talleresPromo: document.getElementById("talleres-promo").value
+                };
+
+                const fileContent = `// ==========================================================================\n// Flor Capeletto - Base de Datos de Servicios (Contenido de Marca Personal)\n// Este archivo es la fuente de verdad. Al editar los textos aquí, se\n// actualizarán en el planificador interno de servicios automáticamente.\n// ==========================================================================\n\nconst SERVICIOS_DATA = {\n` +
+                    keys.map(key => `    ${key}: ${JSON.stringify(data[key])}`).join(",\n\n") +
+                    `\n};\n`;
+
+                const blob = new Blob([fileContent], { type: "application/javascript" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "servicios_data.js";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                closeExportModal();
+                showToast("¡Descarga iniciada! Recuerda reemplazar el archivo anterior.");
+            });
+
+            // Botón Reset (Cargar versión del archivo)
+            document.getElementById("reset-btn").addEventListener("click", () => {
+                if (confirm("¿Estás segura de que deseas restaurar la versión original del archivo de código? Esto reemplazará lo que hayas escrito temporalmente.")) {
+                    loadData(true);
+                    showToast("¡Datos del archivo restaurados!");
+                }
+            });
+
+            // Mostrar Notificación Toast
+            const showToast = (message = "¡Borrador guardado con éxito!") => {
+                const toast = document.getElementById("toast");
+                toast.querySelector("span").innerText = message;
+                toast.classList.add("show");
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+            };
+
+            // Inicializar la carga
+            loadData();
+        });
+    </script>
+</body>
+</html>
