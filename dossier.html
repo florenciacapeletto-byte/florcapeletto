@@ -123,13 +123,73 @@
             border-radius: 2px;
         }
         
+        /* Currency Selector Styles */
+        .currency-selector-section {
+            margin-bottom: 30px;
+        }
+        
+        .currency-selector-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 15px 25px;
+            border: 1px solid rgba(63, 98, 91, 0.1);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 0 auto;
+            max-width: 550px;
+        }
+        
+        .currency-selector-card label {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+        
+        .select-wrapper {
+            position: relative;
+            width: 240px;
+        }
+        
+        .currency-select-field {
+            width: 100%;
+            padding: 10px 15px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background-color: var(--bg-warm);
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition);
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='%233F625B' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 35px;
+        }
+        
+        .currency-select-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(63, 98, 91, 0.15);
+        }
+        
         /* Service Cards */
         .service-list-card {
             background-color: var(--white);
             border-radius: 20px;
             border: 1px solid rgba(63, 98, 91, 0.08);
             box-shadow: var(--shadow-sm);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             overflow: hidden;
             transition: var(--transition);
         }
@@ -140,7 +200,7 @@
         }
         
         .service-header-banner {
-            height: 150px;
+            height: 160px;
             overflow: hidden;
             position: relative;
         }
@@ -152,7 +212,7 @@
         }
         
         .service-card-body {
-            padding: 25px;
+            padding: 30px;
         }
         
         .service-card-tag {
@@ -163,9 +223,9 @@
             letter-spacing: 1px;
             color: var(--primary);
             background-color: var(--bg-rose);
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         
         .service-card-tag.premium {
@@ -174,14 +234,14 @@
         }
         
         .service-card-title {
-            font-size: 1.35rem;
+            font-size: 1.45rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .service-card-desc {
-            font-size: 0.95rem;
+            font-size: 0.96rem;
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 20px;
@@ -190,25 +250,43 @@
         .service-card-includes {
             list-style: none;
             padding: 0;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border-top: 1px dashed rgba(63, 98, 91, 0.15);
-            padding-top: 15px;
+            padding-top: 20px;
         }
         
         .service-card-includes li {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: var(--text-main);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .service-card-includes li i {
             color: var(--primary);
-            margin-top: 3px;
-            font-size: 0.85rem;
+            margin-top: 4px;
+            font-size: 0.88rem;
+            flex-shrink: 0;
+        }
+        
+        /* Highlight Editable Templates */
+        .templates-highlight-box {
+            background-color: rgba(249, 229, 228, 0.35);
+            border-left: 4px solid var(--peach);
+            padding: 15px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .templates-highlight-box strong {
+            color: var(--primary-light);
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
         }
         
         /* Price Tag block */
@@ -216,7 +294,7 @@
             background-color: #FAF8F5;
             border-radius: 12px;
             padding: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border: 1px solid rgba(63, 98, 91, 0.05);
             text-align: center;
         }
@@ -232,22 +310,27 @@
         
         .price-value-container {
             display: flex;
-            flex-direction: column;
-            gap: 5px;
             justify-content: center;
             align-items: center;
+            min-height: 35px;
         }
         
-        .price-primary {
-            font-size: 1.4rem;
+        /* Multi-currency Displays */
+        .price-display {
+            display: none;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent);
+            animation: fadeIn 0.3s ease;
         }
         
-        .price-secondary-list {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
+        .price-display.active {
+            display: inline-block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Modes of work section */
@@ -390,6 +473,14 @@
             .service-card-title {
                 font-size: 1.2rem;
             }
+            .currency-selector-card {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 15px;
+            }
+            .select-wrapper {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -439,14 +530,28 @@
             <p class="dossier-tagline">Dossier de Servicios & Propuesta de Acompañamiento</p>
             
             <div class="dossier-intro-card">
-                <p><strong>¡Hola! Soy Flor.</strong> Ex-recruiter, mentora y facilitadora de procesos de transición y crecimiento profesional.</p>
-                <p>Te acompaño a deconstruir tu historia profesional, estructurar tu propuesta de valor, posicionarte estratégicamente en el mercado local o internacional y, fundamentalmente, a sostener emocionalmente tu proceso de cambio para que tomes acción real con un sistema nervioso regulado.</p>
-                <p style="margin-top: 10px; font-weight: 600; color: var(--primary);">A continuación, te presento las modalidades de trabajo y las tarifas vigentes.</p>
+                <p><strong>¡Hola! Soy Flor.</strong> Consultora de Carrera y Mentora de Empleabilidad.</p>
+                <p>Te acompaño a deconstruir tu historia profesional, estructurar tu propuesta de valor, posicionarte estratégicamente en el mercado nacional o internacional y, fundamentalmente, a gestionar la incertidumbre del cambio laboral para que tomes acción con seguridad y foco en tus metas.</p>
+                <p style="margin-top: 10px; font-weight: 600; color: var(--primary);">A continuación, te presento mis servicios vigentes con su detalle completo de entregables.</p>
             </div>
         </header>
 
+        <!-- Currency Selector Section -->
+        <div class="currency-selector-section reveal-on-scroll">
+            <div class="currency-selector-card">
+                <label for="currency-select"><i class="fa-solid fa-earth-americas"></i> Mostrar tarifas en:</label>
+                <div class="select-wrapper">
+                    <select id="currency-select" class="currency-select-field">
+                        <option value="ars">🇦🇷 Pesos Argentinos ($ ARS)</option>
+                        <option value="usd">🇺🇸 Dólares ($ USD)</option>
+                        <option value="eur">🇪🇺 Euros (€ EUR)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <!-- Services Section Title -->
-        <h2 class="dossier-section-title reveal-on-scroll">Nuestros Servicios</h2>
+        <h2 class="dossier-section-title reveal-on-scroll">Propuestas de Trabajo</h2>
 
         <!-- Service 1: Sesion Inicial -->
         <div class="service-list-card reveal-on-scroll">
@@ -455,18 +560,25 @@
             </div>
             <div class="service-card-body">
                 <span class="service-card-tag">Punto de Partida</span>
-                <h3 class="service-card-title">Sesión Inicial de Diagnóstico</h3>
-                <p class="service-card-desc">Una sesión enfocada de claridad para conocernos, evaluar en profundidad tu perfil, tus metas de carrera o negocio y definir la mejor estrategia de acompañamiento para tu caso particular.</p>
+                <h3 class="service-card-title">Sesión Inicial de Diagnóstico (30 min)</h3>
+                <p class="service-card-desc">Una videollamada corta y enfocada para conocernos, evaluar tu situación profesional actual, identificar tus principales bloqueos en la búsqueda o negocio y definir la ruta de trabajo ideal.</p>
+                
                 <ul class="service-card-includes">
-                    <li><i class="fa-solid fa-check"></i> 1 Sesión individual 1a1 online en vivo.</li>
-                    <li><i class="fa-solid fa-check"></i> Auditoría previa de tu estado actual e inquietudes.</li>
-                    <li><i class="fa-solid fa-check"></i> Definición de hoja de ruta o programa recomendado.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Reunión en vivo:</strong> 1 sesión de 30 minutos individual 1a1 online (Zoom o Meet).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Auditoría Express:</strong> Diagnóstico preliminar en base a tus fricciones activas (CV, LinkedIn o miedos).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Plan de Ruta Personalizado:</strong> Definición exacta del paso a seguir o programa recomendado.</li>
                 </ul>
+
+                <div class="templates-highlight-box">
+                    <strong>🎁 Materiales Editables Incluidos:</strong>
+                    • Cuestionario de Diagnóstico Previo (Auditoría Inicial)<br>
+                    • Plan de Ruta Inicial en PDF para guiar tus primeros pasos.
+                </div>
+
                 <div class="service-price-block">
                     <div class="price-label">Inversión</div>
                     <div class="price-value-container">
-                        <span class="price-primary">A consultar / Bonificada</span>
-                        <span class="price-secondary-list">(Incluida al contratar mentorías o programas avanzados)</span>
+                        <span class="price-primary" style="color: var(--primary);">¡Gratuita!</span>
                     </div>
                 </div>
             </div>
@@ -480,17 +592,27 @@
             <div class="service-card-body">
                 <span class="service-card-tag">Táctico</span>
                 <h3 class="service-card-title">CV Estratégico</h3>
-                <p class="service-card-desc">Rediseño y optimización de tu CV bajo la mirada crítica de una seleccionadora. Logramos un currículum atractivo para los reclutadores y optimizado para superar filtros automáticos (ATS-ready).</p>
+                <p class="service-card-desc">Rediseño y optimización profunda de tu currículum bajo la perspectiva de reclutadora. Diseñamos un CV de alto impacto que supere los filtros automáticos (ATS-ready) y resalte tus logros reales.</p>
+                
                 <ul class="service-card-includes">
-                    <li><i class="fa-solid fa-check"></i> 1 Sesión individual 1a1 online en vivo.</li>
-                    <li><i class="fa-solid fa-check"></i> Diagnóstico de tu estado actual y redefinición del objetivo.</li>
-                    <li><i class="fa-solid fa-check"></i> Rediseño completo y redacción estratégica de tu CV.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Consultoría 1a1 (90 min):</strong> Sesión en vivo para deconstruir tu trayectoria, identificar fortalezas técnicas y redefinir tus metas de carrera.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Rediseño Visual & SEO:</strong> Yo me encargo de la redacción estratégica de secciones, palabras clave del sector y maquetación profesional.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Feedback Técnico:</strong> Auditoría de tu perfil frente a ofertas reales para optimizar el encuadre.</li>
                 </ul>
+
+                <div class="templates-highlight-box">
+                    <strong>🎁 Materiales Editables Incluidos:</strong>
+                    • Entrega de tu CV final en formatos editables (Word/Google Docs y Canva)<br>
+                    • Guía de Verbos de Acción e impacto para búsquedas laborales<br>
+                    • Checklist de Autovalidación ATS para validar futuros cambios.
+                </div>
+
                 <div class="service-price-block">
                     <div class="price-label">Inversión</div>
                     <div class="price-value-container">
-                        <span class="price-primary">$50.000 ARS</span>
-                        <span class="price-secondary-list">u$s 40 USD | €35 EUR</span>
+                        <span class="price-display" data-currency="ars">🇦🇷 $50.000 ARS</span>
+                        <span class="price-display" data-currency="usd">🇺🇸 u$s 40 USD</span>
+                        <span class="price-display" data-currency="eur">🇪🇺 €35 EUR</span>
                     </div>
                 </div>
             </div>
@@ -499,22 +621,32 @@
         <!-- Service 3: LinkedIn Optimizado -->
         <div class="service-list-card reveal-on-scroll">
             <div class="service-header-banner">
-                <img src="assets/linkedin_session.png" alt="LinkedIn Optimizado" class="service-banner-img">
+                <img src="assets/linkedin_session.png" alt="LinkedIn de Alto Impacto" class="service-banner-img">
             </div>
             <div class="service-card-body">
                 <span class="service-card-tag">Táctico</span>
-                <h3 class="service-card-title">LinkedIn Optimizado</h3>
-                <p class="service-card-desc">Auditoría en pantalla compartida y optimización completa de tu perfil para posicionarte en el mercado, atraer ofertas pasivas y presentarte como el candidato ideal.</p>
+                <h3 class="service-card-title">LinkedIn de Alto Impacto</h3>
+                <p class="service-card-desc">Optimización estratégica de tu perfil para posicionarte en tu nicho, atraer la mirada de reclutadores en búsquedas pasivas y conectar con potenciales socios o clientes.</p>
+                
                 <ul class="service-card-includes">
-                    <li><i class="fa-solid fa-check"></i> 1 Sesión individual 1a1 online en vivo.</li>
-                    <li><i class="fa-solid fa-check"></i> Auditoría interactiva de tu perfil en tiempo real.</li>
-                    <li><i class="fa-solid fa-check"></i> Optimización de titulares, acerca de, palabras clave y estructura.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Auditoría en Pantalla (75 min):</strong> Ajustamos en vivo tu privacidad, indexación del algoritmo y configuración técnica ("Open to Work" selectivo).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Redacción persuasiva (Copywriting):</strong> Redactamos en pantalla tu Titular, la sección "Acerca de" (About Me) y redactamos las descripciones de tus roles.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Estrategia de SEO & Networking:</strong> Mapeamos tus palabras clave ideales y configuramos una táctica sencilla de contactos clave.</li>
                 </ul>
+
+                <div class="templates-highlight-box">
+                    <strong>🎁 Materiales Editables Incluidos:</strong>
+                    • 15+ Fórmulas listas de Titulares de Alto Impacto para LinkedIn<br>
+                    • Plantillas editables para Banners/Portadas de LinkedIn en Canva<br>
+                    • Guía de Mensajes de Conexión y Networking frío para tomadores de decisión.
+                </div>
+
                 <div class="service-price-block">
                     <div class="price-label">Inversión</div>
                     <div class="price-value-container">
-                        <span class="price-primary">$60.000 ARS</span>
-                        <span class="price-secondary-list">u$s 50 USD | €45 EUR</span>
+                        <span class="price-display" data-currency="ars">🇦🇷 $60.000 ARS</span>
+                        <span class="price-display" data-currency="usd">🇺🇸 u$s 50 USD</span>
+                        <span class="price-display" data-currency="eur">🇪🇺 €45 EUR</span>
                     </div>
                 </div>
             </div>
@@ -523,22 +655,32 @@
         <!-- Service 4: Pack Inserción Completa -->
         <div class="service-list-card reveal-on-scroll">
             <div class="service-header-banner">
-                <img src="assets/insercion_pack.png" alt="Pack Inserción Laboral Completa" class="service-banner-img">
+                <img src="assets/insercion_pack.png" alt="Programa de Inserción Laboral" class="service-banner-img">
             </div>
             <div class="service-card-body">
                 <span class="service-card-tag">Combo Táctico</span>
-                <h3 class="service-card-title">Pack Inserción Completa</h3>
-                <p class="service-card-desc">El combo definitivo de empleabilidad para acelerar tu búsqueda y ganar total seguridad en tus entrevistas de trabajo.</p>
+                <h3 class="service-card-title">Programa de Inserción Laboral</h3>
+                <p class="service-card-desc">El proceso integral definitivo de empleabilidad. Preparamos toda tu estrategia de postulación y entrenamos tus habilidades en entrevistas mediante simulaciones reales.</p>
+                
                 <ul class="service-card-includes">
-                    <li><i class="fa-solid fa-check"></i> <strong>Sesión 1:</strong> CV Estratégico + LinkedIn Optimizado + Carta de Presentación.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Sesión 2:</strong> Entrenamiento de entrevistas y simulaciones con feedback directo.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Notion Job Tracker PRO</strong> de regalo para organizar tus candidaturas.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Sesión 1 (Alineación y Rediseño - 90 min):</strong> Diseñamos tu estrategia de posicionamiento. Yo me encargo de redactar tu nuevo CV, carta de presentación y tu perfil de LinkedIn.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Sesión 2 (Simulacro de Entrevista - 60 min):</strong> Simulación real en vivo basada en una vacante real de tu sector, grabada para tu análisis, con feedback estructurado (método STAR).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Confianza y Seguridad:</strong> Herramientas tácticas y preparación mental para gestionar la ansiedad y destacar con solvencia en tus entrevistas.</li>
                 </ul>
+
+                <div class="templates-highlight-box">
+                    <strong>🎁 Materiales Editables Incluidos:</strong>
+                    • <strong>Notion Job Tracker PRO</strong> (El Toolkit de control y seguimiento de vacantes)<br>
+                    • Plantilla editable de Carta de Presentación de alto impacto<br>
+                    • Guía de Respuestas a Preguntas Difíciles de Entrevista con guiones editables.
+                </div>
+
                 <div class="service-price-block">
                     <div class="price-label">Inversión Especial Pack</div>
                     <div class="price-value-container">
-                        <span class="price-primary">$100.000 ARS</span>
-                        <span class="price-secondary-list">u$s 90 USD | €80 EUR</span>
+                        <span class="price-display" data-currency="ars">🇦🇷 $100.000 ARS</span>
+                        <span class="price-display" data-currency="usd">🇺🇸 u$s 90 USD</span>
+                        <span class="price-display" data-currency="eur">🇪🇺 €80 EUR</span>
                     </div>
                 </div>
             </div>
@@ -551,19 +693,28 @@
             </div>
             <div class="service-card-body">
                 <span class="service-card-tag">Internacional</span>
-                <h3 class="service-card-title">Programa Migración y Búsqueda Laboral</h3>
-                <p class="service-card-desc">Acompañamiento especializado para profesionales de Latinoamérica que emigran a Italia o Europa y necesitan adaptar su estrategia de búsqueda al contexto europeo.</p>
+                <h3 class="service-card-title">Programa Migración Profesional</h3>
+                <p class="service-card-desc">Diseñado especialmente para profesionales de Latinoamérica que están emigrando o desean recolocarse laboralmente en Italia o el resto de Europa.</p>
+                
                 <ul class="service-card-includes">
-                    <li><i class="fa-solid fa-check"></i> Sesiones 1a1 online orientadas a la inserción europea.</li>
-                    <li><i class="fa-solid fa-check"></i> Adaptación de CV a estándares europeos (Europass vs. formato local).</li>
-                    <li><i class="fa-solid fa-check"></i> LinkedIn internacional, estrategias de postulación local y remota.</li>
-                    <li><i class="fa-solid fa-check"></i> Preparación del fit cultural para entrevistas internacionales.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Estrategia de Postulación Europea:</strong> Sesiones 1a1 individuales donde adaptamos tu perfil y CV a estándares europeos (análisis de Europass vs. CVs visuales).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>LinkedIn Internacional:</strong> Configuración regional y optimización SEO para aparecer en los paneles de recruiters locales en la Unión Europea.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Fit Cultural en Entrevistas:</strong> Entrenamiento para superar filtros y adaptarte a la cultura laboral de corporaciones y empresas multinacionales.</li>
                 </ul>
+
+                <div class="templates-highlight-box">
+                    <strong>🎁 Materiales Editables Incluidos:</strong>
+                    • Plantillas editables de CV y Carta de Presentación en inglés e italiano<br>
+                    • Plantillas de Mensajes fríos de autopostulación dirigidos a recruiters europeos<br>
+                    • Planilla editable de Gestión Financiera y Costo de Vida para emigración.
+                </div>
+
                 <div class="service-price-block">
                     <div class="price-label">Inversión</div>
                     <div class="price-value-container">
-                        <span class="price-primary">$100.000 ARS</span>
-                        <span class="price-secondary-list">u$s 100 USD | €90 EUR</span>
+                        <span class="price-display" data-currency="ars">🇦🇷 $100.000 ARS</span>
+                        <span class="price-display" data-currency="usd">🇺🇸 u$s 100 USD</span>
+                        <span class="price-display" data-currency="eur">🇪🇺 €90 EUR</span>
                     </div>
                 </div>
             </div>
@@ -577,20 +728,28 @@
             <div class="service-card-body">
                 <span class="service-card-tag premium">Premium - Mentoría 4 Semanas</span>
                 <h3 class="service-card-title">Método NEXO</h3>
-                <p class="service-card-desc">Tu programa individual premium de 4 semanas para dar el salto al autoempleo, estructurar tu marca personal de servicios y monetizar tu conocimiento de forma sostenible.</p>
+                <p class="service-card-desc">Programa premium e individual de 4 semanas para dar el salto definitivo al autoempleo, estructurar tu marca personal de servicios y monetizar tu conocimiento con seguridad, claridad y una estrategia paso a paso.</p>
+                
                 <ul class="service-card-includes">
-                    <li><i class="fa-solid fa-check"></i> <strong>Cuestionario de Diagnóstico Previo</strong> para auditar tus recursos y metas.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>4 Sesiones individuales 1a1</strong> de alto nivel en vivo.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Soporte continuo vía WhatsApp</strong> de lunes a viernes entre sesiones.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Notion Brand Tracker Personalizado</strong> de por vida.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Puente de Soporte de 14 días</strong> post-programa exclusivo.</li>
-                    <li><i class="fa-solid fa-check"></i> Acceso gratuito e ilimitado de por vida a todos mis infoproductos.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Auditoría Previa (Pre-work):</strong> Cuestionario profundo una semana antes de iniciar.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>4 Sesiones individuales 1a1 en vivo (90 min):</strong> Planificamos tu cliente ideal, construimos tu oferta de Servicios Estrella y simulamos tu proceso de ventas.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Soporte continuo vía WhatsApp:</strong> Acompañamiento y co-pensamiento diario de lunes a viernes para revisar borradores y resolver tus decisiones en tiempo real.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Soporte Post-Mentoría (14 días):</strong> Puente exclusivo de acompañamiento por WhatsApp post-programa para auditar tus primeros pasos reales.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Acceso Ilimitado:</strong> Acceso gratuito de por vida a todos mis infoproductos actuales y futuros.</li>
                 </ul>
+
+                <div class="templates-highlight-box">
+                    <strong>🎁 Materiales Editables Incluidos:</strong>
+                    • **Notion Brand Tracker Personalizado** (CRM de clientes, calendario de contenidos, base de datos de marca y metas)<br>
+                    • Plantilla editable de Propuesta Comercial y presupuesto de servicios para clientes<br>
+                    • Planilla Calculadora de Precios y Costos de Servicios.
+                </div>
+
                 <div class="service-price-block" style="background-color: #FAF6ED; border: 1px solid #E5D5B3;">
                     <div class="price-label" style="color: #8C6D23;">Inversión Mentoría Premium</div>
                     <div class="price-value-container">
                         <span class="price-primary" style="color: #8C6D23;">A consultar</span>
-                        <span class="price-secondary-list" style="color: #6D541B;">Planes de pago flexibles en cuotas disponibles</span>
+                        <span class="price-secondary-list" style="color: #6D541B;">Planes de pago flexibles en cuotas mensuales disponibles</span>
                     </div>
                 </div>
             </div>
@@ -625,8 +784,8 @@
                     <i class="fa-solid fa-brain"></i>
                 </div>
                 <div>
-                    <h4 class="work-mode-title">Mentalidad y Sistema Nervioso</h4>
-                    <p class="work-mode-desc">Trabajamos con mindfulness y regulación emocional. Diseñamos planes que no te abrumen y te permitan tomar acción sin parálisis por análisis.</p>
+                    <h4 class="work-mode-title">Enfoque Integral y Confianza</h4>
+                    <p class="work-mode-desc">Acompañamiento en el autoliderazgo y la toma de decisiones. Diseñamos hojas de ruta realistas que evitan la parálisis por análisis y potencian tu seguridad profesional.</p>
                 </div>
             </div>
         </div>
@@ -655,7 +814,7 @@
         </a>
     </div>
 
-    <!-- Custom Scripts for Animation (Reveal) and Mobile Menu -->
+    <!-- Custom Scripts for Animation (Reveal), Mobile Menu and Currency Switching -->
     <script>
         // Simple Mobile Menu Toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
@@ -664,6 +823,56 @@
             menuBtn.addEventListener('click', () => {
                 menuBtn.classList.toggle('active');
                 navMenu.classList.toggle('active');
+            });
+        }
+
+        // Currency Auto-Detection & Selector logic
+        const currencySelect = document.getElementById('currency-select');
+        
+        function detectCurrency() {
+            try {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                if (tz) {
+                    const tzLower = tz.toLowerCase();
+                    if (tzLower.includes("argentina") || tzLower.includes("buenos_aires") || tzLower.includes("cordoba") || tzLower.includes("salta")) {
+                        return "ars";
+                    }
+                    if (tzLower.includes("europe") || tzLower.includes("rome") || tzLower.includes("madrid") || tzLower.includes("paris") || tzLower.includes("berlin") || tzLower.includes("london")) {
+                        return "eur";
+                    }
+                }
+            } catch (e) {
+                console.error("Timezone detection failed:", e);
+            }
+            
+            // Language Fallback
+            const lang = navigator.language || navigator.userLanguage;
+            if (lang && lang.toLowerCase().includes("ar")) {
+                return "ars";
+            }
+            
+            return "usd"; // Fallback default
+        }
+
+        function updatePrices(currency) {
+            const priceElements = document.querySelectorAll('.price-display');
+            priceElements.forEach(el => {
+                if (el.getAttribute('data-currency') === currency) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize currency on load
+        if (currencySelect) {
+            const detected = detectCurrency();
+            currencySelect.value = detected;
+            updatePrices(detected);
+
+            currencySelect.addEventListener('change', (e) => {
+                updatePrices(e.target.value);
             });
         }
 
