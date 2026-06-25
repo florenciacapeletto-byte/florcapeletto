@@ -53,6 +53,66 @@ document.addEventListener("DOMContentLoaded", () => {
     // Registrar visita a la Home
     logEvent("page_view", "home_view");
 
+    // ==========================================
+    // 0.2. Detección de Región y Moneda
+    // ==========================================
+    let userCurrency = "USD";
+
+    const detectUserCurrency = async () => {
+        const savedCurrency = localStorage.getItem("user-currency");
+        if (savedCurrency && ["ARS", "USD", "EUR"].includes(savedCurrency)) {
+            userCurrency = savedCurrency;
+            return;
+        }
+
+        try {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (tz) {
+                if (tz.includes("Argentina") || tz === "America/Buenos_Aires") {
+                    userCurrency = "ARS";
+                } else if (tz.startsWith("Europe/")) {
+                    userCurrency = "EUR";
+                } else {
+                    userCurrency = "USD";
+                }
+            }
+        } catch (e) {
+            console.warn("Timezone detection failed:", e);
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+        try {
+            const response = await fetch("https://freeipapi.com/api/json", { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            if (response.ok) {
+                const data = await response.json();
+                const countryCode = data.countryCode;
+                
+                if (countryCode === "AR") {
+                    userCurrency = "ARS";
+                } else {
+                    const euCountries = [
+                        "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", 
+                        "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", 
+                        "PL", "PT", "RO", "SK", "SI", "ES", "SE"
+                    ];
+                    if (euCountries.includes(countryCode)) {
+                        userCurrency = "EUR";
+                    } else {
+                        userCurrency = "USD";
+                    }
+                }
+            }
+        } catch (err) {
+            console.log("IP Geolocation failed/timeout, keeping fallback:", userCurrency);
+        }
+    };
+
+    detectUserCurrency();
+
     // Registro de clics delegados (para evitar re-enlazar listeners individuales)
     document.addEventListener("click", (e) => {
         // 1. Clic en compra de Guía de LinkedIn (Hotmart)
@@ -144,40 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ==========================================
-    // 3. Filtrado Dinámico de Recursos e Infoproductos
-    // ==========================================
-    const tabButtons = document.querySelectorAll(".tab-btn");
-    const recursoCards = document.querySelectorAll(".recurso-card");
 
-    tabButtons.forEach(button => {
-        // Ignorar botones de pestañas del panel administrativo
-        if (button.id === "admin-tab-leads" || button.id === "admin-tab-bookings") return;
-
-        button.addEventListener("click", () => {
-            // Remover clase activa de todos y añadir al seleccionado
-            tabButtons.forEach(btn => {
-                if (btn.id !== "admin-tab-leads" && btn.id !== "admin-tab-bookings") {
-                    btn.classList.remove("active");
-                }
-            });
-            button.classList.add("active");
-            
-            const filterValue = button.getAttribute("data-filter");
-            
-            recursoCards.forEach(card => {
-                const category = card.getAttribute("data-category");
-                
-                if (filterValue === "all") {
-                    card.style.display = "flex";
-                } else if (category === filterValue) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        });
-    });
 
     // ==========================================
     // 4. Sistema de Captura de Leads (Modales)
@@ -222,99 +249,109 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Abrir Modal de Leads
-    openModalButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const resourceKey = button.getAttribute("data-resource");
-            const config = RESOURCE_DELIVERY[resourceKey];
-            
-            if (config) {
-                // Resetear estado del formulario
-                leadForm.style.display = "flex";
-                modalSuccessState.style.display = "none";
-                leadForm.reset();
+    let closeLeadModal = () => {};
 
-                // Cargar contenidos del recurso seleccionado
-                modalTitle.innerText = config.title;
-                modalSubtitle.innerText = config.subtitle;
-                requestedResourceInput.value = resourceKey;
+    if (leadModal && leadForm && modalCloseBtn && modalSuccessState) {
+        // Abrir Modal de Leads
+        openModalButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const resourceKey = button.getAttribute("data-resource");
+                const config = RESOURCE_DELIVERY[resourceKey];
                 
-                // Cambiar icono del badge
-                modalBadgeIcon.innerHTML = `<i class="${config.icon}"></i>`;
-                
-                // Abrir modal con efecto
-                leadModal.classList.add("active");
-                document.body.style.overflow = "hidden"; // Evitar scroll del fondo
+                if (config) {
+                    // Resetear estado del formulario
+                    leadForm.style.display = "flex";
+                    modalSuccessState.style.display = "none";
+                    leadForm.reset();
+
+                    // Cargar contenidos del recurso seleccionado
+                    if (modalTitle) modalTitle.innerText = config.title;
+                    if (modalSubtitle) modalSubtitle.innerText = config.subtitle;
+                    if (requestedResourceInput) requestedResourceInput.value = resourceKey;
+                    
+                    // Cambiar icono del badge
+                    if (modalBadgeIcon) modalBadgeIcon.innerHTML = `<i class="${config.icon}"></i>`;
+                    
+                    // Abrir modal con efecto
+                    leadModal.classList.add("active");
+                    document.body.style.overflow = "hidden"; // Evitar scroll del fondo
+                }
+            });
+        });
+
+        // Cerrar Modal Leads
+        closeLeadModal = () => {
+            leadModal.classList.remove("active");
+            document.body.style.overflow = ""; // Restaurar scroll
+        };
+
+        modalCloseBtn.addEventListener("click", closeLeadModal);
+        
+        leadModal.addEventListener("click", (e) => {
+            if (e.target === leadModal) {
+                closeLeadModal();
             }
         });
-    });
 
-    // Cerrar Modal Leads
-    const closeLeadModal = () => {
-        leadModal.classList.remove("active");
-        document.body.style.overflow = ""; // Restaurar scroll
-    };
+        // Procesar Formulario de Leads (Captura)
+        leadForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            const nameEl = document.getElementById("lead-name");
+            const emailEl = document.getElementById("lead-email");
+            if (!nameEl || !emailEl) return;
 
-    modalCloseBtn.addEventListener("click", closeLeadModal);
-    
-    leadModal.addEventListener("click", (e) => {
-        if (e.target === leadModal) {
-            closeLeadModal();
-        }
-    });
+            const name = nameEl.value.trim();
+            const email = emailEl.value.trim();
+            const resourceKey = requestedResourceInput ? requestedResourceInput.value : "";
+            const config = RESOURCE_DELIVERY[resourceKey];
 
-    // Procesar Formulario de Leads (Captura)
-    leadForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
-        const name = document.getElementById("lead-name").value.trim();
-        const email = document.getElementById("lead-email").value.trim();
-        const resourceKey = requestedResourceInput.value;
-        const config = RESOURCE_DELIVERY[resourceKey];
+            if (!name || !email || !config) return;
 
-        if (!name || !email || !config) return;
+            // Guardar localmente y enviar a Make/Supabase
+            saveLead(name, email, config.title, config.link);
 
-        // Guardar localmente y enviar a Make/Supabase
-        saveLead(name, email, config.title, config.link);
-
-        // Configurar el enlace de descarga exitoso
-        modalDownloadLink.href = config.link;
-        if (resourceKey === "talleres") {
-            modalDownloadLink.innerHTML = `${config.btnText} <i class="fa-solid fa-circle-check"></i>`;
-        } else {
-            modalDownloadLink.innerHTML = `${config.btnText} <i class="fa-solid fa-circle-arrow-down"></i>`;
-        }
-        
-        // Configurar descarga nativa para el PDF y enlace para Notion
-        if (resourceKey === "linkedin") {
-            modalDownloadLink.setAttribute("download", "Guia_LinkedIn_2026_FlorCapeletto.pdf");
-        } else {
-            modalDownloadLink.removeAttribute("download");
-        }
-        
-        // Agregar manejador de clic explícito para asegurar compatibilidad en cualquier navegador
-        modalDownloadLink.onclick = (event) => {
-            if (resourceKey === "talleres") {
-                event.preventDefault();
-                closeLeadModal();
-                return;
+            // Configurar el enlace de descarga exitoso
+            if (modalDownloadLink) {
+                modalDownloadLink.href = config.link;
+                if (resourceKey === "talleres") {
+                    modalDownloadLink.innerHTML = `${config.btnText} <i class="fa-solid fa-circle-check"></i>`;
+                } else {
+                    modalDownloadLink.innerHTML = `${config.btnText} <i class="fa-solid fa-circle-arrow-down"></i>`;
+                }
+                
+                // Configurar descarga nativa para el PDF y enlace para Notion
+                if (resourceKey === "linkedin") {
+                    modalDownloadLink.setAttribute("download", "Guia_LinkedIn_2026_FlorCapeletto.pdf");
+                } else {
+                    modalDownloadLink.removeAttribute("download");
+                }
+                
+                // Agregar manejador de clic explícito para asegurar compatibilidad en cualquier navegador
+                modalDownloadLink.onclick = (event) => {
+                    if (resourceKey === "talleres") {
+                        event.preventDefault();
+                        closeLeadModal();
+                        return;
+                    }
+                    if (resourceKey === "linkedin") {
+                        // Permitir que el navegador ejecute la descarga nativa con el atributo 'download'
+                        return;
+                    }
+                    // Para Notion, abrir explícitamente en pestaña nueva
+                    event.preventDefault();
+                    window.open(config.link, '_blank');
+                };
             }
-            if (resourceKey === "linkedin") {
-                // Permitir que el navegador ejecute la descarga nativa con el atributo 'download'
-                return;
-            }
-            // Para Notion, abrir explícitamente en pestaña nueva
-            event.preventDefault();
-            window.open(config.link, '_blank');
-        };
-        
-        const successMsgEl = document.getElementById("success-message");
-        successMsgEl.innerText = config.successMsg;
+            
+            const successMsgEl = document.getElementById("success-message");
+            if (successMsgEl) successMsgEl.innerText = config.successMsg;
 
-        // Ocultar formulario y mostrar pantalla de éxito
-        leadForm.style.display = "none";
-        modalSuccessState.style.display = "flex";
-    });
+            // Ocultar formulario y mostrar pantalla de éxito
+            leadForm.style.display = "none";
+            modalSuccessState.style.display = "flex";
+        });
+    }
 
     // Manejo de botones de conversión dentro de la pantalla de éxito del modal de leads
     const modalSuccessBookingBtn = document.getElementById("modal-success-booking-btn");
@@ -851,4 +888,421 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(updateTimelineProgress, 100);
     }
 
+    // ==========================================
+    // 7. Lógica Especial de la Página de Servicios y Precios (servicios.html)
+    // ==========================================
+
+    // B. Modal para Detalles de Tarjetas de Servicios
+    const serviceModal = document.getElementById("service-modal");
+    const serviceCloseBtn = document.getElementById("service-close-btn");
+    const detailsButtons = document.querySelectorAll(".btn-card-details");
+
+    if (serviceModal && detailsButtons.length > 0) {
+        
+        const openServiceModal = (cardKey) => {
+            const buttonEl = document.querySelector(`[data-card="${cardKey}"]`);
+            if (!buttonEl) return;
+
+            const cardElement = buttonEl.closest(".pricing-card");
+            const panel = document.getElementById(`details-${cardKey}`);
+
+            if (cardElement && panel) {
+                // 1. Obtener elementos de la tarjeta
+                const title = cardElement.querySelector(".card-title").innerText;
+                const subtitle = cardElement.querySelector(".card-subtitle").innerText;
+                const imgSrc = cardElement.querySelector(".card-image").src;
+                const description = cardElement.querySelector(".card-desc").innerText;
+
+                // Precios y notas por región desde los data-attributes de la tarjeta
+                const priceArs = cardElement.getAttribute("data-price-ars") || "";
+                const priceUsd = cardElement.getAttribute("data-price-usd") || "";
+                const priceEur = cardElement.getAttribute("data-price-eur") || "";
+                
+                const priceArsNote = cardElement.getAttribute("data-price-ars-note") || "";
+                const priceUsdNote = cardElement.getAttribute("data-price-usd-note") || "";
+                const priceEurNote = cardElement.getAttribute("data-price-eur-note") || "";
+
+                const activeCardData = {
+                    title,
+                    priceArs,
+                    priceUsd,
+                    priceEur,
+                    priceArsNote,
+                    priceUsdNote,
+                    priceEurNote
+                };
+
+                // 2. Poblar cabecera
+                const modalImg = document.getElementById("service-modal-img");
+                const modalTitle = document.getElementById("service-modal-title");
+                const modalSubtitle = document.getElementById("service-modal-subtitle");
+                const modalDesc = document.getElementById("service-modal-description");
+
+                if (modalImg) {
+                    modalImg.src = imgSrc;
+                    modalImg.alt = title;
+                }
+                if (modalTitle) modalTitle.innerText = title;
+                if (modalSubtitle) modalSubtitle.innerText = subtitle;
+                if (modalDesc) modalDesc.innerText = description;
+
+                // 3. Organizar bloques de contenido (Izquierda vs Derecha)
+                const leftContainer = document.getElementById("service-modal-details-container");
+                const paymentsSection = document.getElementById("service-modal-payments-section");
+                const modalWhatsappBtn = document.getElementById("service-modal-whatsapp-btn");
+                const modalCurrencySelect = document.getElementById("modal-currency-select");
+
+                if (leftContainer) leftContainer.innerHTML = "";
+                if (paymentsSection) paymentsSection.innerHTML = "";
+
+                // Clonar bloques de detalle (información básica y métodos de pago)
+                const detailBlocks = panel.querySelectorAll(".detail-block");
+                detailBlocks.forEach(block => {
+                    const blockTitleEl = block.querySelector(".detail-block-title");
+                    if (!blockTitleEl) return;
+
+                    const blockTitle = blockTitleEl.innerText.toLowerCase();
+
+                    // Identificar el tipo de bloque por su título/icono
+                    if (blockTitle.includes("pago") || blockTitle.includes("facilidades")) {
+                        if (paymentsSection) {
+                            paymentsSection.innerHTML = block.innerHTML;
+                        }
+                    } else {
+                        // Bloques informativos (Duración, Primera sesión, Metodología, Recursos) van a la izquierda
+                        if (leftContainer) {
+                            const clone = block.cloneNode(true);
+                            leftContainer.appendChild(clone);
+                        }
+                    }
+                });
+
+                // Función interna para actualizar el precio y el botón de WhatsApp
+                const updateModalPricing = () => {
+                    const activeSelect = document.getElementById("modal-currency-select");
+                    const selectedCurrency = activeSelect ? activeSelect.value : userCurrency;
+                    
+                    const priceEl = document.getElementById("service-modal-price");
+                    const noteEl = document.getElementById("service-modal-price-note");
+
+                    let priceText = "";
+                    let noteText = "";
+
+                    if (selectedCurrency === "ARS") {
+                        priceText = activeCardData.priceArs;
+                        noteText = activeCardData.priceArsNote;
+                    } else if (selectedCurrency === "EUR") {
+                        priceText = activeCardData.priceEur;
+                        noteText = activeCardData.priceEurNote;
+                    } else {
+                        priceText = activeCardData.priceUsd;
+                        noteText = activeCardData.priceUsdNote;
+                    }
+
+                    if (priceEl) priceEl.innerText = priceText;
+                    
+                    if (noteEl) {
+                        if (noteText) {
+                            noteEl.innerText = noteText;
+                            noteEl.style.display = "inline-block";
+                        } else {
+                            noteEl.style.display = "none";
+                        }
+                    }
+
+                    // Configurar enlace y mensaje de WhatsApp
+                    if (modalWhatsappBtn) {
+                        const baseMsg = `¡Hola Flor! Me interesa contratar el servicio de "${activeCardData.title}" (${priceText}). ¿Cómo coordinamos los detalles?`;
+                        modalWhatsappBtn.href = `https://wa.me/393445628917?text=${encodeURIComponent(baseMsg)}`;
+                        
+                        // Textos de botón customizados por tipo de servicio
+                        if (cardKey === "nexo") {
+                            modalWhatsappBtn.innerHTML = `Aplicar al Programa <i class="fa-solid fa-arrow-right"></i>`;
+                        } else if (cardKey === "migracion") {
+                            modalWhatsappBtn.innerHTML = `Contratar Programa <i class="fa-solid fa-arrow-right"></i>`;
+                        } else if (cardKey === "insercion") {
+                            modalWhatsappBtn.innerHTML = `Contratar Pack <i class="fa-solid fa-arrow-right"></i>`;
+                        } else {
+                            modalWhatsappBtn.innerHTML = `Contratar Servicio <i class="fa-solid fa-arrow-right"></i>`;
+                        }
+                    }
+                };
+
+                // Asignar el selector al valor detectado o guardado actual y enlazar listener
+                if (modalCurrencySelect) {
+                    modalCurrencySelect.value = userCurrency;
+                    
+                    // Clonar selector para eliminar event listeners acumulados de modales anteriores
+                    const newSelect = modalCurrencySelect.cloneNode(true);
+                    modalCurrencySelect.parentNode.replaceChild(newSelect, modalCurrencySelect);
+
+                    newSelect.addEventListener("change", (e) => {
+                        userCurrency = e.target.value;
+                        localStorage.setItem("user-currency", userCurrency);
+                        updateModalPricing();
+                    });
+                }
+
+                // Ejecutar inicialización de visualización de precios
+                updateModalPricing();
+
+                // 5. Mostrar modal
+                serviceModal.classList.add("active");
+                document.body.style.overflow = "hidden"; // Desactivar scroll
+                
+                if (typeof logEvent === "function") {
+                    logEvent("click", "open_service_modal_" + cardKey);
+                }
+            }
+        };
+
+        const closeServiceModal = () => {
+            serviceModal.classList.remove("active");
+            document.body.style.overflow = ""; // Restaurar scroll
+        };
+
+        detailsButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const cardKey = button.getAttribute("data-card");
+                openServiceModal(cardKey);
+            });
+        });
+
+        if (serviceCloseBtn) serviceCloseBtn.addEventListener("click", closeServiceModal);
+        
+        serviceModal.addEventListener("click", (e) => {
+            if (e.target === serviceModal) {
+                closeServiceModal();
+            }
+        });
+    }
+
+    // C. Acordeón de Preguntas Frecuentes (FAQs)
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach(item => {
+        const trigger = item.querySelector(".faq-trigger");
+        if (trigger) {
+            trigger.addEventListener("click", () => {
+                const isActive = item.classList.contains("active");
+                
+                // Cerrar todos los demás ítems
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove("active");
+                    }
+                });
+
+                // Toggle del ítem actual
+                item.classList.toggle("active");
+
+                if (typeof logEvent === "function" && !isActive) {
+                    logEvent("click", "open_faq");
+                }
+            });
+        }
+    });
+
+    // ==========================================
+    // ==========================================
+    // D. Carrusel de Testimonios Interactivo e Infinito
+    // ==========================================
+    const track = document.getElementById("testimonios-track");
+    const prevBtn = document.querySelector(".carousel-control.prev");
+    const nextBtn = document.querySelector(".carousel-control.next");
+
+    if (track) {
+        const originalCards = Array.from(track.children);
+        
+        if (originalCards.length > 0) {
+            // 1. Recorte de texto a 4 líneas y botón "Ver más" dinámico
+            originalCards.forEach(card => {
+                const textEl = card.querySelector(".testimonial-text");
+                if (!textEl) return;
+
+                const wrap = document.createElement("div");
+                wrap.className = "testimonial-text-wrap";
+                textEl.parentNode.insertBefore(wrap, textEl);
+                wrap.appendChild(textEl);
+            });
+
+            // Medir alturas y agregar botones antes de clonar para que se dupliquen
+            originalCards.forEach(card => {
+                const wrap = card.querySelector(".testimonial-text-wrap");
+                // 98px representa la altura holgada para exactamente 4 líneas de lectura.
+                // Si sobrepasa esta altura, aplicamos la clase de recorte (clipped) y agregamos el botón.
+                if (wrap && wrap.scrollHeight > 98) {
+                    wrap.classList.add("clipped");
+                    const btn = document.createElement("button");
+                    btn.className = "testimonial-toggle-btn";
+                    btn.innerText = "Ver más";
+                    wrap.parentNode.insertBefore(btn, wrap.nextSibling);
+                }
+            });
+
+            // 2. Clonación para Loop Infinito
+            const numClones = 4;
+            let cardWidth = originalCards[0].offsetWidth;
+            let gap = parseInt(window.getComputedStyle(track).gap) || 24;
+            let step = cardWidth + gap;
+
+            // Clonar las primeras tarjetas al final
+            for (let i = 0; i < numClones; i++) {
+                const clone = originalCards[i].cloneNode(true);
+                clone.classList.add("clone");
+                track.appendChild(clone);
+            }
+
+            // Clonar las últimas tarjetas al principio
+            for (let i = originalCards.length - 1; i >= originalCards.length - numClones; i--) {
+                const clone = originalCards[i].cloneNode(true);
+                clone.classList.add("clone");
+                track.insertBefore(clone, track.firstChild);
+            }
+
+            // Posición inicial centrada en los elementos originales
+            const setInitialScroll = () => {
+                const style = window.getComputedStyle(track);
+                const paddingLeft = parseInt(style.paddingLeft) || 0;
+                track.scrollLeft = numClones * step - paddingLeft;
+            };
+
+            setTimeout(setInitialScroll, 50);
+
+            // Ajustar proporciones y posiciones en cambio de tamaño de ventana
+            window.addEventListener("resize", () => {
+                const firstCard = track.querySelector(".testimonial-card");
+                if (firstCard) {
+                    const newCardWidth = firstCard.offsetWidth;
+                    const newGap = parseInt(window.getComputedStyle(track).gap) || 24;
+                    const ratio = (newCardWidth + newGap) / step;
+                    step = newCardWidth + newGap;
+                    track.scrollLeft = track.scrollLeft * ratio;
+                }
+            });
+
+            // 3. Salto de Scroll Infinito (Snapping)
+            const handleScrollSnap = () => {
+                const scrollLeft = track.scrollLeft;
+                const totalOriginalWidth = originalCards.length * step;
+                const rightThreshold = (numClones + originalCards.length - 2) * step;
+                const leftThreshold = (numClones - 2) * step;
+
+                if (scrollLeft >= rightThreshold) {
+                    track.style.scrollBehavior = "auto";
+                    track.scrollLeft = scrollLeft - totalOriginalWidth;
+                    track.offsetHeight; // Forzar reflow
+                    track.style.scrollBehavior = "smooth";
+                } else if (scrollLeft <= leftThreshold) {
+                    track.style.scrollBehavior = "auto";
+                    track.scrollLeft = scrollLeft + totalOriginalWidth;
+                    track.offsetHeight; // Forzar reflow
+                    track.style.scrollBehavior = "smooth";
+                }
+            };
+
+            track.addEventListener("scroll", handleScrollSnap);
+
+            // 4. Listeners de Botones de Control
+            if (prevBtn) {
+                prevBtn.addEventListener("click", () => {
+                    track.style.scrollBehavior = "smooth";
+                    track.scrollLeft -= step;
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener("click", () => {
+                    track.style.scrollBehavior = "smooth";
+                    track.scrollLeft += step;
+                });
+            }
+
+            // 5. Control de Arrastre con Mouse (Grab & Drag)
+            let isDown = false;
+            let startX;
+            let startScrollLeft;
+            let dragMoved = false;
+
+            track.addEventListener("mousedown", (e) => {
+                isDown = true;
+                track.classList.add("dragging");
+                track.style.scrollBehavior = "auto";
+                startX = e.pageX - track.offsetLeft;
+                startScrollLeft = track.scrollLeft;
+                dragMoved = false;
+            });
+
+            track.addEventListener("mouseleave", () => {
+                isDown = false;
+                track.classList.remove("dragging");
+            });
+
+            track.addEventListener("mouseup", (e) => {
+                isDown = false;
+                track.classList.remove("dragging");
+                track.style.scrollBehavior = "smooth";
+                
+                if (dragMoved) {
+                    const preventClick = (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    };
+                    track.addEventListener("click", preventClick, { capture: true, once: true });
+                }
+            });
+
+            track.addEventListener("mousemove", (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - track.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                if (Math.abs(walk) > 5) {
+                    dragMoved = true;
+                }
+                track.scrollLeft = startScrollLeft - walk;
+            });
+
+            // 6. Delegación de Eventos para botones "Ver más"
+            track.addEventListener("click", (e) => {
+                const btn = e.target.closest(".testimonial-toggle-btn");
+                if (!btn) return;
+                e.stopPropagation();
+
+                const card = btn.closest(".testimonial-card");
+                const wrap = card.querySelector(".testimonial-text-wrap");
+                if (wrap) {
+                    const isExpanded = wrap.classList.toggle("expanded");
+                    btn.innerText = isExpanded ? "Ver menos" : "Ver más";
+                }
+            });
+        }
+    }
+
+    // ==========================================
+    // 9. Animaciones de Desplazamiento (Scroll Reveal)
+    // ==========================================
+    const revealElements = document.querySelectorAll(".reveal-on-scroll");
+
+    if ("IntersectionObserver" in window && revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: "0px 0px -6% 0px",
+            threshold: 0.05
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    } else {
+        revealElements.forEach(el => el.classList.add("active"));
+    }
+
 });
+

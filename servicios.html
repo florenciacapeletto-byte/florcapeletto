@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | Flor Capeletto Marca Personal</title>
+    <meta name="description" content="Propuesta de servicios y metodología de trabajo. Sesiones individuales y programas premium de reinvención profesional, empleabilidad y bienestar.">
+    
+    <!-- Favicon / Icono de Pestaña -->
+    <link rel="icon" type="image/png" href="assets/logo_transparent.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Floating Background Organic Blobs -->
+    <div class="bg-blobs-container">
+        <div class="bg-blob blob-salvia"></div>
+        <div class="bg-blob blob-durazno"></div>
+        <div class="bg-blob blob-bosque"></div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="navbar scrolled" id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo-link" style="display: flex; align-items: center; gap: 10px;">
+                <img src="assets/logo_transparent.png" alt="Flor Capeletto Logo" class="navbar-logo">
+                <span class="brand-signature navbar-brand-logo">
+                    <span class="brand-cursive">Flor</span>
+                    <span class="brand-print">CAPELETTO</span>
+                </span>
+            </a>
+            
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú de navegación">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html#sobre-mi" class="nav-item">Sobre Mí</a>
+                <a href="servicios.html" class="nav-item active">Servicios</a>
+                <a href="index.html#ebooks" class="nav-item">Ebooks & Guías</a>
+                <a href="index.html#recursos-gratis" class="nav-item">Recursos Gratis</a>
+                <a href="index.html#blog" class="nav-item">Reflexiones</a>
+                <a href="index.html#contacto" class="nav-btn">Hablemos</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Header / Hero -->
+    <section class="services-hero" style="padding-top: 150px; padding-bottom: 60px; text-align: center; position: relative;">
+        <div class="section-container" style="max-width: 900px;">
+            <span class="section-tagline">Propuesta de Servicios</span>
+            <h1 style="font-size: 3rem; margin-bottom: 20px; font-weight: 700; color: var(--primary);">Diseñemos tu camino de <span class="text-gradient">reinvención</span></h1>
+            <div class="section-divider" style="margin-bottom: 25px;"></div>
+            <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; max-width: 750px; margin: 0 auto; font-weight: 500;">
+                A continuación se detallan los servicios brindados actualmente, los cuales puedes conocer en profundidad haciendo clic en cada uno.
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="padding-top: 20px; padding-bottom: 80px; position: relative; z-index: 5;">
+        <div class="section-container">
+
+            <!-- TACTICAL SERVICES GRID (3 Cards) -->
+            <h3 class="reveal-on-scroll" style="font-family: var(--font-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 35px; text-align: center;">Sesiones de Enfoque Táctico</h3>
+            
+            <div class="pricing-grid">
+                       <!-- 1. CV Estratégico -->
+                <div class="pricing-card reveal-on-scroll" data-price-ars="$50.000 ARS" data-price-usd="u$s 40 USD" data-price-eur="€35 EUR">
+                    <!-- Photo Header Container -->
+                    <div class="card-image-wrapper">
+                        <img src="assets/cv_session.png" alt="CV Estratégico: Estrategia & Diseño" class="card-image">
+                    </div>
+                    
+                    <h3 class="card-title">CV Estratégico</h3>
+                    <span class="card-subtitle">Estrategia & Diseño de CV</span>
+                    <p class="card-desc">Audito tu trayectoria profesional previa bajo la perspectiva de una seleccionadora experta para optimizar tu currículum y superar filtros automáticos.</p>
+                    
+                    <button class="btn-card-details" data-card="cv">
+                        <span>Más detalles</span> <i class="fa-solid fa-arrow-up-right"></i>
+                    </button>
+                    
+                    <!-- Panel Desplegable de Detalles -->
+                    <div class="card-details-panel" id="details-cv">
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-regular fa-clock"></i> Duración</div>
+                            <div class="detail-block-desc">1 sesión individual en vivo (con duración flexible adaptada a la complejidad de tu perfil) + soporte de redacción y optimización offline.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-bullseye"></i> Primera sesión 1:1</div>
+                            <div class="detail-block-desc">Auditoría en pantalla compartida de tu CV anterior y deconstrucción de tu experiencia laboral para identificar tus logros reales y tus fortalezas técnicas.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-gears"></i> Cómo trabajamos (Metodología)</div>
+                            <div class="detail-block-desc">
+                                <strong>1. Pre-work:</strong> Completas un cuestionario profundo de auditoría laboral una semana antes de iniciar.<br>
+                                <strong>2. Sesión en vivo:</strong> Nos conectamos por Zoom/Meet durante 90 minutos para reencuadrar tus experiencias y fijar tu estrategia.<br>
+                                <strong>3. Rediseño:</strong> Yo me encargo de la redacción, optimización SEO y rediseño visual de tu currículum.<br>
+                                <strong>4. Entrega:</strong> Te entrego el CV final en formato editable y optimizado para filtros ATS-ready.
+                            </div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-box-open"></i> Recursos incluidos</div>
+                            <div class="detail-block-desc">Recursos, guías y plantillas exclusivas incluidas en tu plan de trabajo.</div>
+                        </div>
+
+
+ 
+                        <a href="https://wa.me/393445628917?text=¡Hola%20Flor!%20Me%20interesa%20contratar%20el%20servicio%20de%20%22CV%20Estrat%C3%A9gico%22.%20¿Cómo%20coordinamos%20los%20detalles%3F" target="_blank" class="btn-card-buy" style="margin-top: 10px;">
+                            Contratar Servicio <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. LinkedIn de Alto Impacto -->
+                <div class="pricing-card reveal-on-scroll" data-price-ars="$60.000 ARS" data-price-usd="u$s 50 USD" data-price-eur="€45 EUR">
+                    <!-- Photo Header Container -->
+                    <div class="card-image-wrapper">
+                        <img src="assets/linkedin_session.png" alt="LinkedIn de Alto Impacto: Optimización & Posicionamiento" class="card-image">
+                    </div>
+                    
+                    <h3 class="card-title">LinkedIn de Alto Impacto</h3>
+                    <span class="card-subtitle">Optimización, Posicionamiento & Marca Personal</span>
+                    <p class="card-desc">Configuro tu perfil de LinkedIn como un imán para atraer clientes, reclutadores de talento y oportunidades de negocio, potenciando tu posicionamiento profesional y marca personal.</p>
+                    
+                    <button class="btn-card-details" data-card="linkedin">
+                        <span>Más detalles</span> <i class="fa-solid fa-arrow-up-right"></i>
+                    </button>
+                    
+                    <!-- Panel Desplegable de Detalles -->
+                    <div class="card-details-panel" id="details-linkedin">
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-regular fa-clock"></i> Duración</div>
+                            <div class="detail-block-desc">1 sesión individual en vivo de enfoque práctico, con duración flexible adaptada al ritmo de tu perfil y objetivos profesionales.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-bullseye"></i> Primera sesión 1:1</div>
+                            <div class="detail-block-desc">Auditoría en pantalla compartida de tu perfil actual. Reconfiguramos las opciones de privacidad, indexación del perfil y posicionamiento comercial frente a tu público objetivo (clientes y reclutadores).</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-gears"></i> Cómo trabajamos (Metodología)</div>
+                            <div class="detail-block-desc">
+                                <strong>1. Mapeo de palabras clave:</strong> Identifico los términos de búsqueda con los que recruiters y clientes potenciales de tu sector filtran perfiles.<br>
+                                <strong>2. Edición en vivo:</strong> Nos conectamos y reescribimos juntos tu titular, extracto "Acerca de" y secciones de experiencia en pantalla compartida.<br>
+                                <strong>3. Estrategia de Red & Marca Personal:</strong> Diseñamos una táctica sencilla de contactos calificados, visibilidad y posicionamiento para atraer clientes y destacar en tu sector.
+                            </div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-box-open"></i> Recursos incluidos</div>
+                            <div class="detail-block-desc">Recursos, guías y plantillas exclusivas incluidas en tu plan de trabajo.</div>
+                        </div>
+
+
+ 
+                        <a href="https://wa.me/393445628917?text=¡Hola%20Flor!%20Me%20interesa%20contratar%20el%20servicio%20de%20%22LinkedIn%20de%20Alto%20Impacto%22.%20¿Cómo%20coordinamos%20los%20detalles%3F" target="_blank" class="btn-card-buy" style="margin-top: 10px;">
+                            Contratar Servicio <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Programa de Inserción Laboral (Highlighted) -->
+                <div class="pricing-card highlighted reveal-on-scroll" data-price-ars="$100.000 ARS" data-price-usd="u$s 90 USD" data-price-eur="€80 EUR">
+                    <span class="card-badge">Más Recomendado</span>
+                    
+                    <!-- Photo Header Container -->
+                    <div class="card-image-wrapper">
+                        <img src="assets/insercion_pack.png" alt="Programa de Inserción Laboral" class="card-image">
+                    </div>
+                    
+                    <h3 class="card-title">Programa de Inserción Laboral</h3>
+                    <span class="card-subtitle">Ruta Completa & Entrevistas</span>
+                    <p class="card-desc">El proceso táctico ideal. Diseñamos tus herramientas clave de postulación y entrenamos tus habilidades en simulaciones de entrevistas reales.</p>
+                    
+                    <button class="btn-card-details" data-card="insercion">
+                        <span>Más detalles</span> <i class="fa-solid fa-arrow-up-right"></i>
+                    </button>
+                    
+                    <!-- Panel Desplegable de Detalles -->
+                    <div class="card-details-panel" id="details-insercion">
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-regular fa-clock"></i> Duración</div>
+                            <div class="detail-block-desc">2 sesiones individuales en vivo (con duración flexible y enfocadas según los requerimientos de tu postulación) distribuidas en 2 semanas.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-bullseye"></i> Primera sesión 1:1</div>
+                            <div class="detail-block-desc">Alineación estratégica: Diseñamos las bases de tu CV y LinkedIn. Realizamos la auditoría técnica y definimos tu posicionamiento comercial de carrera.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-gears"></i> Cómo trabajamos (Metodología)</div>
+                            <div class="detail-block-desc">
+                                <strong>1. Sesión 1 (Alineación):</strong> Diseñamos el plan de carrera y las bases de tu CV y perfil de LinkedIn.<br>
+                                <strong>2. Fase de Diseño:</strong> Yo redacto tu nuevo CV, carta de presentación y optimizo tu perfil de LinkedIn.<br>
+                                <strong>3. Sesión 2 (Simulación):</strong> Hacemos un simulacro de entrevista adaptado a una vacante real, seguido de una devolución detallada de feedback estructurado (método STAR) y herramientas de gestión emocional.
+                            </div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-box-open"></i> Recursos incluidos</div>
+                            <div class="detail-block-desc">Recursos, guías y plantillas exclusivas incluidas en tu plan de trabajo.</div>
+                        </div>
+
+
+ 
+                        <a href="https://wa.me/393445628917?text=¡Hola%20Flor!%20Me%20interesa%20contratar%20el%20%22Programa%20de%20Inserci%C3%B3n%20Laboral%22.%20¿Cómo%20coordinamos%20los%20detalles%3F" target="_blank" class="btn-card-buy" style="margin-top: 10px;">
+                            Contratar Pack <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- SPECIALIZED & PREMIUM PROGRAMS -->
+            <h3 class="reveal-on-scroll" style="font-family: var(--font-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; margin-top: 60px; margin-bottom: 35px; text-align: center;">Programas Especializados y Mentoría Premium</h3>
+            
+            <div class="specialized-grid">
+                
+                <!-- 4. Programa de Migración Profesional -->
+                <div class="pricing-card special-featured reveal-on-scroll" data-price-ars="$100.000 ARS" data-price-usd="u$s 100 USD" data-price-eur="€90 EUR">
+                    <!-- Photo Header Container -->
+                    <div class="card-image-wrapper">
+                        <img src="assets/migracion_program.png" alt="Programa de Migración Profesional: Empleo en Europa" class="card-image">
+                    </div>
+                    
+                    <h3 class="card-title">Programa de Migración Profesional</h3>
+                    <span class="card-subtitle">Búsqueda de Empleo en Europa</span>
+                    <p class="card-desc">Programa 1a1 diseñado para profesionales de Latinoamérica que han emigrado o desean buscar trabajo y recolocarse en Europa.</p>
+                    
+                    <button class="btn-card-details" data-card="migracion">
+                        <span>Más detalles</span> <i class="fa-solid fa-arrow-up-right"></i>
+                    </button>
+                    
+                    <!-- Panel Desplegable de Detalles -->
+                    <div class="card-details-panel" id="details-migracion">
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-regular fa-clock"></i> Duración</div>
+                            <div class="detail-block-desc">Proceso intensivo de sesiones 1a1 individuales adaptadas a tu ritmo de migración.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-bullseye"></i> Primera sesión 1:1</div>
+                            <div class="detail-block-desc">Diagnóstico de equivalencia profesional y deconstrucción de tu experiencia local para traducirla de forma atractiva a las demandas de los reclutadores europeos.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-gears"></i> Cómo trabajamos (Metodología)</div>
+                            <div class="detail-block-desc">
+                                <strong>1. Diagnóstico e Identidad:</strong> Traducimos tu experiencia local, tus títulos y tu posicionamiento laboral al formato e idioma requerido.<br>
+                                <strong>2. Estrategia de aplicación:</strong> Configuramos tus canales de búsqueda europeos (LinkedIn local, portales específicos de Europa).<br>
+                                <strong>3. Fit cultural:</strong> Entrenamos tu discurso en entrevistas abordando el choque cultural y adaptando tus respuestas.
+                            </div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-box-open"></i> Recursos incluidos</div>
+                            <div class="detail-block-desc">Recursos, guías y plantillas exclusivas incluidas en tu plan de trabajo.</div>
+                        </div>
+
+
+ 
+                        <a href="https://wa.me/393445628917?text=¡Hola%20Flor!%20Me%20interesa%20contratar%20el%20%22Programa%20de%20Migraci%C3%B3n%20Profesional%22.%20¿Cómo%20coordinamos%20los%20detalles%3F" target="_blank" class="btn-card-buy" style="margin-top: 10px;">
+                            Contratar Programa <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. Método NEXO (Mentoría Premium) -->
+                <div class="pricing-card highlighted special-featured reveal-on-scroll" data-price-ars="$400.000 ARS" data-price-ars-note="en 2 cuotas" data-price-usd="u$s 450 USD" data-price-usd-note="en 2 cuotas" data-price-eur="€400 EUR" data-price-eur-note="en 2 cuotas">
+                    <span class="card-badge">Mentoría Estrella Premium</span>
+                    
+                    <!-- Photo Header Container -->
+                    <div class="card-image-wrapper">
+                        <img src="assets/nexo_mentor.png" alt="Método NEXO" class="card-image">
+                    </div>
+                    
+                    <h3 class="card-title">Método NEXO</h3>
+                    <span class="card-subtitle">Marca Personal, Negocios & Bienestar</span>
+                    <p class="card-desc">El programa individual definitivo para dar el salto al autoempleo, estructurar tu marca personal y consolidar tus servicios con un sistema nervioso regulado.</p>
+                    
+                    <button class="btn-card-details" data-card="nexo">
+                        <span>Más detalles</span> <i class="fa-solid fa-arrow-up-right"></i>
+                    </button>
+                    
+                    <!-- Panel Desplegable de Detalles -->
+                    <div class="card-details-panel" id="details-nexo">
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-regular fa-clock"></i> Duración</div>
+                            <div class="detail-block-desc">Programa individual intensivo de 4 semanas (4 sesiones 1a1 + soporte activo diario).</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-bullseye"></i> Primera sesión 1:1 (Diagnóstico · El Origen)</div>
+                            <div class="detail-block-desc">Conocernos en profundidad, recopilar tus datos de carrera e historia para establecer tu mapa de fortalezas y ordenar el pre-work de CV, Carta y LinkedIn base.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-gears"></i> Cómo trabajamos (Metodología)</div>
+                            <div class="detail-block-desc">
+                                <strong>Sesión 2 (Identidad):</strong> LinkedIn estratégico, nicho y método de búsquedas reales.<br>
+                                <strong>Sesión 3 (Ingeniería):</strong> Preparación y simulación de entrevistas con feedback real + herramientas de enfoque y regulación mental ante la incertidumbre.<br>
+                                <strong>Sesión 4 (Lanzamiento):</strong> Diseño de tu Marca Personal completa, resolución de pendientes y plan táctico final a 90 días.
+                            </div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-heart"></i> Soporte de Acompañamiento Exclusivo</div>
+                            <div class="detail-block-desc">Soporte individual de dudas por WhatsApp durante el mes de mentoría <strong>y por un año completo una vez finalizada la misma</strong>. Incluye el <strong>envío proactivo de vacantes de empleo</strong> alineadas con tu perfil, junto con consejos personalizados, ideas y recursos útiles que considere que puedan servirte.</div>
+                        </div>
+                        <div class="detail-block">
+                            <div class="detail-block-title"><i class="fa-solid fa-box-open"></i> Recursos incluidos</div>
+                            <div class="detail-block-desc">Recursos, guías y plantillas exclusivas incluidas en tu plan de trabajo.</div>
+                        </div>
+
+
+
+                        <a href="https://wa.me/393445628917?text=¡Hola%20Flor!%20Me%20interesa%20aplicar%20al%20%22Método%20NEXO%22.%20¿Cómo%20coordinamos%20los%20detalles%3F" target="_blank" class="btn-card-buy" style="margin-top: 10px;">
+                            Aplicar al Programa <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Testimonios de Apoyo (Moved right below services) -->
+    <section class="testimonios" id="testimonios-servicios" style="padding: 100px 20px; position: relative; z-index: 5;">
+        <div class="section-container">
+            <div class="section-header" style="margin-bottom: 50px;">
+                <h2 class="section-title">Resultados Reales</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <!-- Testimonios Carousel Slider -->
+            <div class="testimonios-carousel-wrapper">
+                <button class="carousel-control prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="testimonios-carousel-track" id="testimonios-track">
+                    
+                    <!-- Testimonio 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Brinda seguridad y confianza en lo que te asesora, muy profesional y excelente persona. Se nota que tiene muchísima experiencia en esta área. Recomiendo su trabajo al 100%."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Juan Ignacio C.</h4>
+                                <p class="testimonial-role">Contador Público</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Gracias por tu apoyo y profesionalismo durante todo el proceso. Me ayudaste a optimizar mi perfil de LinkedIn, mejorar mi estrategia de búsqueda laboral y prepararme para entrevistas. La evaluación inicial fue muy útil para identificar mis fortalezas y áreas de mejora. Destaco también la optimización de mi CV, las estrategias de búsqueda y el acompañamiento constante. Recomendaría a cualquiera que busque un cambio profesional significativo."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Diego M.</h4>
+                                <p class="testimonial-role">Desarrollador Full Stack</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Flor es excelente profesional. Me ayudó a preparar mi CV para diferentes puestos y, además, me ayudó a prepararme para futuras entrevistas. Hoy tengo trabajo gracias a su ayuda y conocimientos. Recomiendo al 100% su trabajo. Es muy ordenada, organizada y sobretodo tiene un trato profesional que hoy en día no se encuentra. Se destaca por su tacto humano. Realmente le interesa que a quien contrate su servicio tenga resultados."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Álvaro O.</h4>
+                                <p class="testimonial-role">Recepcionista Hotelero</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Excelente profesional Flor, me ayud&oacute; a reorganizar mi CV, mis experiencias y a destacar mis fortalezas. Mi CV qued&oacute; impecable y muy moderno. S&uacute;per recomendable &#x1F44C;"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Evelyn C.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 5 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Una genia. Me dejó el CV óptimo. Listo para ser presentado y me dio mil consejos para encarar entrevistas laborales. Un 10 para Flor!!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Angel P.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 6 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Gracias Flor por estar siempre dispuesta a ayudar, atenta a las dudas y con mucha paciencia. Una excelente profesional."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Victoria G.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 7 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Excelente asesoramiento! Florencia me ayudó no solo a darle estructura y orientación a mi currículum, sino que también a destacar mis habilidades con una estética súper profesional. ¡Totalmente recomendada!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Nair S.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 8 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Me ayudó a armar mi CV y condensar de manera eficiente mi experiencia. Luego me llamaron para una entrevista laboral. Gracias Flor"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Giuliana S.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 9 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"La verdad Flor un 10! Tu aporte me ayudó mucho a estructurar y dar orden a mi CV, lo que llevó a dar resultados eficaces en un lazo de corto tiempo. ¡Gracias!!!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Betiana R.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 10 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Le pedí a Florencia si me podía armar mi CV, le pasé mis datos y a los días me lo envió, muy contento con el resultado y su atención."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Fernando C.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 11 (WhatsApp 1) -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"&iexcl;Genialllll qued&oacute; espectacularr!!! Sos muy geniaaaaaaaaaa &#x1F64C;"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Ana C.</h4>
+                                <p class="testimonial-role">Cliente de Mentor&iacute;a (WhatsApp)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 12 (WhatsApp 2) -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Ah&iacute; recib&iacute; la gu&iacute;a Flor, &iexcl;muy bueno! S&uacute;per claros &#x1F44F;&#x1F44F; Gracias por la dedicaci&oacute;n, me siento mil veces m&aacute;s preparado para ma&ntilde;ana &#x1F64F; &iexcl;Despu&eacute;s te escribo!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Claudio S.</h4>
+                                <p class="testimonial-role">Cliente de Asesor&iacute;a (WhatsApp)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 13 (WhatsApp 3) -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Reci&eacute;n veo los CVs, no escuch&eacute; los audios pero... &iexcl;Otro level esto jajajajajaja! Buen&iacute;simos est&aacute;n, esas palabras t&eacute;cnicas me encantan. &#x1F4A5;"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">&Aacute;lvaro O.</h4>
+                                <p class="testimonial-role">Cliente de Consultor&iacute;a (WhatsApp)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <!-- LinkedIn & Google Profile Verification Call to Action -->
+            <div class="testimonials-cta">
+                <p class="cta-notice">Todos estos testimonios y mensajes son reales, espontáneos y compartidos por mis clientes.</p>
+                <div class="cta-buttons">
+                    <a href="https://www.linkedin.com/in/florencia-capeletto/" target="_blank" class="btn-linkedin-verify">
+                        <i class="fa-brands fa-linkedin"></i> Ver más recomendaciones en mi perfil de LinkedIn
+                    </a>
+                    <a href="https://g.page/r/CcY6CCGetp0OEBM/review" target="_blank" class="btn-google-verify">
+                        <i class="fa-brands fa-google"></i> Ver opiniones y dejar reseña en Google
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FAQs Section -->
+    <section class="faqs-section" style="padding: 100px 20px; position: relative; z-index: 5; background: rgba(144, 181, 163, 0.04);">
+        <div class="section-container">
+            <div class="section-header" style="margin-bottom: 60px;">
+                <span class="section-tagline">Preguntas Frecuentes</span>
+                <h2 class="section-title">Resuelve tus Dudas</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">Si tienes alguna pregunta sobre la logística, formas de trabajo o los pagos, aquí tienes algunas respuestas comunes.</p>
+            </div>
+            
+            <div class="faq-grid">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>¿No sé qué servicio elegir, cómo puedo empezar?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <p>Te sugiero reservar mi <strong>Sesión de Diagnóstico Gratis (30 min)</strong>. Nos conoceremos en una videollamada corta, evaluaremos tu momento profesional y te sugeriré con total honestidad cuál de mis planes tácticos o programas se adapta mejor a tu necesidad.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>¿Cómo coordinamos las agendas y horarios?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <p>Una vez contratado el servicio, te enviaré un enlace a mi calendario de reservas (Calendly). La plataforma detecta automáticamente tu huso horario y te permite elegir las fechas y horarios disponibles que más te convengan, sincronizándolo automáticamente.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>¿Cómo funcionan las opciones de pago en cuotas?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <p>Para programas premium como el <strong>Método NEXO</strong>, puedes abonarlo en 2 cuotas o partes de forma simple: el primer 50% al reservar tus fechas del mes para iniciar el pre-work, y el 50% restante a mitad del programa (semana 2 o al finalizar la segunda sesión en vivo).</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>¿Los servicios tienen alguna garantía?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-content">
+                        <p>Todos mis servicios están respaldados por cuestionarios y pre-works estratégicos previos a los encuentros. Esto asegura que estemos al 100% alineados antes de encender la videocámara. Si decides suspender el proceso antes de la primera sesión, se realiza el reembolso correspondiente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Call To Action / Booking -->
+    <section class="booking-cta-section" style="padding: 100px 20px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: var(--white); text-align: center; position: relative; z-index: 5;">
+        <div class="section-container" style="max-width: 800px;">
+            <h2 style="font-family: var(--font-title); font-size: 2.5rem; color: var(--white); margin-bottom: 20px; font-weight: 600;">¿Aún tienes dudas de cuál es el plan correcto?</h2>
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 40px; color: rgba(252, 251, 249, 0.85); max-width: 650px; margin-left: auto; margin-right: auto;">
+                Charlemos en una videollamada corta sin costo. Evaluaremos tu situación profesional actual en 30 minutos y definiremos juntos los próximos pasos en tu reinvención.
+            </p>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button type="button" class="btn-primary open-booking-btn" style="background-color: var(--accent); border-color: var(--accent); font-weight: 700; color: var(--white); padding: 16px 36px; cursor: pointer;">
+                    Reservar Diagnóstico Gratis <i class="fa-solid fa-calendar-days"></i>
+                </button>
+                <a href="https://wa.me/393445628917?text=¡Hola%20Flor!%20Tengo%20algunas%20dudas%20sobre%20tus%20servicios%20que%20vi%20en%20la%20web%20y%20me%20gustaría%20consultarte." target="_blank" class="btn-secondary" style="border-color: var(--white); color: var(--white); background: transparent; padding: 14px 34px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    Consultar por WhatsApp <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="position: relative; z-index: 5;">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="assets/logo_transparent.png" alt="Flor Capeletto Logo" class="footer-logo">
+                <p>Estrategia Profesional, Crecimiento Integral & Bienestar Emocional aplicado al desarrollo en tus propios términos.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="index.html#home">Inicio</a></li>
+                    <li><a href="index.html#sobre-mi">Sobre Mí</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="index.html#ebooks">Ebooks & Guías</a></li>
+                    <li><a href="index.html#recursos-gratis">Recursos Gratis</a></li>
+                    <li><a href="index.html#blog">Reflexiones</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Flor Capeletto. Todos los derechos reservados. Diseñado para ti.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Service Details Modal Overlay -->
+    <div class="modal-overlay" id="service-modal">
+        <div class="modal-card animate-zoom" style="max-width: 850px; background: rgba(252, 251, 249, 0.96); backdrop-filter: blur(25px); border: 1px solid rgba(144, 181, 163, 0.3); border-radius: 28px;">
+            <button class="modal-close-btn" id="service-close-btn" aria-label="Cerrar modal" style="color: var(--primary); background-color: rgba(63, 98, 91, 0.08); z-index: 10;">&times;</button>
+            
+            <div class="modal-body" style="padding: 0;">
+                <!-- Header with image background -->
+                <div class="service-modal-header" style="position: relative; height: 260px; overflow: hidden; border-radius: 28px 28px 0 0;">
+                    <img src="" alt="" id="service-modal-img" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(44, 53, 49, 0.95) 0%, rgba(44, 53, 49, 0.3) 70%, rgba(44, 53, 49, 0) 100%); padding: 30px 40px; color: var(--white);">
+                        <span id="service-modal-subtitle" style="font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; display: block; margin-bottom: 6px;"></span>
+                        <h2 id="service-modal-title" style="font-family: var(--font-title); font-size: 2.2rem; font-weight: 700; color: var(--white); margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);"></h2>
+                    </div>
+                </div>
+
+                <!-- Two column content grid -->
+                <div class="service-modal-content-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 35px; padding: 40px;">
+                    <!-- Left: Description and Methodology -->
+                    <div class="service-modal-left-col">
+                        <p id="service-modal-description" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 30px; font-weight: 500;"></p>
+                        <div id="service-modal-details-container"></div>
+                    </div>
+
+                    <!-- Right: Pricing, Payments, WhatsApp CTA -->
+                    <div class="service-modal-right-col" style="background: rgba(144, 181, 163, 0.08); border-radius: 20px; padding: 30px; border: 1px solid rgba(144, 181, 163, 0.2); display: flex; flex-direction: column; justify-content: space-between; align-self: start; position: sticky; top: 20px;">
+                        <div>
+                            <h4 style="font-family: var(--font-body); font-weight: 700; font-size: 1.1rem; color: var(--primary); margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-tags"></i> Costo de Inversión
+                            </h4>
+                            
+                            <!-- Dynamic Pricing Box -->
+                            <div class="modal-pricing-box" style="margin-bottom: 10px;">
+                                <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
+                                    <span id="service-modal-price" style="font-size: 2rem; font-weight: 700; color: var(--primary); font-family: var(--font-title); display: block; line-height: 1.2;"></span>
+                                    <span id="service-modal-price-note" style="font-size: 0.88rem; font-weight: 600; color: var(--accent); display: none;"></span>
+                                </div>
+                                
+                                <!-- Elegant Currency Select -->
+                                <div class="modal-currency-selector-wrapper" style="position: relative; width: 100%;">
+                                    <label for="modal-currency-select" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px;">Mostrar precio en:</label>
+                                    <div class="select-container-custom" style="position: relative;">
+                                        <select id="modal-currency-select" style="width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(144, 181, 163, 0.3); background-color: var(--white); color: var(--primary); font-size: 0.9rem; font-weight: 600; cursor: pointer; outline: none; transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%25233F625B%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 14px center; background-size: 10px auto; padding-right: 35px;">
+                                            <option value="ARS">🇦🇷 Peso argentino ($) - ARS</option>
+                                            <option value="USD">🌎 Dólares (u$s) - USD</option>
+                                            <option value="EUR">🇪🇺 Euros (€) - EUR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="" target="_blank" id="service-modal-whatsapp-btn" class="btn-card-buy" style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 25px; border-radius: 12px; font-weight: 700; text-decoration: none; text-align: center;">
+                            Contratar Servicio <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Appointment Booking Modal (Same as home page) -->
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal-card animate-zoom" style="max-width: 650px;">
+            <button class="modal-close-btn" id="booking-close-btn" aria-label="Cerrar modal" style="color: var(--primary); background-color: rgba(63, 98, 91, 0.08);">&times;</button>
+            <div class="modal-body" style="padding: 35px 20px 20px 20px;">
+                <h3 style="font-family: var(--font-title); font-size: 1.55rem; color: var(--primary); margin-bottom: 5px; text-align: center;">Reserva tu Diagnóstico Gratis</h3>
+                <p class="modal-subtitle-text" style="margin-bottom: 20px; text-align: center;">Elige el lunes y el horario que mejor te convenga. Calendly sincronizará la cita de forma 100% automática en tu agenda.</p>
+                
+                <!-- Calendly Inline Embed Widget -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/contacto-florcapeletto/30min?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=3f625b&color_scheme=light" style="min-width:320px;height:580px;border-radius:12px;overflow:hidden;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Script for Page Functionality -->
+    <script src="app.js"></script>
+
+</body>
+</html>

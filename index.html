@@ -29,6 +29,13 @@
 </head>
 <body>
 
+    <!-- Floating Background Organic Blobs -->
+    <div class="bg-blobs-container">
+        <div class="bg-blob blob-salvia"></div>
+        <div class="bg-blob blob-durazno"></div>
+        <div class="bg-blob blob-bosque"></div>
+    </div>
+
     <!-- Sticky Navigation Bar -->
     <header class="navbar" id="navbar">
         <div class="navbar-container">
@@ -48,34 +55,39 @@
             
             <nav class="nav-menu" id="nav-menu">
                 <a href="#sobre-mi" class="nav-item">Sobre Mí</a>
-                <!-- <a href="#metodo" class="nav-item">Método NEXO</a> -->
-                <a href="#recursos" class="nav-item">Recursos</a>
-                <!-- <a href="https://hotmart.com/es/club/flor-capeletto/community/15287700" class="nav-item" target="_blank">Comunidad</a> -->
+                <a href="servicios.html" class="nav-item">Servicios</a>
+                <a href="#ebooks" class="nav-item">Ebooks & Guías</a>
+                <a href="#recursos-gratis" class="nav-item">Recursos Gratis</a>
                 <a href="#blog" class="nav-item">Reflexiones</a>
                 <a href="#contacto" class="nav-btn">Hablemos</a>
             </nav>
         </div>
-    </header>
+     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-bg-overlay"></div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-brand-signature-container">
-                    <div class="brand-signature">
-                        <span class="brand-cursive">Flor</span>
-                        <span class="brand-print">CAPELETTO</span>
-                    </div>
-                    <span class="hero-brand-role-signature">Estratega de Carrera & Reinvención</span>
-                </div>
-                <h1 class="hero-title">Reinventarte profesionalmente <span class="text-highlight">también se aprende</span></h1>
-                <p class="hero-subtitle">Te acompaño a encontrar claridad, construir una estrategia laboral realista y dar los próximos pasos en tu carrera, estés donde estés.</p>
-                <p class="hero-specialization">Especializada en búsqueda laboral, LinkedIn, entrevistas y reinserción profesional para personas que quieren crecer o empezar de nuevo.</p>
-                <div class="hero-actions">
-                    <a href="#recursos" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fa-solid fa-arrow-right"></i> Acceder a Recursos</a>
-                    <a href="#sobre-mi" class="btn-secondary">Sobre Mí</a>
-                </div>
+     <!-- Hero Section -->
+     <section class="hero" id="home">
+         <div class="hero-bg-overlay"></div>
+         <div class="hero-container">
+             <div class="hero-content">
+                 <div class="hero-brand-signature-container">
+                     <div class="brand-signature">
+                         <span class="brand-cursive">Flor</span>
+                         <span class="brand-print">CAPELETTO</span>
+                     </div>
+                     <span class="hero-brand-role-signature">Estratega de Carrera & Reinvención</span>
+                 </div>
+
+                 <h1 class="hero-title">Reinventarte profesionalmente <span class="text-gradient">también se aprende</span></h1>
+                 <p class="hero-subtitle">Te acompaño a encontrar claridad, construir una estrategia laboral realista y dar los próximos pasos en tu carrera, estés donde estés.</p>
+                 <p class="hero-specialization">Especializada en búsqueda laboral, LinkedIn, entrevistas y reinserción profesional para personas que quieren crecer o empezar de nuevo.</p>
+                 <div class="hero-actions">
+                     <button class="btn-primary open-booking-btn" style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; border: none; font-family: inherit; font-size: 0.95rem; font-weight: 600;">
+                         <i class="fa-solid fa-calendar-days"></i> Reservar Sesión Gratuita
+                     </button>
+                     <a href="#recursos-gratis" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                         Ver Recursos Gratis <i class="fa-solid fa-arrow-down"></i>
+                     </a>
+                 </div>
             </div>
             <div class="hero-image-wrapper">
                 <!-- Manchas orgánicas de fondo para integrar la foto -->
@@ -100,7 +112,7 @@
         <div class="section-container">
             
             <!-- Encabezado de la Sección -->
-            <div class="sobre-mi-header-container">
+            <div class="sobre-mi-header-container reveal-on-scroll">
                 <span class="section-tagline">Sobre Mí</span>
                 <h2 class="section-title">Hola, soy Flor.</h2>
                 <h3 class="bio-subtitle">Estratega de Carrera & Reinvención Profesional</h3>
@@ -109,11 +121,11 @@
             <!-- Grid de 2 Columnas Principal -->
             <div class="sobre-mi-grid">
                 <!-- Columna Izquierda: Bio & Filosofía -->
-                <div class="sobre-mi-left-col">
+                <div class="sobre-mi-left-col reveal-on-scroll">
                     <div class="bio-card">
                         <p>Acompaño a profesionales que llegaron a un punto de quiebre: ese momento en que el camino construido ya no los representa y necesitan encontrar un nuevo rumbo con claridad y confianza.</p>
                         
-                        <p>Como profesional de RR.HH. con más de diez años de experiencia —y sumando mi propia historia de cambio y migración— entendí que reinventarse no es solo cambiar de trabajo. Es animarse a revisar quiénes somos, qué priorizamos hoy y cómo queremos vivir nuestra vida profesional.</p>
+                        <p>Como profesional de RR.HH. con más de diez años de experiencia &mdash;y sumando mi propia historia de cambio y migraci&oacute;n&mdash; entendí que reinventarse no es solo cambiar de trabajo. Es animarse a revisar quiénes somos, qué priorizamos hoy y cómo queremos vivir nuestra vida profesional.</p>
                     </div>
                     
                 <div class="sobre-mi-fact-sheet hand-written-note">
@@ -139,7 +151,7 @@
                 </div>
 
                 <!-- Columna Derecha: Cómo te acompaño (Pilares Dinámicos) -->
-                <div class="sobre-mi-right-col">
+                <div class="sobre-mi-right-col reveal-on-scroll">
                     <h4 class="accompagnamiento-title">Cómo te acompaño a dar el salto:</h4>
                     <p class="accompagnamiento-desc">En este espacio fusiono herramientas estratégicas de empleabilidad, marca profesional y desarrollo personal para ayudarte a:</p>
                     
@@ -180,7 +192,7 @@
             </div>
 
             <!-- Banner Horizontal de Estadísticas -->
-            <div class="sobre-mi-stats-banner">
+            <div class="sobre-mi-stats-banner reveal-on-scroll">
                 <div class="stat-banner-item">
                     <span class="stat-banner-num">10+</span>
                     <span class="stat-banner-lbl">Años de experiencia en Recursos Humanos</span>
@@ -362,107 +374,257 @@
     <!-- Testimonios Section -->
     <section class="testimonios" id="testimonios">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll">
                 <span class="section-tagline">Impacto y Resultados Reales</span>
                 <h2 class="section-title">Lo que dicen mis clientes</h2>
                 <div class="section-divider"></div>
                 <p class="section-description">La mayor satisfacción de mi trabajo es ver cómo profesionales excepcionales logran romper sus barreras, ganar seguridad y posicionarse estratégicamente en el mercado global.</p>
             </div>
-            
-            <!-- Grid de testimonios estructurados de LinkedIn / Email -->
-            <div class="testimonios-grid">
-                
-                <!-- Testimonio 1: Juan Ignacio C. (LinkedIn) -->
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <span class="testimonial-source"><i class="fa-brands fa-linkedin text-linkedin"></i> Recomendación</span>
-                    </div>
-                    <div class="testimonial-body">
-                        <p class="testimonial-text">"Brinda seguridad y confianza en lo que te asesora, muy profesional y excelente persona. Se nota que tiene muchísima experiencia en esta área. Recomiendo su trabajo al 100%."</p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <div class="testimonial-avatar initials-jc">JC</div>
-                        <div class="testimonial-info">
-                            <h4 class="testimonial-name">Juan Ignacio C.</h4>
-                            <p class="testimonial-role">Contador Público</p>
-                            <span class="testimonial-tag">Preparación de entrevistas</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonio 2: Diego M. (LinkedIn) -->
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <span class="testimonial-source"><i class="fa-brands fa-linkedin text-linkedin"></i> Recomendación</span>
-                    </div>
-                    <div class="testimonial-body">
-                        <p class="testimonial-text">"Gracias por tu apoyo y profesionalismo durante todo el proceso. Me ayudaste a optimizar mi perfil de LinkedIn, mejorar mi estrategia de búsqueda laboral y prepararme para entrevistas...<span class="testimonial-more-text"> La evaluación inicial fue muy útil para identificar mis fortalezas y áreas de mejora. Destaco también la optimización de mi CV, las estrategias de búsqueda y el acompañamiento constante. Recomendaría a cualquiera que busque un cambio profesional significativo.</span>" <button type="button" class="testimonial-toggle-btn">Ver más</button></p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <div class="testimonial-avatar initials-dm">DM</div>
-                        <div class="testimonial-info">
-                            <h4 class="testimonial-name">Diego M.</h4>
-                            <p class="testimonial-role">Desarrollador Full Stack</p>
-                            <span class="testimonial-tag">Desarrollo de carrera</span>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <!-- WhatsApp Spontaneous Testimonials - Chat Bubble Design -->
-            <div class="whatsapp-testimonials-container">
-                <h3 class="whatsapp-title"><i class="fa-brands fa-whatsapp text-whatsapp"></i> Respuestas reales del día a día (WhatsApp)</h3>
-                <div class="whatsapp-bubbles-grid">
+            <!-- Testimonios Carousel Slider -->
+            <div class="testimonios-carousel-wrapper reveal-on-scroll">
+                <button class="carousel-control prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="testimonios-carousel-track" id="testimonios-track">
                     
-                    <!-- Bubble 1 -->
-                    <div class="whatsapp-bubble">
-                        <div class="bubble-sender">Ana C.</div>
-                        <div class="bubble-content">
-                            <p>¡Genialllll quedó espectacularr!!! Sos muy geniaaaaaaaaaa 🙌</p>
-                            <span class="bubble-meta">17:52 <i class="fa-solid fa-check-double text-double-tick"></i></span>
+                    <!-- Testimonio 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Brinda seguridad y confianza en lo que te asesora, muy profesional y excelente persona. Se nota que tiene muchísima experiencia en esta área. Recomiendo su trabajo al 100%."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Juan Ignacio C.</h4>
+                                <p class="testimonial-role">Contador Público</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Bubble 2 -->
-                    <div class="whatsapp-bubble">
-                        <div class="bubble-sender">Álvaro O.</div>
-                        <div class="bubble-content">
-                            <p>Ahí recibí la guía Flor, ¡muy bueno! Súper claros 👏👏 Gracias por la dedicación, me siento mil veces más preparado para mañana 🙏 ¡Después te escribo!</p>
-                            <span class="bubble-meta">13:49 <i class="fa-solid fa-check-double text-double-tick"></i></span>
+                    <!-- Testimonio 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Gracias por tu apoyo y profesionalismo durante todo el proceso. Me ayudaste a optimizar mi perfil de LinkedIn, mejorar mi estrategia de búsqueda laboral y prepararme para entrevistas. La evaluación inicial fue muy útil para identificar mis fortalezas y áreas de mejora. Destaco también la optimización de mi CV, las estrategias de búsqueda y el acompañamiento constante. Recomendaría a cualquiera que busque un cambio profesional significativo."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Diego M.</h4>
+                                <p class="testimonial-role">Desarrollador Full Stack</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Bubble 3 -->
-                    <div class="whatsapp-bubble">
-                        <div class="bubble-sender">Claudio S.</div>
-                        <div class="bubble-content">
-                            <p>Recién veo los CVs, no escuché los audios pero... ¡Otro level esto jajajajajaja! Buenísimos están, esas palabras técnicas me encantan. 💥</p>
-                            <span class="bubble-meta">15:13 <i class="fa-solid fa-check-double text-double-tick"></i></span>
+                    <!-- Testimonio 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Flor es excelente profesional. Me ayudó a preparar mi CV para diferentes puestos y, además, me ayudó a prepararme para futuras entrevistas. Hoy tengo trabajo gracias a su ayuda y conocimientos. Recomiendo al 100% su trabajo. Es muy ordenada, organizada y sobretodo tiene un trato profesional que hoy en día no se encuentra. Se destaca por su tacto humano. Realmente le interesa que a quien contrate su servicio tenga resultados."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Álvaro O.</h4>
+                                <p class="testimonial-role">Recepcionista Hotelero</p>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Testimonio 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Excelente profesional Flor, me ayud&oacute; a reorganizar mi CV, mis experiencias y a destacar mis fortalezas. Mi CV qued&oacute; impecable y muy moderno. S&uacute;per recomendable &#x1F44C;"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Evelyn C.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 5 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Una genia. Me dejó el CV óptimo. Listo para ser presentado y me dio mil consejos para encarar entrevistas laborales. Un 10 para Flor!!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Angel P.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 6 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Gracias Flor por estar siempre dispuesta a ayudar, atenta a las dudas y con mucha paciencia. Una excelente profesional."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Victoria G.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 7 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Excelente asesoramiento! Florencia me ayudó no solo a darle estructura y orientación a mi currículum, sino que también a destacar mis habilidades con una estética súper profesional. ¡Totalmente recomendada!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Nair S.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 8 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Me ayudó a armar mi CV y condensar de manera eficiente mi experiencia. Luego me llamaron para una entrevista laboral. Gracias Flor"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Giuliana S.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 9 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"La verdad Flor un 10! Tu aporte me ayudó mucho a estructurar y dar orden a mi CV, lo que llevó a dar resultados eficaces en un lazo de corto tiempo. ¡Gracias!!!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Betiana R.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 10 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Le pedí a Florencia si me podía armar mi CV, le pasé mis datos y a los días me lo envió, muy contento con el resultado y su atención."</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Fernando C.</h4>
+                                <p class="testimonial-role">Cliente de Asesoramiento</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 11 (WhatsApp 1) -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"&iexcl;Genialllll qued&oacute; espectacularr!!! Sos muy geniaaaaaaaaaa &#x1F64C;"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Ana C.</h4>
+                                <p class="testimonial-role">Cliente de Mentor&iacute;a (WhatsApp)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 12 (WhatsApp 2) -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Ah&iacute; recib&iacute; la gu&iacute;a Flor, &iexcl;muy bueno! S&uacute;per claros &#x1F44F;&#x1F44F; Gracias por la dedicaci&oacute;n, me siento mil veces m&aacute;s preparado para ma&ntilde;ana &#x1F64F; &iexcl;Despu&eacute;s te escribo!"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">Claudio S.</h4>
+                                <p class="testimonial-role">Cliente de Asesor&iacute;a (WhatsApp)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 13 (WhatsApp 3) -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="testimonial-body">
+                            <p class="testimonial-text">"Reci&eacute;n veo los CVs, no escuch&eacute; los audios pero... &iexcl;Otro level esto jajajajajaja! Buen&iacute;simos est&aacute;n, esas palabras t&eacute;cnicas me encantan. &#x1F4A5;"</p>
+                        </div>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">&Aacute;lvaro O.</h4>
+                                <p class="testimonial-role">Cliente de Consultor&iacute;a (WhatsApp)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <button class="carousel-control next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
             <!-- LinkedIn & Google Profile Verification Call to Action -->
             <div class="testimonials-cta">
-                <p class="cta-notice">Todos estos testimonios y mensajes son reales, espontáneos e independientes de mis mentorías.</p>
+                <p class="cta-notice">Todos estos testimonios y mensajes son reales, espontáneos y compartidos por mis clientes.</p>
                 <div class="cta-buttons">
                     <a href="https://www.linkedin.com/in/florencia-capeletto/" target="_blank" class="btn-linkedin-verify">
                         <i class="fa-brands fa-linkedin"></i> Ver más recomendaciones en mi perfil de LinkedIn
@@ -476,194 +638,180 @@
         </div>
     </section>
 
-    <!-- Recursos & Infoproductos Section -->
-    <section class="recursos" id="recursos">
+    <!-- Sección 1: Servicios & Mentorías -->
+    <section class="recursos" id="servicios-home" style="background-color: var(--white); border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: 1px solid rgba(78, 96, 116, 0.08);">
         <div class="section-container">
-            <div class="section-header">
-                <span class="section-tagline">Crece Profesional e Intelectualmente</span>
-                <h2 class="section-title">Recursos</h2>
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tagline">Acompañamiento Estratégico e Individual</span>
+                <h2 class="section-title">Servicios & Mentorías</h2>
                 <div class="section-divider"></div>
-                <p class="section-description">Herramientas diseñadas estratégicamente para impulsar tu búsqueda laboral y estructurar tu desarrollo. Descarga recursos gratuitos o agenda sesiones individuales.</p>
-            </div>
-            
-            <div class="recursos-tabs">
-                <button class="tab-btn active" data-filter="all">Todos</button>
-                <button class="tab-btn" data-filter="servicios">Programas y Sesiones</button>
-                <button class="tab-btn" data-filter="recursos">Recursos y Guías</button>
+                <p class="section-description">Programas personalizados y sesiones uno a uno diseñados para impulsar tu reinvención y destacar tu perfil profesional.</p>
             </div>
 
-            <div class="recursos-grid" id="recursos-grid">
-                
-                <!-- Lead Magnet 1: Tracker Notion (Free) -->
-                <div class="recurso-card" data-category="recursos">
-                    <div class="recurso-badge free">RECURSO GRATUITO</div>
-                    <div class="recurso-icon-bg">
-                        <i class="fa-solid fa-clipboard-list"></i>
+            <!-- Sesiones de Enfoque Táctico -->
+            <h3 class="subsection-title-home" style="font-family: var(--font-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2.5px; margin-bottom: 35px; text-align: center;">Sesiones de Enfoque Táctico</h3>
+            
+            <div class="recursos-grid-3">
+                <!-- 1. CV Estratégico -->
+                <div class="recurso-card reveal-on-scroll" data-category="servicios">
+                    <div class="recurso-badge premium" style="background-color: rgba(63, 98, 91, 0.12); color: var(--primary);">SESIÓN INDIVIDUAL</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/cv_session.png" alt="CV Estratégico" class="card-image">
                     </div>
                     <div class="recurso-card-content">
-                        <h3>Tracker de Postulaciones Premium</h3>
-                        <p class="recurso-type">Plantilla de Notion Lista para Duplicar</p>
-                        <p class="recurso-desc">El organizador definitivo para tu búsqueda de empleo. Controla el estado de tus postulaciones, almacena tus versiones de CV, gestiona tus cartas de presentación y mantén el control de tus entrevistas.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-bolt"></i> Acceso Inmediato</span>
-                            <span class="meta-item"><i class="fa-solid fa-star"></i> 100% Personalizable</span>
-                        </div>
-                        <button class="btn-card-action open-modal-btn" data-resource="tracker">
-                            Obtener Tracker <i class="fa-solid fa-arrow-down"></i>
-                        </button>
+                        <h3>CV Estratégico</h3>
+                        <p class="recurso-type">Estrategia & Diseño de CV</p>
+                        <p class="recurso-desc">Audito tu trayectoria profesional bajo la mirada de una seleccionadora experta para optimizar tu currículum, redactar tus logros clave y superar filtros automáticos (ATS-ready).</p>
+                        <a href="servicios.html" class="btn-card-action-premium" style="text-decoration: none; display: block; margin-top: auto;">
+                            Ver Detalles <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
+                <!-- 2. LinkedIn de Alto Impacto -->
+                <div class="recurso-card reveal-on-scroll" data-category="servicios">
+                    <div class="recurso-badge premium" style="background-color: rgba(63, 98, 91, 0.12); color: var(--primary);">SESIÓN INDIVIDUAL</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/linkedin_session.png" alt="LinkedIn de Alto Impacto" class="card-image">
+                    </div>
+                    <div class="recurso-card-content">
+                        <h3>LinkedIn de Alto Impacto</h3>
+                        <p class="recurso-type">Optimización & Marca Personal</p>
+                        <p class="recurso-desc">Configuro tu perfil de LinkedIn como un imán para atraer reclutadores y oportunidades de negocio, potenciando tu posicionamiento profesional y tu marca personal en el sector.</p>
+                        <a href="servicios.html" class="btn-card-action-premium" style="text-decoration: none; display: block; margin-top: auto;">
+                            Ver Detalles <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Programa de Inserción Laboral -->
+                <div class="recurso-card reveal-on-scroll" data-category="servicios">
+                    <div class="recurso-badge premium" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">PROGRAMA COMPLETO</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/insercion_pack.png" alt="Programa de Inserción Laboral" class="card-image">
+                    </div>
+                    <div class="recurso-card-content">
+                        <h3>Programa de Inserción Laboral</h3>
+                        <p class="recurso-type">Ruta Completa & Entrevistas</p>
+                        <p class="recurso-desc">El proceso táctico ideal para tu recolocación. Diseñamos tus herramientas clave de postulación (CV y LinkedIn) y entrenamos tus habilidades en simulaciones de entrevistas reales.</p>
+                        <a href="servicios.html" class="btn-card-action-premium" style="text-decoration: none; display: block; margin-top: auto;">
+                            Ver Detalles <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programas Especializados y Mentoría Premium -->
+            <h3 class="subsection-title-home" style="font-family: var(--font-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2.5px; margin-top: 60px; margin-bottom: 35px; text-align: center;">Programas Especializados y Mentoría Premium</h3>
+
+            <div class="recursos-grid-2">
+                <!-- 4. Programa de Migración Profesional -->
+                <div class="recurso-card reveal-on-scroll" data-category="servicios">
+                    <div class="recurso-badge premium" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">PROGRAMA ESPECIALIZADO</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/migracion_program.png" alt="Programa de Migración Profesional" class="card-image">
+                    </div>
+                    <div class="recurso-card-content">
+                        <h3>Programa de Migración Profesional</h3>
+                        <p class="recurso-type">Búsqueda de Empleo en Europa</p>
+                        <p class="recurso-desc">Acompañamiento individual diseñado para profesionales de Latinoamérica que desean buscar trabajo en Europa o ya han emigrado y necesitan acelerar su inserción laboral local.</p>
+                        <a href="servicios.html" class="btn-card-action-premium" style="text-decoration: none; display: block; margin-top: auto;">
+                            Ver Detalles <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. Mentoría Premium Método NEXO -->
+                <div class="recurso-card reveal-on-scroll" data-category="servicios">
+                    <div class="recurso-badge premium" style="background-color: rgba(63, 98, 91, 0.12); color: var(--primary);">MENTORÍA ESTRELLA PREMIUM</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/nexo_mentor.png" alt="Método NEXO" class="card-image">
+                    </div>
+                    <div class="recurso-card-content">
+                        <h3>Método NEXO</h3>
+                        <p class="recurso-type">Marca Personal, Negocios & Bienestar</p>
+                        <p class="recurso-desc">El programa individual definitivo para dar el salto al autoempleo, estructurar tus servicios independientes o marca personal consolidando tu bienestar mental y regulación nerviosa.</p>
+                        <a href="servicios.html" class="btn-card-action-premium" style="text-decoration: none; display: block; margin-top: auto;">
+                            Ver Detalles <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 2: Ebooks & Guías (Infoproductos) -->
+    <section class="recursos" id="ebooks" style="background-color: #F5F2EB; border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: none; padding-top: 80px; padding-bottom: 80px;">
+        <div class="section-container">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tagline">Desarrollo Autónomo y Práctico</span>
+                <h2 class="section-title">Ebooks & Guías</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">Herramientas y libros digitales premium para potenciar tu marca y estructurar tu búsqueda laboral a tu propio ritmo.</p>
+            </div>
+
+            <div class="recursos-grid" style="display: flex; justify-content: center; flex-wrap: wrap;">
                 <!-- Lead Magnet 2: Guía LinkedIn (Premium) -->
-                <div class="recurso-card" data-category="recursos">
-                    <!-- VERSIÓN GRATUITA (COMENTADA) -->
-                    <!-- <div class="recurso-badge free" id="linkedin-badge-gratis">EBOOK GRATUITO</div> -->
-                    
-                    <!-- VERSIÓN DE PAGO (ACTIVA) -->
+                <div class="recurso-card reveal-on-scroll" data-category="premium" style="max-width: 550px; width: 100%;">
                     <div class="recurso-badge premium" id="linkedin-badge-pago" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">EBOOK PREMIUM</div>
-                    
-                    <div class="recurso-icon-bg">
-                        <i class="fa-solid fa-book-open-reader"></i>
+                    <div class="card-image-wrapper">
+                        <img src="assets/linkedin_guide_cover.png" alt="Guía Estratégica de LinkedIn 2026" class="card-image">
                     </div>
                     <div class="recurso-card-content">
                         <h3>Guía Estratégica de LinkedIn 2026</h3>
                         <p class="recurso-type">Libro Digital en Formato PDF</p>
                         <p class="recurso-desc">Descubre el paso a paso detallado para transformar tu perfil en un imán de ofertas laborales. Aprende a redactar tu sección "Acerca de", estructurar tu experiencia laboral y dominar el algoritmo buscador de los recruiters.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-file-pdf"></i> 80 Páginas Prácticas</span>
-                            <span class="meta-item"><i class="fa-solid fa-circle-check"></i> Trucos de Selección</span>
-                        </div>
-                        
-                        <!-- BOTÓN DESCARGA GRATUITA (COMENTADO) -->
-                        <!--
-                        <button class="btn-card-action open-modal-btn" id="btn-linkedin-gratis" data-resource="linkedin">
-                            Descargar Guía <i class="fa-solid fa-arrow-down"></i>
-                        </button>
-                        -->
-
-                        <!-- BOTÓN DE COMPRA HOTMART (ACTIVO) -->
-                        <a href="https://go.hotmart.com/F106293567O" class="btn-card-action-premium" id="btn-linkedin-comprar" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%;">
+                        <a href="https://go.hotmart.com/F106293567O" class="btn-card-action-premium" id="btn-linkedin-comprar" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%; margin-top: auto;">
                             Comprar Guía <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Comunidad Exclusiva (Free) - COMENTADA PARA EL FUTURO
-                <div class="recurso-card" data-category="recursos">
-                    <div class="recurso-badge free" style="background-color: rgba(144, 181, 163, 0.15); color: var(--primary);">COMUNIDAD GRATUITA</div>
-                    <div class="recurso-icon-bg" style="color: var(--steel-blue); background-color: rgba(78, 96, 116, 0.05);">
-                        <i class="fa-solid fa-users"></i>
+    <!-- Sección 3: Recursos Gratis -->
+    <section class="recursos" id="recursos-gratis" style="background-color: rgba(249, 229, 228, 0.28); border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: none; padding-top: 80px; padding-bottom: 80px;">
+        <div class="section-container">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-tagline">Herramientas de Descarga Inmediata</span>
+                <h2 class="section-title">Recursos Gratis</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">Descarga recursos gratuitos para estructurar tu búsqueda de empleo o reserva tu primera sesión de diagnóstico sin costo.</p>
+            </div>
+
+            <div class="recursos-grid">
+                <!-- Lead Magnet 1: Tracker Notion (Free) -->
+                <div class="recurso-card reveal-on-scroll" data-category="gratuitos">
+                    <div class="recurso-badge free">RECURSO GRATUITO</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/notion_tracker.png" alt="Tracker de Postulaciones Notion" class="card-image">
                     </div>
                     <div class="recurso-card-content">
-                        <h3>Comunidad Reinvención & Bienestar</h3>
-                        <p class="recurso-type">Espacio de Networking e Intercambio</p>
-                        <p class="recurso-desc">Únete a nuestro foro privado para conectar con otros profesionales en procesos de cambio. Comparte experiencias, haz preguntas y accede a debates semanales en un entorno de apoyo mutuo.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-circle-check"></i> Acceso 100% Gratis</span>
-                            <span class="meta-item"><i class="fa-solid fa-comments"></i> Debates y Soporte</span>
-                        </div>
-                        <a href="https://hotmart.com/es/club/flor-capeletto/community/15287700" class="btn-card-action" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%;">
-                            Unirme a la Comunidad <i class="fa-solid fa-right-to-bracket"></i>
-                        </a>
+                        <h3>Tracker de Postulaciones Premium</h3>
+                        <p class="recurso-type">Plantilla de Notion Lista para Duplicar</p>
+                        <p class="recurso-desc">El organizador definitivo para tu búsqueda de empleo. Controla el estado de tus postulaciones, almacena tus versiones de CV, gestiona tus cartas de presentación y mantén el control de tus entrevistas.</p>
+                        <button class="btn-card-action open-modal-btn" data-resource="tracker" style="margin-top: auto;">
+                            Obtener Tracker <i class="fa-solid fa-arrow-down"></i>
+                        </button>
                     </div>
                 </div>
-                -->
 
                 <!-- Premium Item 1: Sesión Diagnóstico Inicial Gratis -->
-                <div class="recurso-card" data-category="servicios">
-                    <div class="recurso-badge free" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">DIAGNÓSTICO GRATUITO</div>
-                    <div class="recurso-icon-bg">
-                        <i class="fa-solid fa-comments"></i>
+                <div class="recurso-card reveal-on-scroll" data-category="gratuitos">
+                    <div class="recurso-badge free" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">DIAGN&Oacute;STICO GRATUITO</div>
+                    <div class="card-image-wrapper">
+                        <img src="assets/zoom_session.png" alt="Sesión Inicial de Diagnóstico" class="card-image">
                     </div>
                     <div class="recurso-card-content">
                         <h3>Sesión Inicial de Diagnóstico (30 min)</h3>
                         <p class="recurso-type">Charla Estratégica Personalizada</p>
                         <p class="recurso-desc">Charlemos en una sesión de 30 minutos sin costo para conocernos, evaluar tu momento profesional y determinar de qué forma mi método se alinea con lo que estás buscando para tu reinvención.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-clock"></i> 30 Minutos Vía Zoom</span>
-                            <span class="meta-item"><i class="fa-solid fa-calendar-check"></i> Exclusivo los Lunes</span>
-                        </div>
-                        <button class="btn-card-action-premium open-booking-btn" id="open-booking-card-btn" style="width: 100%; border: 2px solid var(--accent); background: transparent; color: var(--accent); font-weight: 700; padding: 14px 0; border-radius: 12px; cursor: pointer; transition: var(--transition);">
+                        <button class="btn-card-action-premium open-booking-btn" id="open-booking-card-btn" style="width: 100%; border: 2px solid var(--accent); background: transparent; color: var(--accent); font-weight: 700; padding: 14px 0; border-radius: 12px; cursor: pointer; transition: var(--transition); margin-top: auto;">
                             Reservar Sesión Gratuita <i class="fa-solid fa-calendar-days"></i>
                         </button>
                     </div>
                 </div>
-
-                <!-- Premium Item 2: Mentoría Premium Método NEXO (Paid) - OCULTADO TEMPORALMENTE
-                <div class="recurso-card" data-category="servicios">
-                    <div class="recurso-badge premium" style="background-color: rgba(63, 98, 91, 0.12); color: var(--primary);">PROGRAMA PREMIUM</div>
-                    <div class="recurso-icon-bg">
-                        <i class="fa-solid fa-compass"></i>
-                    </div>
-                    <div class="recurso-card-content">
-                        <h3>Mentoría Premium Método NEXO</h3>
-                        <p class="recurso-type">Desarrollo de Marca Personal, Servicios & Emprendimiento</p>
-                        <p class="recurso-desc">Acompañamiento individual de rediseño de carrera diseñado para profesionales que desean dar el salto al autoempleo, estructurar sus servicios independientes o consolidar su marca personal. Fusiona posicionamiento de mercado con herramientas de mentalidad para avanzar frente a la incertidumbre con seguridad.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-lightbulb"></i> Modelado de Marca & Servicios</span>
-                            <span class="meta-item"><i class="fa-solid fa-brain"></i> Regulación del estrés ante la incertidumbre</span>
-                        </div>
-                        <a href="#contacto" class="btn-card-action-premium open-nexo-session-btn" style="text-decoration: none; display: block;">
-                            Consultar Disponibilidad <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                -->
-
-                <!-- Premium Item 2B: Consultoría Táctica de Empleo (Paid) -->
-                <div class="recurso-card" data-category="servicios">
-                    <div class="recurso-badge premium" style="background-color: rgba(217, 135, 87, 0.12); color: var(--accent);">CONSULTORÍA 1 A 1</div>
-                    <div class="recurso-icon-bg">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
-                    <div class="recurso-card-content">
-                        <h3>Consultoría Táctica de Empleo</h3>
-                        <p class="recurso-type">CV, LinkedIn Boost & Simulación de Entrevistas</p>
-                        <p class="recurso-desc">Sesiones individuales de enfoque rápido y práctico para tu inserción laboral o recolocación corporativa. Aplico mi mirada de seleccionadora en vivo para optimizar tu currículum (ATS-ready), transformar tu perfil de LinkedIn en un imán de ofertas, y entrenar tu discurso en entrevistas de nivel.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-circle-check"></i> LinkedIn & CV Boost (90 min)</span>
-                            <span class="meta-item"><i class="fa-solid fa-circle-check"></i> Simulación con feedback real (75 min)</span>
-                        </div>
-                        <a href="#contacto" class="btn-card-action-premium open-tactical-session-btn" style="text-decoration: none; display: block;">
-                            Consultar Disponibilidad <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Premium Item 3: Talleres Pregrabados -->
-                <div class="recurso-card" data-category="servicios">
-                    <!-- PASO 1 (LISTA DE ESPERA - ACTIVO): -->
-                    <div class="recurso-badge premium" id="taller-badge-espera" style="background-color: rgba(78, 96, 116, 0.1); color: var(--steel-blue);">LISTA DE ESPERA</div>
-                    
-                    <!-- PASO 1 (LANZAMIENTO - COMENTADO): Descomenta la línea de abajo y borra/comenta la de LISTA DE ESPERA cuando lances en Hotmart -->
-                    <!-- <div class="recurso-badge premium" id="taller-badge-lanzado" style="background-color: rgba(63, 98, 91, 0.12); color: var(--primary);">TALLER ONLINE</div> -->
-
-                    <div class="recurso-icon-bg">
-                        <i class="fa-solid fa-photo-film"></i>
-                    </div>
-                    <div class="recurso-card-content">
-                        <h3>Talleres Prácticos Autogestionados</h3>
-                        <p class="recurso-type">Clases Pregrabadas + Plantillas de Trabajo</p>
-                        <p class="recurso-desc">Talleres digitales interactivos diseñados para que avances a tu propio ritmo. Abordaremos herramientas tácticas de reinvención profesional, gestión del miedo al cambio y adaptabilidad al cambio.</p>
-                        <div class="recurso-meta">
-                            <span class="meta-item"><i class="fa-solid fa-circle-play"></i> Clases de por vida</span>
-                            <span class="meta-item"><i class="fa-solid fa-book"></i> Hojas de Ruta Prácticas</span>
-                        </div>
-                        
-                        <!-- PASO 2 (LISTA DE ESPERA - ACTIVO): Formulario de captura para avisar al lanzar -->
-                        <button class="btn-card-action open-modal-btn" id="btn-taller-espera" data-resource="talleres" style="width: 100%;">
-                            Avisarme al lanzar <i class="fa-solid fa-bell"></i>
-                        </button>
-
-                        <!-- PASO 2 (LANZAMIENTO - COMENTADO): Botón de compra directa de Hotmart. Descomenta y pon tu HotLink real en href cuando esté listo -->
-                        <!-- 
-                        <a href="https://pay.hotmart.com/TU_CODIGO_PRODUCTO" class="btn-card-action-premium" id="btn-taller-comprar" target="_blank" style="text-decoration: none; display: block; text-align: center; width: 100%;">
-                            Inscribirme al Taller <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                        -->
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -671,7 +819,7 @@
     <!-- Blog Section -->
     <section class="blog" id="blog">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll">
                 <span class="section-tagline">Un espacio de encuentro y movimiento</span>
                 <h2 class="section-title">El Espacio de Reflexión</h2>
                 <div class="section-divider"></div>
@@ -680,7 +828,7 @@
             
             <div class="blog-grid">
                 <!-- Article 1: Empleabilidad y Cambio -->
-                <article class="blog-card">
+                <article class="blog-card reveal-on-scroll">
                     <div class="blog-img-wrapper">
                         <img src="assets/blog_mindset.png" alt="Gestión emocional aplicada al cambio profesional" class="blog-img">
                         <div class="blog-card-category">Mentalidad</div>
@@ -694,7 +842,7 @@
                 </article>
 
                 <!-- Article 2: Equilibrando la balanza -->
-                <article class="blog-card">
+                <article class="blog-card reveal-on-scroll">
                     <div class="blog-img-wrapper">
                         <img src="assets/blog_mindfulness.png" alt="Equilibrando la balanza y bienestar emocional" class="blog-img">
                         <div class="blog-card-category">Bienestar Emocional</div>
@@ -713,7 +861,7 @@
     <!-- Contacto Section -->
     <section class="contacto" id="contacto">
         <div class="section-container grid-2">
-            <div class="contacto-info">
+            <div class="contacto-info reveal-on-scroll">
                 <span class="section-tagline">Contacto Directo</span>
                 <h2 class="section-title">Hablemos</h2>
                 <div class="section-divider-left"></div>
@@ -756,7 +904,7 @@
             </div>
 
             <!-- Form -->
-            <div class="contacto-form-wrapper">
+            <div class="contacto-form-wrapper reveal-on-scroll">
                 <form id="contact-form" class="contacto-form">
                     <div class="form-group">
                         <label for="form-name">Tu Nombre Completo</label>
@@ -818,8 +966,9 @@
                 <ul>
                     <li><a href="#home">Inicio</a></li>
                     <li><a href="#sobre-mi">Sobre Mí</a></li>
-                    <!-- <li><a href="#metodo">Método NEXO</a></li> -->
-                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="#ebooks">Ebooks & Guías</a></li>
+                    <li><a href="#recursos-gratis">Recursos Gratis</a></li>
                     <li><a href="#blog">Reflexiones</a></li>
                 </ul>
             </div>
@@ -886,11 +1035,25 @@
                         Acceder al Recurso Ahora <i class="fa-solid fa-circle-arrow-down"></i>
                     </a>
                     
-                    <!-- Instagram Follow CTA -->
-                    <div class="modal-social-follow">
-                        <p>¿Seguimos en contacto? Te invito a seguirme en Instagram para ver tips diarios y el detrás de escena de la reinvención:</p>
-                        <a href="https://www.instagram.com/florcapeletto.rrhh" target="_blank" class="btn-modal-instagram">
-                            <i class="fa-brands fa-instagram"></i> Seguir en Instagram 📸
+                    <!-- New Active Conversion Funnel CTA -->
+                    <div class="modal-conversion-cta" style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(78, 96, 116, 0.12); width: 100%; text-align: left;">
+                        <h4 style="font-family: var(--font-title); font-size: 1.15rem; color: var(--primary); margin-bottom: 8px; font-weight: 600; text-align: center;">&iquest;Y vos? &iquest;Quieres acelerar tu reinvención?</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px; text-align: justify;">Te invito a dar el paso definitivo. Analicemos tu perfil y objetivos juntos en una <strong>Sesión de Diagnóstico Gratis (30 min)</strong>, o reserva una <strong>Sesión Táctica de Empleo</strong> (CV/LinkedIn Boost) con un <strong>15% de descuento</strong> usando el código <strong style="color: var(--accent);">BIENVENIDA15</strong>.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                            <button type="button" class="btn-modal-submit" id="modal-success-booking-btn" style="background-color: var(--primary); padding: 14px 0; margin-top: 0; box-shadow: var(--shadow-md); font-size: 0.9rem; cursor: pointer;">
+                                Reservar Diagnóstico Gratis <i class="fa-solid fa-calendar-days"></i>
+                            </button>
+                            <button type="button" class="btn-modal-instagram" id="modal-success-tactical-btn" style="border-color: var(--accent); color: var(--accent); padding: 12px 0; font-size: 0.9rem; width: 100%; text-align: center; justify-content: center; cursor: pointer;">
+                                Reservar Sesión Táctica (15% Off) <i class="fa-solid fa-rocket"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Instagram Follow CTA (Subtle footer style) -->
+                    <div class="modal-social-follow" style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(78, 96, 116, 0.08); width: 100%;">
+                        <a href="https://www.instagram.com/florcapeletto.rrhh" target="_blank" style="font-size: 0.82rem; color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; justify-content: center; width: 100%;">
+                            <i class="fa-brands fa-instagram" style="color: var(--accent); font-size: 0.95rem;"></i> Seguir en Instagram para tips diarios
                         </a>
                     </div>
                 </div>
@@ -929,17 +1092,17 @@
                     <p style="text-align: justify; color: var(--text-main); margin-bottom: 15px; font-size: 0.95rem;">En la antigua cultura celta, este símbolo de tres espirales entrelazadas representaba la evolución eterna, el aprendizaje perpetuo y el equilibrio. Hoy, es el núcleo de mi metodología: una brújula que te recuerda que crecer no significa dejar de ser tú, sino expandirte en armonía:</p>
                     
                     <div style="background: rgba(144, 181, 163, 0.08); padding: 18px; border-radius: 16px; border-left: 4px solid var(--primary);">
-                        <strong style="color: var(--primary); font-family: var(--font-title); font-size: 1.05rem; display: block; margin-bottom: 4px; font-weight: 600;">✦ La Trinidad Cíclica (Estrategia de Carrera)</strong>
+                        <strong style="color: var(--primary); font-family: var(--font-title); font-size: 1.05rem; display: block; margin-bottom: 4px; font-weight: 600;"><i class="fa-solid fa-arrows-spin" style="margin-right: 6px;"></i> La Trinidad Cíclica (Estrategia de Carrera)</strong>
                         El movimiento constante entre tu pasado (tu experiencia acumulada), tu presente (tu autoconocimiento) y tu futuro (tu reinvención). No descartas tu historia, la utilizas como impulso.
                     </div>
                     
                     <div style="background: rgba(239, 170, 137, 0.08); padding: 18px; border-radius: 16px; border-left: 4px solid var(--accent);">
-                        <strong style="color: var(--accent); font-family: var(--font-title); font-size: 1.05rem; display: block; margin-bottom: 4px; font-weight: 600;">✦  Evolución del Ser (Autoconocimiento)</strong>
+                        <strong style="color: var(--accent); font-family: var(--font-title); font-size: 1.05rem; display: block; margin-bottom: 4px; font-weight: 600;"><i class="fa-solid fa-seedling" style="margin-right: 6px;"></i> Evolución del Ser (Autoconocimiento)</strong>
                         Un viaje hacia adentro para conectar con tus talentos innatos, superar tus propios miedos limitantes y expandir tu consciencia laboral sin un techo que te condicione.
                     </div>
                     
                     <div style="background: rgba(78, 96, 116, 0.08); padding: 18px; border-radius: 16px; border-left: 4px solid var(--steel-blue);">
-                        <strong style="color: var(--steel-blue); font-family: var(--font-title); font-size: 1.05rem; display: block; margin-bottom: 4px; font-weight: 600;">🌿 Equilibrio en el Movimiento (Bienestar & Mentalidad)</strong>
+                        <strong style="color: var(--steel-blue); font-family: var(--font-title); font-size: 1.05rem; display: block; margin-bottom: 4px; font-weight: 600;"><i class="fa-solid fa-scale-balanced" style="margin-right: 6px;"></i> Equilibrio en el Movimiento (Bienestar & Mentalidad)</strong>
                         Tres brazos que convergen en un centro de paz. Para lograr un cambio profesional duradero, es vital mantener un balance saludable entre tu cuerpo, tu mente y tus emociones en momentos de transición.
                     </div>
                 </div>
@@ -1045,3 +1208,4 @@
     <script src="app.js"></script>
 </body>
 </html>
+
