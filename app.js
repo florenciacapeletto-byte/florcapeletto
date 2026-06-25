@@ -984,6 +984,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     const priceEl = document.getElementById("service-modal-price");
                     const noteEl = document.getElementById("service-modal-price-note");
+                    const currencySelectorWrapper = document.querySelector(".modal-currency-selector-wrapper");
 
                     let priceText = "";
                     let noteText = "";
@@ -997,6 +998,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else {
                         priceText = activeCardData.priceUsd;
                         noteText = activeCardData.priceUsdNote;
+                    }
+
+                    // Ocultar selector de moneda si el precio es "A consultar"
+                    const isConsultar = (
+                        (activeCardData.priceArs && activeCardData.priceArs.toLowerCase().includes("consultar")) ||
+                        (activeCardData.priceUsd && activeCardData.priceUsd.toLowerCase().includes("consultar")) ||
+                        (activeCardData.priceEur && activeCardData.priceEur.toLowerCase().includes("consultar")) ||
+                        !activeCardData.priceArs
+                    );
+
+                    if (isConsultar) {
+                        if (currencySelectorWrapper) currencySelectorWrapper.style.display = "none";
+                        priceText = "A consultar";
+                        noteText = "";
+                    } else {
+                        if (currencySelectorWrapper) currencySelectorWrapper.style.display = "block";
                     }
 
                     if (priceEl) priceEl.innerText = priceText;
