@@ -660,43 +660,41 @@
                     </div>
                 </div>
 
-                <!-- Two column content grid -->
-                <div class="service-modal-content-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 35px; padding: 40px;">
-                    <!-- Left: Description and Methodology -->
+                <!-- Single column content layout (Pricing at the bottom) -->
+                <div class="service-modal-content-grid">
+                    <!-- Top/Middle: Description and Methodology (Full Width) -->
                     <div class="service-modal-left-col">
                         <p id="service-modal-description" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 30px; font-weight: 500;"></p>
                         <div id="service-modal-details-container"></div>
                     </div>
 
-                    <!-- Right: Pricing, Payments, WhatsApp CTA -->
-                    <div class="service-modal-right-col" style="background: rgba(252, 251, 249, 0.4); border-radius: 20px; padding: 25px; border: 1px solid rgba(144, 181, 163, 0.12); display: flex; flex-direction: column; justify-content: space-between; align-self: start; position: sticky; top: 20px;">
-                        <div>
-                            <h4 style="font-family: var(--font-body); font-weight: 700; font-size: 0.8rem; color: var(--text-muted); margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.8px;">
-                                <i class="fa-solid fa-tags" style="font-size: 0.75rem; color: var(--accent);"></i> Costo de Inversión
-                            </h4>
-                            
-                            <!-- Dynamic Pricing Box -->
-                            <div class="modal-pricing-box" style="margin-bottom: 10px;">
-                                <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+                    <!-- Bottom: Pricing, Payments, WhatsApp CTA Footer -->
+                    <div class="service-modal-right-col">
+                        <div class="service-modal-right-col-pricing">
+                            <div>
+                                <h4 style="font-family: var(--font-body); font-weight: 700; font-size: 0.8rem; color: var(--text-muted); margin-top: 0; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.8px;">
+                                    <i class="fa-solid fa-tags" style="font-size: 0.75rem; color: var(--accent);"></i> Costo de Inversión
+                                </h4>
+                                <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
                                     <span id="service-modal-price"></span>
                                     <span id="service-modal-price-note" style="display: none;"></span>
                                 </div>
-                                
-                                <!-- Elegant Currency Select -->
-                                <div class="modal-currency-selector-wrapper" style="position: relative; width: 100%;">
-                                    <label for="modal-currency-select">Mostrar precio en:</label>
-                                    <div class="select-container-custom" style="position: relative;">
-                                        <select id="modal-currency-select">
-                                            <option value="ARS">🇦🇷 Peso argentino ($) - ARS</option>
-                                            <option value="USD">🌎 Dólares (u$s) - USD</option>
-                                            <option value="EUR">🇪🇺 Euros (€) - EUR</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            
+                            <!-- Elegant Currency Select -->
+                            <div class="modal-currency-selector-wrapper" style="position: relative; min-width: 170px;">
+                                <label for="modal-currency-select">Mostrar precio en:</label>
+                                <div class="select-container-custom" style="position: relative;">
+                                    <select id="modal-currency-select">
+                                        <option value="ARS">🇦🇷 Peso argentino ($) - ARS</option>
+                                        <option value="USD">🌎 Dólares (u$s) - USD</option>
+                                        <option value="EUR">🇪🇺 Euros (€) - EUR</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
 
-                        <a href="" target="_blank" id="service-modal-whatsapp-btn" class="btn-card-buy" style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 25px; border-radius: 12px; font-weight: 700; text-decoration: none; text-align: center;">
+                        <a href="" target="_blank" id="service-modal-whatsapp-btn" class="btn-card-buy" style="margin-top: 0; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 25px; border-radius: 12px; font-weight: 700; text-decoration: none; text-align: center; white-space: nowrap;">
                             Contratar Servicio <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
