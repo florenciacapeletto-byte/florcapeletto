@@ -3478,7 +3478,8 @@ section {
 
 .specialized-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 480px));
+    justify-content: center;
     gap: 35px;
     margin-bottom: 60px;
 }
@@ -4012,16 +4013,15 @@ section {
 
 /* Estilos para el selector de moneda y precios dinámicos en el modal */
 .modal-pricing-box {
-    background: rgba(252, 251, 249, 0.5);
-    border: 1px solid rgba(144, 181, 163, 0.2);
-    padding: 20px;
-    border-radius: 16px;
-    margin-bottom: 25px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
 }
 
 #service-modal-price {
     font-family: var(--font-title);
-    font-size: 2rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--primary);
     line-height: 1.2;
@@ -4030,14 +4030,14 @@ section {
 
 #service-modal-price-note {
     font-family: var(--font-body);
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--accent);
     background-color: rgba(217, 135, 87, 0.08);
-    padding: 4px 10px;
+    padding: 2px 8px;
     border-radius: 30px;
     border: 1px solid rgba(217, 135, 87, 0.2);
-    margin-left: 5px;
+    margin-left: 8px;
     align-self: center;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -4045,17 +4045,24 @@ section {
 
 #modal-currency-select {
     width: 100%;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid rgba(144, 181, 163, 0.3);
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(144, 181, 163, 0.25);
     background-color: var(--white);
     color: var(--primary);
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%25233F625B%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 8px auto;
+    padding-right: 28px;
 }
 
 #modal-currency-select:hover {
@@ -4072,10 +4079,10 @@ section {
 .modal-currency-selector-wrapper label {
     font-family: var(--font-body);
     display: block;
-    font-size: 0.78rem;
+    font-size: 0.68rem;
     font-weight: 700;
     color: var(--text-muted);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.8px;
 }
