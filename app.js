@@ -1029,7 +1029,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // Configurar enlace y mensaje de WhatsApp
                     if (modalWhatsappBtn) {
-                        const baseMsg = `¡Hola Flor! Me interesa contratar el servicio de "${activeCardData.title}" (${priceText}). ¿Cómo coordinamos los detalles?`;
+                        let baseMsg = "";
+                        if (isConsultar) {
+                            baseMsg = `¡Hola Flor! Me interesa recibir el Dossier de Servicios y consultar disponibilidad para "${activeCardData.title}". ¿Cómo coordinamos los detalles?`;
+                        } else {
+                            baseMsg = `¡Hola Flor! Me interesa contratar el servicio de "${activeCardData.title}" (${priceText}). ¿Cómo coordinamos los detalles?`;
+                        }
                         modalWhatsappBtn.href = `https://wa.me/393445628917?text=${encodeURIComponent(baseMsg)}`;
                         
                         // Textos de botón customizados por tipo de servicio
