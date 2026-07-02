@@ -481,17 +481,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cerrar Modal Reservas
     const closeBookingModal = () => {
-        bookingModal.classList.remove("active");
+        if (bookingModal) {
+            bookingModal.classList.remove("active");
+        }
         document.body.style.overflow = ""; // Restaurar scroll
     };
 
     if (bookingCloseBtn) bookingCloseBtn.addEventListener("click", closeBookingModal);
     
-    bookingModal.addEventListener("click", (e) => {
-        if (e.target === bookingModal) {
-            closeBookingModal();
-        }
-    });
+    if (bookingModal) {
+        bookingModal.addEventListener("click", (e) => {
+            if (e.target === bookingModal) {
+                closeBookingModal();
+            }
+        });
+    }
 
     // ==========================================
     // 6. Formulario de Contacto (Simulación Premium)
