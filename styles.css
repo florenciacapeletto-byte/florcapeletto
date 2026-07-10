@@ -54,8 +54,8 @@ html {
     max-width: 100%;
 }
 
-section[id] {
-    scroll-margin-top: 90px;
+section[id], div[id], [id] {
+    scroll-margin-top: 130px;
 }
 
 body {
@@ -83,7 +83,7 @@ a {
 
 /* Contenedores y Secciones */
 section {
-    padding: 60px 20px;
+    padding: 90px 20px;
     position: relative;
 }
 
@@ -784,7 +784,7 @@ section {
     background-color: rgba(144, 181, 163, 0.15); /* Contraste verde sabio menta suave y elegante */
     border-top: 1px solid rgba(144, 181, 163, 0.2);
     border-bottom: 1px solid rgba(144, 181, 163, 0.2);
-    padding: 50px 20px;
+    padding: 80px 20px;
     position: relative;
     overflow: hidden;
 }
@@ -2750,7 +2750,7 @@ section {
 
 @media (max-width: 992px) {
     section {
-        padding: 40px 20px;
+        padding: 60px 20px;
     }
     
     .grid-2 {
@@ -3122,6 +3122,52 @@ section {
     left: 50%;
 }
 
+.nexo-timeline-illustration {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 80px); /* Matches content width minus paddings */
+    height: 180px;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nexo-timeline-item:nth-child(odd) .nexo-timeline-illustration {
+    left: 100%;
+    padding-left: 20px;
+}
+
+.nexo-timeline-item:nth-child(even) .nexo-timeline-illustration {
+    right: 100%;
+    padding-right: 20px;
+}
+
+/* Micro-animations for Nexo Timeline Illustrations */
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(3px, -5px) scale(1.03); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes floatIcon {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(1deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.nexo-timeline-illustration svg .blob-bg {
+    transform-origin: center;
+    animation: floatBlob 6s ease-in-out infinite;
+}
+
+.nexo-timeline-illustration svg .icon-group {
+    transform-origin: center;
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
 .nexo-timeline-dot {
     position: absolute;
     width: 36px;
@@ -3311,6 +3357,10 @@ section {
         width: 100%;
         padding-left: 70px;
         padding-right: 20px;
+    }
+    
+    .nexo-timeline-illustration {
+        display: none !important;
     }
     
     .nexo-timeline-item:nth-child(even) {
