@@ -935,40 +935,36 @@ section {
 }
 
 .sobre-mi-pillars-section {
-    background-color: var(--white);
-    border: 1px solid rgba(144, 181, 163, 0.18);
-    border-radius: 20px;
-    padding: 45px;
-    box-shadow: 0 15px 40px rgba(63, 98, 91, 0.04);
+    margin-top: 60px;
     position: relative;
     z-index: 5;
 }
 
 .sobre-mi-pillars-header {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 45px;
 }
 
 .sobre-mi-pillars-header .accompagnamiento-title {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 .sobre-mi-pillars-header .accompagnamiento-desc {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-muted);
-    max-width: 700px;
+    max-width: 750px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 .sobre-mi-pillars-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-bottom: 40px;
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
 .pillar-card-horizontal {
@@ -976,63 +972,68 @@ section {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 15px;
-    padding: 25px 20px;
-    border-radius: 12px;
-    background-color: rgba(144, 181, 163, 0.04);
-    border: 1px solid rgba(144, 181, 163, 0.1);
+    gap: 20px;
+    padding: 35px 25px;
+    border-radius: 16px;
+    background-color: var(--white);
+    border: 1px solid rgba(144, 181, 163, 0.12);
+    box-shadow: 0 10px 30px rgba(63, 98, 91, 0.02);
     transition: var(--transition);
 }
 
 .pillar-card-horizontal:hover {
-    transform: translateY(-4px);
-    background-color: rgba(144, 181, 163, 0.08);
-    border-color: rgba(63, 98, 91, 0.2);
-    box-shadow: var(--shadow-sm);
+    transform: translateY(-5px);
+    border-color: rgba(63, 98, 91, 0.25);
+    box-shadow: 0 15px 35px rgba(63, 98, 91, 0.06);
 }
 
 .pillar-card-horizontal .pillar-icon {
-    width: 48px;
-    height: 48px;
-    background-color: rgba(217, 135, 87, 0.1);
+    width: 54px;
+    height: 54px;
+    background-color: rgba(217, 135, 87, 0.08);
     color: var(--accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+    transition: var(--transition);
+}
+
+.pillar-card-horizontal:hover .pillar-icon {
+    background-color: var(--accent);
+    color: var(--white);
 }
 
 .pillar-card-horizontal h5 {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--primary);
     font-weight: 600;
-    margin-bottom: 8px;
+    margin: 0;
 }
 
 .pillar-card-horizontal p {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.65;
+    margin: 0;
 }
 
 .sobre-mi-cta-centered {
     text-align: center;
-    border-top: 1px solid rgba(144, 181, 163, 0.15);
-    padding-top: 30px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .sobre-mi-cta-centered .cta-text {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 500;
     color: var(--text-main);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .sobre-mi-cta-centered .btn-primary {
-    padding: 14px 32px;
-    font-size: 0.95rem;
+    padding: 14px 35px;
+    font-size: 0.98rem;
 }
 
 /* Banner de Estadísticas Horizontal */
