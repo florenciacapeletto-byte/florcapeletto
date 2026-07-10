@@ -81,7 +81,7 @@ a {
 
 /* Contenedores y Secciones */
 section {
-    padding: 100px 20px;
+    padding: 60px 20px;
     position: relative;
 }
 
@@ -782,7 +782,7 @@ section {
     background-color: rgba(144, 181, 163, 0.15); /* Contraste verde sabio menta suave y elegante */
     border-top: 1px solid rgba(144, 181, 163, 0.2);
     border-bottom: 1px solid rgba(144, 181, 163, 0.2);
-    padding: 80px 20px;
+    padding: 50px 20px;
     position: relative;
     overflow: hidden;
 }
@@ -2748,7 +2748,7 @@ section {
 
 @media (max-width: 992px) {
     section {
-        padding: 70px 20px;
+        padding: 40px 20px;
     }
     
     .grid-2 {
