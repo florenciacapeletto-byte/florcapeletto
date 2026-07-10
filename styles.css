@@ -835,19 +835,14 @@ section {
     margin-top: 5px;
 }
 
-.sobre-mi-grid {
+.sobre-mi-bio-row {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 45px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
     align-items: stretch;
+    margin-bottom: 50px;
     position: relative;
     z-index: 5;
-}
-
-.sobre-mi-left-col {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
 }
 
 .bio-card {
@@ -856,25 +851,30 @@ section {
     border-radius: 16px;
     padding: 35px;
     box-shadow: 0 10px 30px rgba(63, 98, 91, 0.03);
-    font-size: 0.96rem;
-    line-height: 1.75;
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    justify-content: center;
+    gap: 20px;
 }
 
 .sobre-mi-fact-sheet {
     background-color: #fdfbf7; /* Fondo cálido tipo papel marfil */
     border: 1px dashed rgba(217, 135, 87, 0.45); /* Borde punteado terracota */
-    border-radius: 12px;
-    padding: 22px 28px;
+    border-radius: 16px;
+    padding: 30px;
     box-shadow: 2px 6px 20px rgba(63, 98, 91, 0.03);
     transform: rotate(-0.5deg); /* Ligera rotación orgánica */
-    max-width: 460px;
+    max-width: 100%;
     width: 100%;
-    align-self: flex-start;
+    align-self: auto;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .sobre-mi-fact-sheet:hover {
@@ -934,94 +934,105 @@ section {
     }
 }
 
-.sobre-mi-right-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.sobre-mi-pillars-section {
     background-color: var(--white);
     border: 1px solid rgba(144, 181, 163, 0.18);
-    border-radius: 16px;
-    padding: 35px;
-    box-shadow: 0 10px 30px rgba(63, 98, 91, 0.03);
+    border-radius: 20px;
+    padding: 45px;
+    box-shadow: 0 15px 40px rgba(63, 98, 91, 0.04);
+    position: relative;
+    z-index: 5;
 }
 
-.accompagnamiento-title {
-    font-size: 1.15rem;
+.sobre-mi-pillars-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.sobre-mi-pillars-header .accompagnamiento-title {
+    font-size: 1.3rem;
     color: var(--primary);
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.accompagnamiento-desc {
-    font-size: 0.92rem;
+.sobre-mi-pillars-header .accompagnamiento-desc {
+    font-size: 0.95rem;
     color: var(--text-muted);
-    line-height: 1.5;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
-.pillars-container {
+.sobre-mi-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.pillar-card-horizontal {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    margin: 10px 0;
-}
-
-.pillar-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    padding: 16px 20px;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 25px 20px;
     border-radius: 12px;
-    background-color: rgba(144, 181, 163, 0.05);
-    border: 1px solid rgba(144, 181, 163, 0.12);
+    background-color: rgba(144, 181, 163, 0.04);
+    border: 1px solid rgba(144, 181, 163, 0.1);
     transition: var(--transition);
 }
 
-.pillar-card:hover {
-    transform: translateX(5px);
-    background-color: rgba(144, 181, 163, 0.09);
-    border-color: rgba(144, 181, 163, 0.25);
-    box-shadow: 0 5px 15px rgba(63, 98, 91, 0.04);
+.pillar-card-horizontal:hover {
+    transform: translateY(-4px);
+    background-color: rgba(144, 181, 163, 0.08);
+    border-color: rgba(63, 98, 91, 0.2);
+    box-shadow: var(--shadow-sm);
 }
 
-.pillar-icon {
-    font-size: 1.45rem;
+.pillar-card-horizontal .pillar-icon {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(217, 135, 87, 0.1);
     color: var(--accent);
-    margin-top: 2px;
-}
-
-.pillar-info h5 {
-    font-size: 0.98rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 4px;
-}
-
-.pillar-info p {
-    font-size: 0.88rem;
-    color: var(--text-main);
-    line-height: 1.45;
-}
-
-.sobre-mi-cta-wrapper {
-    border-top: 1px solid rgba(144, 181, 163, 0.15);
-    padding-top: 22px;
-    margin-top: 10px;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
 }
 
-.sobre-mi-cta-wrapper .cta-text {
-    font-size: 0.92rem;
-    color: var(--text-main);
+.pillar-card-horizontal h5 {
+    font-size: 1.05rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.pillar-card-horizontal p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.sobre-mi-cta-centered {
+    text-align: center;
+    border-top: 1px solid rgba(144, 181, 163, 0.15);
+    padding-top: 30px;
+    margin-top: 10px;
+}
+
+.sobre-mi-cta-centered .cta-text {
+    font-size: 1rem;
     font-weight: 500;
-    line-height: 1.5;
+    color: var(--text-main);
+    margin-bottom: 20px;
 }
 
-.sobre-mi-cta-wrapper .btn-primary {
-    align-self: flex-start;
-    padding: 12px 28px;
-    font-size: 0.9rem;
+.sobre-mi-cta-centered .btn-primary {
+    padding: 14px 32px;
+    font-size: 0.95rem;
 }
 
 /* Banner de Estadísticas Horizontal */
@@ -1071,9 +1082,19 @@ section {
 
 /* Responsividad para la sección Sobre Mí */
 @media (max-width: 991px) {
-    .sobre-mi-grid {
+    .sobre-mi-bio-row {
         grid-template-columns: 1fr;
-        gap: 35px;
+        gap: 30px;
+        margin-bottom: 35px;
+    }
+    
+    .sobre-mi-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .sobre-mi-pillars-section {
+        padding: 30px 20px;
     }
     
     .sobre-mi-stats-banner {
@@ -2315,7 +2336,7 @@ section {
     scroll-behavior: smooth;
     scrollbar-width: none; /* Firefox */
     cursor: grab;
-    user-select: none;
+    touch-action: pan-y; /* Permite scroll vertical nativo y scroll horizontal */
     -webkit-overflow-scrolling: touch;
     padding: 15px 10px; /* Para dar margen a las sombras de las tarjetas */
 }
@@ -2327,6 +2348,8 @@ section {
 .testimonios-carousel-track.dragging {
     cursor: grabbing;
     scroll-behavior: auto; /* Evita suavizado mientras se arrastra para respuesta inmediata */
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .testimonios-carousel-track .testimonial-card {

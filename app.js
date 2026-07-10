@@ -186,11 +186,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     const navbar = document.getElementById("navbar");
     
+    let navbarTicking = false;
     window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
+        if (!navbarTicking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+                navbarTicking = false;
+            });
+            navbarTicking = true;
         }
     });
 
@@ -857,13 +864,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const timelineDots = document.querySelectorAll(".nexo-timeline-dot");
 
     if (timeline && pathFill && traveler) {
+        let cachedDotOffsets = [];
+
+        // Cachear offsets para evitar layout reflows (thrashing) en el scroll handler
+        const cacheOffsets = () => {
+            cachedDotOffsets = Array.from(timelineDots).map(dot => ({
+                element: dot,
+                offsetTop: dot.offsetTop
+            }));
+        };
+
         const updateTimelineProgress = () => {
             const rect = timeline.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
 
-            // Inicia cuando la parte superior de la sección está al 60% de alto de pantalla
             const startTrigger = viewportHeight * 0.6;
-            // Termina cuando la parte inferior de la sección está al 40% de alto de pantalla
             const endTrigger = viewportHeight * 0.4;
 
             const sectionHeight = rect.height;
@@ -877,35 +892,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 progress = Math.min(Math.max(scrolledDistance / totalDistance, 0), 1);
             }
 
-            // Altura de progreso en porcentaje
             const progressPercent = progress * 100;
             pathFill.style.height = `${progressPercent}%`;
 
-            // Posición top del viajero (Triskelion)
             const travelerTop = progress * sectionHeight;
             traveler.style.top = `${travelerTop}px`;
 
-            // Rotar el logo del triskelion a medida que avanza (hasta 360 grados)
             if (travelerLogo) {
                 const rotation = progress * 360;
                 travelerLogo.style.transform = `rotate(${rotation}deg)`;
             }
 
-            // Activar dinámicamente los círculos indicadores (dots) a medida que el viajero los pasa
-            timelineDots.forEach(dot => {
-                const dotTop = dot.offsetTop;
-                if (travelerTop >= dotTop - 10) {
-                    dot.classList.add("active");
+            cachedDotOffsets.forEach(dotInfo => {
+                if (travelerTop >= dotInfo.offsetTop - 10) {
+                    dotInfo.element.classList.add("active");
                 } else {
-                    dot.classList.remove("active");
+                    dotInfo.element.classList.remove("active");
                 }
             });
         };
 
-        // Ejecutar en scroll y en load/resize inicial
-        window.addEventListener("scroll", updateTimelineProgress);
-        window.addEventListener("resize", updateTimelineProgress);
-        setTimeout(updateTimelineProgress, 100);
+        // Scroll thottling usando requestAnimationFrame para mantener 60fps
+        let ticking = false;
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateTimelineProgress();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        cacheOffsets();
+        window.addEventListener("scroll", onScroll);
+        window.addEventListener("resize", () => {
+            cacheOffsets();
+            updateTimelineProgress();
+        });
+        
+        setTimeout(() => {
+            cacheOffsets();
+            updateTimelineProgress();
+        }, 150);
     }
 
     // ==========================================
@@ -1259,12 +1288,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // 5. Control de Arrastre con Mouse (Grab & Drag)
+            // 5. Control de Arrastre con Mouse y Táctil (Grab, Drag & Touch Swipe)
             let isDown = false;
             let startX;
             let startScrollLeft;
             let dragMoved = false;
 
+            // Arrastre con Mouse
             track.addEventListener("mousedown", (e) => {
                 isDown = true;
                 track.classList.add("dragging");
@@ -1303,6 +1333,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 track.scrollLeft = startScrollLeft - walk;
             });
+
+            // Arrastre Táctil (Touch) para garantizar scroll lateral en celulares
+            let isTouchDown = false;
+            let touchStartX;
+            let touchStartScrollLeft;
+            let touchStartY;
+
+            track.addEventListener("touchstart", (e) => {
+                isTouchDown = true;
+                track.style.scrollBehavior = "auto";
+                touchStartX = e.touches[0].pageX - track.offsetLeft;
+                touchStartY = e.touches[0].pageY;
+                touchStartScrollLeft = track.scrollLeft;
+            }, { passive: true });
+
+            track.addEventListener("touchend", () => {
+                isTouchDown = false;
+                track.style.scrollBehavior = "smooth";
+            });
+
+            track.addEventListener("touchmove", (e) => {
+                if (!isTouchDown) return;
+                const x = e.touches[0].pageX - track.offsetLeft;
+                const y = e.touches[0].pageY;
+                const walkX = (x - touchStartX) * 1.3;
+                const walkY = y - touchStartY;
+
+                // Solo prevenimos scroll vertical si el movimiento del dedo es principalmente horizontal
+                if (Math.abs(walkX) > Math.abs(walkY)) {
+                    if (e.cancelable) {
+                        e.preventDefault();
+                    }
+                    track.scrollLeft = touchStartScrollLeft - walkX;
+                }
+            }, { passive: false });
 
             // 6. Delegación de Eventos para botones "Ver más"
             track.addEventListener("click", (e) => {
