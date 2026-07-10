@@ -51,6 +51,7 @@ html {
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     width: 100%;
+    max-width: 100%;
 }
 
 section[id] {
@@ -63,6 +64,7 @@ body {
     color: var(--text-main);
     line-height: 1.7;
     overflow-x: hidden;
+    max-width: 100%;
 }
 
 /* Tipografía de Títulos */
@@ -4182,6 +4184,25 @@ section {
 
 .blog-grid .blog-card:nth-child(1) { transition-delay: 0.1s; }
 .blog-grid .blog-card:nth-child(2) { transition-delay: 0.25s; }
+
+/* Snappier scroll reveal transitions on mobile devices */
+@media (max-width: 768px) {
+    .reveal-on-scroll {
+        transform: translateY(15px);
+        transition: opacity 0.4s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                    transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    
+    /* Disable transition delays on mobile to show cards instantly together */
+    .recursos-grid-3 .recurso-card:nth-child(n),
+    .recursos-grid-2 .recurso-card:nth-child(n),
+    .recursos-grid .recurso-card:nth-child(n),
+    .pricing-grid .pricing-card:nth-child(n),
+    .specialized-grid .pricing-card:nth-child(n),
+    .blog-grid .blog-card:nth-child(n) {
+        transition-delay: 0s !important;
+    }
+}
 
 
 

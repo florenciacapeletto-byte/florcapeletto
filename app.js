@@ -192,8 +192,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const navItems = document.querySelectorAll(".nav-item, .nav-btn");
 
     mobileMenuBtn.addEventListener("click", () => {
-        mobileMenuBtn.classList.toggle("active");
+        const isActive = mobileMenuBtn.classList.toggle("active");
         navMenu.classList.toggle("active");
+        if (isActive) {
+            document.body.style.overflow = "hidden"; // Bloquear scroll de fondo
+        } else {
+            document.body.style.overflow = ""; // Restaurar scroll
+        }
     });
 
     // Cerrar menú al hacer clic en un enlace
@@ -201,6 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener("click", () => {
             mobileMenuBtn.classList.remove("active");
             navMenu.classList.remove("active");
+            document.body.style.overflow = ""; // Restaurar scroll al cerrar
         });
     });
 
