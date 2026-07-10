@@ -166,6 +166,16 @@ document.addEventListener("DOMContentLoaded", () => {
             logEvent("click", socialName);
             return;
         }
+
+        // 8. Clic en "Conversar sobre mi caso" (Áreas de Acompañamiento)
+        const inquiryBtn = e.target.closest('#servicios-home .btn-card-action-premium');
+        if (inquiryBtn) {
+            const card = inquiryBtn.closest('.recurso-card');
+            const cardTitle = card ? card.querySelector('h3').innerText : "unknown";
+            const sanitizedTitle = cardTitle.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9_]/g, "_");
+            logEvent("click", `click_inquiry_${sanitizedTitle}`);
+            return;
+        }
     });
 
     // Enlace permanente de Google Meet para sesiones de diagnóstico
