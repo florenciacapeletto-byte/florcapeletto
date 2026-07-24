@@ -854,88 +854,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================
-    // 11. Animación Interactiva de la Línea de Tiempo del Método NEXO
-    // ==========================================
-    const timeline = document.querySelector(".nexo-timeline");
-    const pathFill = document.getElementById("nexo-path-fill");
-    const traveler = document.getElementById("nexo-traveler");
-    const travelerLogo = traveler ? traveler.querySelector(".nexo-traveler-logo") : null;
-    const timelineDots = document.querySelectorAll(".nexo-timeline-dot");
 
-    if (timeline && pathFill && traveler) {
-        let cachedDotOffsets = [];
-
-        // Cachear offsets para evitar layout reflows (thrashing) en el scroll handler
-        const cacheOffsets = () => {
-            cachedDotOffsets = Array.from(timelineDots).map(dot => ({
-                element: dot,
-                offsetTop: dot.offsetTop
-            }));
-        };
-
-        const updateTimelineProgress = () => {
-            const rect = timeline.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-
-            const startTrigger = viewportHeight * 0.6;
-            const endTrigger = viewportHeight * 0.4;
-
-            const sectionHeight = rect.height;
-            const sectionTop = rect.top;
-
-            let progress = 0;
-
-            if (sectionTop < startTrigger) {
-                const scrolledDistance = startTrigger - sectionTop;
-                const totalDistance = sectionHeight + startTrigger - endTrigger;
-                progress = Math.min(Math.max(scrolledDistance / totalDistance, 0), 1);
-            }
-
-            const progressPercent = progress * 100;
-            pathFill.style.height = `${progressPercent}%`;
-
-            const travelerTop = progress * sectionHeight;
-            traveler.style.top = `${travelerTop}px`;
-
-            if (travelerLogo) {
-                const rotation = progress * 360;
-                travelerLogo.style.transform = `rotate(${rotation}deg)`;
-            }
-
-            cachedDotOffsets.forEach(dotInfo => {
-                if (travelerTop >= dotInfo.offsetTop - 10) {
-                    dotInfo.element.classList.add("active");
-                } else {
-                    dotInfo.element.classList.remove("active");
-                }
-            });
-        };
-
-        // Scroll thottling usando requestAnimationFrame para mantener 60fps
-        let ticking = false;
-        const onScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateTimelineProgress();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        cacheOffsets();
-        window.addEventListener("scroll", onScroll);
-        window.addEventListener("resize", () => {
-            cacheOffsets();
-            updateTimelineProgress();
-        });
-        
-        setTimeout(() => {
-            cacheOffsets();
-            updateTimelineProgress();
-        }, 150);
-    }
 
     // ==========================================
     // 7. Lógica Especial de la Página de Servicios y Precios (servicios.html)
@@ -1087,9 +1006,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         modalWhatsappBtn.href = `https://wa.me/393445628917?text=${encodeURIComponent(baseMsg)}`;
                         
                         // Textos de botón customizados por tipo de servicio
-                        if (cardKey === "nexo") {
-                            modalWhatsappBtn.innerHTML = `Aplicar al Programa <i class="fa-solid fa-arrow-right"></i>`;
-                        } else if (cardKey === "migracion") {
+                        if (cardKey === "migracion") {
                             modalWhatsappBtn.innerHTML = `Contratar Programa <i class="fa-solid fa-arrow-right"></i>`;
                         } else if (cardKey === "insercion") {
                             modalWhatsappBtn.innerHTML = `Contratar Pack <i class="fa-solid fa-arrow-right"></i>`;

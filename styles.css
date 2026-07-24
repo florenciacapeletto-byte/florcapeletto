@@ -4298,6 +4298,139 @@ section {
     }
 }
 
+/* ==========================================
+   ESTILOS DE LA HERRAMIENTA: ESCÁNER DE CV
+   ========================================== */
+.escaner-body {
+    background-color: var(--bg-main);
+}
+
+.escaner-card {
+    background-color: var(--white);
+    border: 1px solid rgba(144, 181, 163, 0.18);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(63, 98, 91, 0.04);
+}
+
+.cv-dropzone:hover {
+    border-color: var(--primary) !important;
+    background-color: rgba(144, 181, 163, 0.08) !important;
+}
+
+.cv-dropzone:hover .dropzone-icon-wrapper {
+    transform: scale(1.1);
+}
+
+/* Animación del láser del escáner */
+@keyframes laserScan {
+    0% {
+        top: 0;
+        opacity: 0.3;
+    }
+    50% {
+        top: 100%;
+        opacity: 1;
+    }
+    100% {
+        top: 0;
+        opacity: 0.3;
+    }
+}
+
+/* Efecto hover en botones de pestañas */
+.tab-btn {
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: var(--primary) !important;
+}
+
+/* Listas de resultados (Fortalezas y Debilidades) */
+.results-list li {
+    padding: 10px 14px;
+    background-color: rgba(78, 96, 116, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(78, 96, 116, 0.05);
+}
+
+/* Checkboxes interactivos de Plan de Acción */
+.action-checklist li {
+    transition: all 0.3s ease;
+}
+
+.action-checklist input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Adaptabilidad Móvil */
+@media (max-width: 768px) {
+    .escaner-split-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+    
+    .questionnaire-side {
+        border-left: none !important;
+        padding-left: 0 !important;
+        border-top: 1px solid rgba(144, 181, 163, 0.15) !important;
+        padding-top: 30px !important;
+    }
+    
+    #step-results {
+        gap: 25px !important;
+    }
+
+    #step-results > div:first-child {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+        padding: 30px 20px !important;
+        text-align: center !important;
+    }
+
+    .tabs-header {
+        gap: 15px !important;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .tab-btn {
+        font-size: 0.85rem !important;
+        white-space: nowrap;
+    }
+
+    #tab-breakdown > div {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    #tab-checklists > div {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+    
+    .escaner-card {
+        padding: 25px 20px !important;
+    }
+
+    .escaner-card[style*="background-color: var(--primary)"] {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+        padding: 35px 20px !important;
+        text-align: center !important;
+    }
+    
+    .escaner-card[style*="background-color: var(--primary)"] button {
+        width: 100% !important;
+        justify-content: center;
+    }
+}
+
+
 
 
 
