@@ -676,6 +676,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "3. <strong>Abrazar la imperfección:</strong> La reinvención y el crecimiento profesional no son caminos lineales. Habrá días intensos, días de acción y días donde tirar el celular a un lado sea lo más sano.",
                 "Equilibrar la balanza no es lograr una estabilidad perfecta todos los días. Es aprender a escuchar nuestro cuerpo, validar el cansancio sin juzgarlo y entender que cuidar nuestra energía no es un lujo, sino la única estrategia sostenible para sostener nuestra carrera en el largo plazo.",
                 "Así que, si hoy fue uno de esos días intensos, permítete tirar el celular a un lado, cerrar los ojos y descansar en serio. Tu carrera te lo agradecerá."
+            ]
         },
         claridad: {
             title: "Pausar para ver: La claridad no llega en medio del ruido",
