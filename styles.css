@@ -83,7 +83,7 @@ a {
 
 /* Contenedores y Secciones */
 section {
-    padding: 90px 20px;
+    padding: 70px 20px;
     position: relative;
 }
 
@@ -104,7 +104,7 @@ section {
 .section-header {
     text-align: center;
     max-width: 700px;
-    margin: 0 auto 60px auto;
+    margin: 0 auto 40px auto;
 }
 
 .section-tagline {
@@ -297,13 +297,14 @@ section {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 85vh; /* Reduced height to avoid massive empty space on large screens */
     display: flex;
     align-items: center;
-    padding-top: 130px;
-    padding-bottom: 60px;
-    background: radial-gradient(circle at 80% 20%, rgba(144, 181, 163, 0.15) 0%, rgba(252, 251, 249, 0) 50%),
-                radial-gradient(circle at 10% 80%, rgba(249, 229, 228, 0.25) 0%, rgba(252, 251, 249, 0) 60%);
+    padding-top: 110px; /* Tightened padding */
+    padding-bottom: 50px;
+    background: radial-gradient(circle at 85% 20%, rgba(144, 181, 163, 0.18) 0%, rgba(252, 251, 249, 0) 60%),
+                radial-gradient(circle at 15% 80%, rgba(249, 229, 228, 0.28) 0%, rgba(252, 251, 249, 0) 70%),
+                var(--bg-warm);
 }
 
 .hero-container {
@@ -781,12 +782,187 @@ section {
 }
 
 .quien-soy {
-    background-color: rgba(144, 181, 163, 0.15); /* Contraste verde sabio menta suave y elegante */
-    border-top: 1px solid rgba(144, 181, 163, 0.2);
-    border-bottom: 1px solid rgba(144, 181, 163, 0.2);
-    padding: 80px 20px;
+    background-color: #EBF2EE; /* Solid light sage green for a defined section block */
+    border-top: 1px solid rgba(144, 181, 163, 0.25);
+    border-bottom: 1px solid rgba(144, 181, 163, 0.25);
+    padding: 70px 20px;
     position: relative;
     overflow: hidden;
+}
+
+/* Marca de agua celta decorativa para fondos */
+.sobre-mi-bg-watermark {
+    position: absolute;
+    top: -5%;
+    right: -5%;
+    width: 320px;
+    height: 320px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+    transform: rotate(15deg);
+}
+
+.sobre-mi-bg-watermark img,
+.testimonios-bg-watermark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.testimonios-bg-watermark {
+    position: absolute;
+    bottom: -5%;
+    left: -5%;
+    width: 320px;
+    height: 320px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+    transform: rotate(-15deg);
+}
+
+/* Layout de Marca Personal - 2 Columnas */
+.sobre-mi-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 5;
+}
+
+.sobre-mi-image-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 15px;
+}
+
+.sobre-mi-image-wrapper-new {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 4 / 5; /* Elegant portrait aspect ratio */
+    border-radius: 20px;
+    overflow: hidden; /* Clips the photo to the rounded corners */
+    border: 8px solid var(--white); /* White elegant frame like an art print */
+    box-shadow: 0 15px 35px rgba(63, 98, 91, 0.12); /* Smooth premium drop shadow */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background-color: var(--white);
+}
+
+.sobre-mi-image-wrapper-new:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(63, 98, 91, 0.18);
+}
+
+.organic-blob-bg {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background-color: var(--secondary);
+    border-radius: 60% 40% 50% 50% / 50% 50% 50% 60%;
+    opacity: 0.22;
+    z-index: 1; /* Sits behind the wrapper */
+    top: -5px;
+    left: calc(50% - 150px);
+    animation: blob-bounce 8s infinite ease-in-out;
+}
+
+.sobre-mi-photo-new {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fills the frame perfectly without distortion */
+    display: block;
+}
+
+@keyframes blob-bounce {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(6px, -10px) scale(1.03); border-radius: 40% 60% 50% 50% / 40% 40% 60% 60%; }
+}
+
+.sobre-mi-content-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sobre-mi-bio-text {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: var(--text-main);
+}
+
+.bio-lead {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.sobre-mi-bio-text p {
+    margin-bottom: 15px;
+}
+
+.sobre-mi-bio-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Grilla de Datos Clave Integrada (Montserrat) */
+.sobre-mi-highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    background-color: var(--white);
+    border: 1px solid rgba(144, 181, 163, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.highlight-icon {
+    width: 42px;
+    height: 42px;
+    background-color: rgba(217, 135, 87, 0.08);
+    color: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.highlight-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.highlight-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    margin-bottom: 2px;
+}
+
+.highlight-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
 }
 
 .quien-soy .grid-2 {
@@ -815,16 +991,16 @@ section {
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 76%, rgba(0,0,0,0) 100%);
 }
 
-/* Sobre Mí - Sección Dinámica y Balanceada Sin Foto */
+/* Sobre Mí - Sección Dinámica y Balanceada */
 .sobre-mi-header-container {
     text-align: center;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
     position: relative;
     z-index: 5;
 }
 
 .sobre-mi-header-container .section-title {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .sobre-mi-header-container .bio-subtitle {
@@ -834,108 +1010,12 @@ section {
     color: var(--accent);
     margin-top: 5px;
 }
-
-.sobre-mi-bio-row {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 40px;
-    align-items: stretch;
-    margin-bottom: 50px;
-    position: relative;
-    z-index: 5;
-}
-
-.bio-card {
-    background-color: var(--white);
-    border: 1px solid rgba(144, 181, 163, 0.18);
-    border-radius: 16px;
-    padding: 35px;
-    box-shadow: 0 10px 30px rgba(63, 98, 91, 0.03);
-    font-size: 0.98rem;
-    line-height: 1.8;
-    color: var(--text-main);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-}
-
-.sobre-mi-fact-sheet {
-    background-color: #fdfbf7; /* Fondo cálido tipo papel marfil */
-    border: 1px dashed rgba(217, 135, 87, 0.45); /* Borde punteado terracota */
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 2px 6px 20px rgba(63, 98, 91, 0.03);
-    transform: rotate(-0.5deg); /* Ligera rotación orgánica */
-    max-width: 100%;
-    width: 100%;
-    align-self: auto;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.sobre-mi-fact-sheet:hover {
-    transform: rotate(0deg) scale(1.01);
-    box-shadow: 4px 8px 25px rgba(63, 98, 91, 0.06);
-}
-
-.note-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.note-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.check-handwritten {
-    color: var(--accent); /* Terracota */
-    font-size: 0.8rem;
-    margin-top: 6px; /* Alinear con el texto cursivo */
-    flex-shrink: 0;
-}
-
-.note-text {
-    font-family: 'Oooh Baby', cursive;
-    font-size: 1.35rem; /* La tipografía manuscrita es fina y requiere mayor tamaño */
-    color: var(--primary); /* Verde bosque */
-    line-height: 1.35;
-    font-weight: 500;
-}
-
-.note-text strong {
-    font-family: var(--font-body); /* Montserrat */
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--accent); /* Terracota */
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-right: 6px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-@media (max-width: 480px) {
-    .sobre-mi-fact-sheet {
-        padding: 18px 20px;
-        transform: rotate(0deg); /* Quitar rotación en móviles muy pequeños */
-    }
-    .note-text {
         font-size: 1.25rem;
     }
 }
 
 .sobre-mi-pillars-section {
-    margin-top: 60px;
+    margin-top: 30px;
     position: relative;
     z-index: 5;
 }
@@ -1045,7 +1125,7 @@ section {
     color: var(--text-white);
     border-radius: 16px;
     padding: 35px 25px;
-    margin-top: 60px;
+    margin-top: 35px;
     box-shadow: var(--shadow-md);
     position: relative;
     z-index: 5;
@@ -1083,10 +1163,18 @@ section {
 
 /* Responsividad para la sección Sobre Mí */
 @media (max-width: 991px) {
-    .sobre-mi-bio-row {
+    .sobre-mi-main-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
-        margin-bottom: 35px;
+        gap: 35px;
+    }
+    
+    .sobre-mi-photo-new {
+        max-height: 360px;
+    }
+    
+    .organic-blob-bg {
+        width: 240px;
+        height: 240px;
     }
     
     .sobre-mi-pillars-grid {
@@ -1334,9 +1422,9 @@ section {
 
 /* Sección Blog */
 .blog {
-    background-color: rgba(144, 181, 163, 0.14); /* Verde sabio menta sólido para separar con Recursos */
-    border-top: 1px solid rgba(144, 181, 163, 0.22);
-    border-bottom: 1px solid rgba(144, 181, 163, 0.22);
+    background-color: #E9EFEA; /* Defined soft minty sage green */
+    border-top: 1px solid rgba(144, 181, 163, 0.25);
+    border-bottom: 1px solid rgba(144, 181, 163, 0.25);
 }
 
 .blog-grid {
@@ -2295,9 +2383,11 @@ section {
    Sección de Testimonios
    ========================================================================== */
 .testimonios {
-    background-color: rgba(249, 229, 228, 0.32); /* Contraste rosa durazno cálido sólido y sofisticado */
-    border-top: 1px solid rgba(249, 229, 228, 0.4);
-    border-bottom: 1px solid rgba(249, 229, 228, 0.4);
+    background-color: #F6EEEB; /* Solid defined warm peach-rose backdrop */
+    border-top: 1px solid rgba(217, 135, 87, 0.18);
+    border-bottom: 1px solid rgba(217, 135, 87, 0.18);
+    position: relative;
+    overflow: hidden;
 }
 
 /* Testimonios Carousel (Interactive Slider) */

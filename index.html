@@ -110,6 +110,11 @@
 
     <!-- Sobre Mí Section (Quién Soy + Método Integrado) -->
     <section class="quien-soy" id="sobre-mi">
+        <!-- Marca de agua decorativa de fondo -->
+        <div class="sobre-mi-bg-watermark">
+            <img src="assets/logo_transparent.png" alt="watermark">
+        </div>
+        
         <div class="section-container">
             
             <!-- Encabezado de la Sección -->
@@ -119,35 +124,50 @@
                 <h3 class="bio-subtitle">Estratega de Carrera & Reinvención Profesional</h3>
             </div>
 
-            <!-- Bloque 1: Bio & Ficha Técnica (2 Columnas Balanceadas) -->
-            <div class="sobre-mi-bio-row">
-                <!-- Bio Text -->
-                <div class="bio-card reveal-on-scroll">
-                    <p>Acompaño a profesionales que llegaron a un punto de quiebre: ese momento en que el camino construido ya no los representa y necesitan encontrar un nuevo rumbo con claridad y confianza.</p>
-                    
-                    <p>Como profesional de RR.HH. con más de diez años de experiencia &mdash;y sumando mi propia historia de cambio y migraci&oacute;n&mdash; entendí que reinventarse no es solo cambiar de trabajo. Es animarse a revisar quiénes somos, qué priorizamos hoy y cómo queremos vivir nuestra vida profesional.</p>
+            <!-- Bloque 1: Bio & Imagen (2 Columnas Balanceadas de Marca Personal) -->
+            <div class="sobre-mi-main-grid">
+                <!-- Columna Izquierda: Foto de Flor -->
+                <div class="sobre-mi-image-column reveal-on-scroll">
+                    <div class="organic-blob-bg"></div>
+                    <div class="sobre-mi-image-wrapper-new">
+                        <img src="assets/flor_sobre_mi.jpg" alt="Flor Capeletto" class="sobre-mi-photo-new">
+                    </div>
                 </div>
-                
-                <!-- Handwritten Fact Sheet -->
-                <div class="sobre-mi-fact-sheet hand-written-note reveal-on-scroll">
-                    <ul class="note-list">
-                        <li>
-                            <i class="fa-solid fa-check check-handwritten"></i>
-                            <span class="note-text"><strong>Experiencia:</strong> +10 años impulsando personas, equipos y trayectorias profesionales.</span>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check check-handwritten"></i>
-                            <span class="note-text"><strong>Formación:</strong> Gestión del Capital Humano, Administración Organizacional y Desarrollo Profesional.</span>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check check-handwritten"></i>
-                            <span class="note-text"><strong>Mi motor:</strong> Ayudar a las personas a construir carreras alineadas con su bienestar.</span>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-check check-handwritten"></i>
-                            <span class="note-text"><strong>Enfoque:</strong> Estrategia clara, mirada integral y herramientas prácticas.</span>
-                        </li>
-                    </ul>
+
+                <!-- Columna Derecha: Bio + Datos Clave -->
+                <div class="sobre-mi-content-column reveal-on-scroll">
+                    <div class="sobre-mi-bio-text">
+                        <p class="bio-lead">Acompaño a profesionales a trazar un nuevo rumbo laboral con claridad, estrategia y seguridad en sí mismos.</p>
+                        
+                        <p>Cuento con más de diez años de trayectoria en el ámbito corporativo, donde me desempeñé en áreas operativas y de coordinación de ventas antes de especializarme en la gestión del ciclo de talento y Recursos Humanos. Esta doble perspectiva —el entendimiento de la dinámica del negocio y el conocimiento exacto de lo que busca un reclutador— enriquece mi mirada y es el mayor valor que pongo a tu disposición.</p>
+                        
+                        <p>Tras vivir mi propio proceso de migración y transición de carrera, en 2024 decidí volcar toda esta experiencia para trabajar de forma independiente como mentora. Hoy fusiono metodologías técnicas de empleabilidad con un acompañamiento centrado en el bienestar del profesional, asegurando que tu reinvención sea sólida, viable y fiel a lo que eres hoy.</p>
+                    </div>
+
+                    <!-- Datos Clave Integrados en un Grid de Alto Impacto -->
+                    <div class="sobre-mi-highlights-grid">
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <div class="highlight-details">
+                                <span class="highlight-title">Experiencia</span>
+                                <span class="highlight-value">+10 años en el ámbito corporativo y Mentora de Carrera desde 2024</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="highlight-details">
+                                <span class="highlight-title">Formación</span>
+                                <span class="highlight-value">Gestión del Capital Humano y Administración de Empresas</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fa-solid fa-sliders"></i></div>
+                            <div class="highlight-details">
+                                <span class="highlight-title">Mi Enfoque</span>
+                                <span class="highlight-value">Estrategia personalizada, herramientas prácticas y mirada integral</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -190,9 +210,9 @@
                 <!-- CTA Centrado -->
                 <div class="sobre-mi-cta-centered">
                     <p class="cta-text">Creo que cada transición es una oportunidad de crecimiento. Si estás en ese momento, estás en el lugar correcto.</p>
-                    <button class="btn-primary open-booking-btn" style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; border: none; font-family: inherit; font-size: 0.95rem; font-weight: 600;">
+                    <a href="#contacto" class="btn-primary" style="display: inline-flex; align-items: center; gap: 10px; font-family: inherit; font-size: 0.95rem; font-weight: 600; text-decoration: none;">
                         Conversemos <i class="fa-solid fa-comments"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -200,7 +220,7 @@
             <div class="sobre-mi-stats-banner reveal-on-scroll">
                 <div class="stat-banner-item">
                     <span class="stat-banner-num">10+</span>
-                    <span class="stat-banner-lbl">Años de experiencia en Recursos Humanos</span>
+                    <span class="stat-banner-lbl">Años de trayectoria corporativa y de gestión</span>
                 </div>
                 <div class="stat-banner-divider"></div>
                 <div class="stat-banner-item">
@@ -221,6 +241,11 @@
 
     <!-- Testimonios Section -->
     <section class="testimonios" id="testimonios">
+        <!-- Marca de agua decorativa de fondo contraria -->
+        <div class="testimonios-bg-watermark">
+            <img src="assets/logo_transparent.png" alt="watermark">
+        </div>
+        
         <div class="section-container">
             <div class="section-header reveal-on-scroll">
                 <span class="section-tagline">Impacto y Resultados Reales</span>
@@ -487,7 +512,7 @@
     </section>
 
     <!-- Sección 1: Áreas de Acompañamiento (Vitrina de Metodología y Enfoque) -->
-    <section class="recursos" id="servicios-home" style="background-color: var(--white); border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: 1px solid rgba(78, 96, 116, 0.08);">
+    <section class="recursos" id="servicios-home" style="background-color: #FFFFFF; border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: 1px solid rgba(78, 96, 116, 0.08); padding: 70px 20px;">
         <div class="section-container">
             <div class="section-header reveal-on-scroll">
                 <span class="section-tagline">Desarrollo y Estrategia Profesional</span>
@@ -598,7 +623,7 @@
     -->
 
     <!-- Sección 3: Recursos Gratis -->
-    <section class="recursos" id="recursos-gratis" style="background-color: rgba(249, 229, 228, 0.28); border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: none; padding-top: 50px; padding-bottom: 50px;">
+    <section class="recursos" id="recursos-gratis" style="background-color: #FAF1EE; border-bottom: 1px solid rgba(78, 96, 116, 0.08); border-top: none; padding: 70px 20px;">
         <div class="section-container">
             <div class="section-header reveal-on-scroll">
                 <span class="section-tagline">Herramientas de Descarga Inmediata</span>
