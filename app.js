@@ -383,13 +383,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalSuccessBookingBtn) {
         modalSuccessBookingBtn.addEventListener("click", () => {
             closeLeadModal(); // Cerrar el modal actual de lead
-            setTimeout(() => {
-                // Abrir el modal de reserva (Calendly)
-                if (typeof bookingModal !== "undefined" && bookingModal) {
-                    bookingModal.classList.add("active");
-                    document.body.style.overflow = "hidden";
-                }
-            }, 350); // Pequeño delay para que la transición visual sea suave
         });
     }
 
@@ -488,37 +481,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 5. Sistema de Reserva de Sesión Lunes Gratis
+    // 5. Redirección a WhatsApp para Sesión Gratuita
     // ==========================================
-    const bookingModal = document.getElementById("booking-modal");
-    const bookingCloseBtn = document.getElementById("booking-close-btn");
     const openBookingButtons = document.querySelectorAll(".open-booking-btn");
     
-    // Abrir Modal de Reservas (Bindeado a todos los botones correspondientes)
     openBookingButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            bookingModal.classList.add("active");
-            document.body.style.overflow = "hidden"; // Evitar scroll del fondo
-        });
-    });
-
-    // Cerrar Modal Reservas
-    const closeBookingModal = () => {
-        if (bookingModal) {
-            bookingModal.classList.remove("active");
-        }
-        document.body.style.overflow = ""; // Restaurar scroll
-    };
-
-    if (bookingCloseBtn) bookingCloseBtn.addEventListener("click", closeBookingModal);
-    
-    if (bookingModal) {
-        bookingModal.addEventListener("click", (e) => {
-            if (e.target === bookingModal) {
-                closeBookingModal();
+        btn.addEventListener("click", (e) => {
+            if (btn.tagName !== 'A') {
+                e.preventDefault();
+                window.open("https://wa.me/393445628917?text=%C2%A1Hola%20Flor!%20Me%20gustar%C3%ADa%20coordinar%20una%20sesi%C3%B3n%20gratuita%20de%20diagn%C3%B3stico.", "_blank");
             }
         });
-    }
+    });
 
     // ==========================================
     // 6. Formulario de Contacto (Simulación Premium)

@@ -45,10 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const reScanBtn = document.getElementById("re-scan-btn");
 
-    // Modal Booking Elements
-    const bookingModal = document.getElementById("booking-modal");
-    const bookingCloseBtn = document.getElementById("booking-close-btn");
-
     // Modal Legal Elements
     const legalModal = document.getElementById("legal-modal");
     const legalCloseBtn = document.getElementById("legal-close-btn");
@@ -72,24 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Modal de Reserva (Calendly)
+    // Redirección a WhatsApp para Reservas
     document.addEventListener("click", (e) => {
         const btn = e.target.closest(".open-booking-btn");
-        if (btn) {
+        if (btn && btn.tagName !== 'A') {
             e.preventDefault();
-            if (bookingModal) {
-                bookingModal.classList.add("active");
-                document.body.style.overflow = "hidden";
-            }
+            window.open("https://wa.me/393445628917?text=%C2%A1Hola%20Flor!%20Utilic%C3%A9%20el%20Esc%C3%A1ner%20de%20CV%20y%20me%20gustar%C3%ADa%20coordinar%20una%20sesi%C3%B3n%20de%20consulta%20sin%20costo%20por%20WhatsApp.", "_blank");
         }
     });
-
-    if (bookingCloseBtn && bookingModal) {
-        bookingCloseBtn.addEventListener("click", () => {
-            bookingModal.classList.remove("active");
-            document.body.style.overflow = "";
-        });
-    }
 
     // Modal de Aviso Legal
     if (openLegalBtn && legalModal) {
@@ -112,10 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cerrar modales clickeando afuera
     window.addEventListener("click", (e) => {
-        if (e.target === bookingModal) {
-            bookingModal.classList.remove("active");
-            document.body.style.overflow = "";
-        }
         if (e.target === legalModal) {
             legalModal.classList.remove("active");
             document.body.style.overflow = "";
