@@ -32,8 +32,8 @@
     <!-- Sticky Navigation Bar -->
     <header class="navbar" id="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="navbar-logo-link" style="display: flex; align-items: center; gap: 10px;">
-                <img src="assets/logo_transparent.png" alt="Flor Capeletto Logo" class="navbar-logo">
+            <a href="index.html" class="navbar-logo-link" id="nav-logo-link" style="display: flex; align-items: center; gap: 10px;">
+                <img src="assets/logo_transparent.png" alt="Flor Capeletto Logo" class="navbar-logo" id="nav-logo">
                 <span class="brand-signature navbar-brand-logo">
                     <span class="brand-cursive">Flor</span>
                     <span class="brand-print">CAPELETTO</span>
@@ -48,7 +48,6 @@
             
             <nav class="nav-menu" id="nav-menu">
                 <a href="index.html#sobre-mi" class="nav-item">Sobre Mí</a>
-                <a href="index.html#metodo" class="nav-item">Cómo Trabajo</a>
                 <a href="index.html#recursos-gratis" class="nav-item">Recursos Gratis</a>
                 <a href="escaner-cv.html" class="nav-item active" style="position: relative; display: inline-flex; align-items: center;">Escáner de CV <span class="nav-badge" style="background-color: var(--accent); color: var(--white); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; padding: 2px 5px; border-radius: 10px; margin-left: 5px; letter-spacing: 0.3px;">Gratis</span></a>
                 <a href="index.html#blog" class="nav-item">Reflexiones</a>
@@ -131,23 +130,10 @@
                                     <option value="es">Español</option>
                                     <option value="en">Inglés</option>
                                     <option value="both">Ambos (Dos versiones / Idioma mixto)</option>
+                                    <option value="auto">Otros (Detección automática)</option>
                                 </select>
                             </div>
-                            
-                            <!-- Question 3 -->
-                            <div class="q-group">
-                                <label style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--primary); margin-bottom: 6px;">¿Incluye elementos visuales complejos?</label>
-                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: -4px 0 6px 0; line-height: 1.3;">Por ejemplo: gráficos de barras de habilidades (%), tablas con bordes, dos columnas de texto estrechas o iconos decorativos de colores.</p>
-                                <div style="display: flex; gap: 15px;">
-                                    <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-main); cursor: pointer;">
-                                        <input type="radio" name="q-design" value="yes" style="accent-color: var(--primary);"> Sí, tiene barras/tablas
-                                    </label>
-                                    <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-main); cursor: pointer;">
-                                        <input type="radio" name="q-design" value="no" checked style="accent-color: var(--primary);"> No, diseño clásico y plano
-                                    </label>
-                                </div>
-                            </div>
-                            
+                             
                             <!-- Question 4: Job Description (Optional) -->
                             <div class="q-group">
                                 <label style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--primary); margin-bottom: 6px;">¿Quieres medir tu afinidad con una oferta? (Opcional)</label>
@@ -669,7 +655,6 @@
                 <ul>
                     <li><a href="index.html#home">Inicio</a></li>
                     <li><a href="index.html#sobre-mi">Sobre Mí</a></li>
-                    <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="index.html#recursos-gratis">Recursos Gratis</a></li>
                     <li><a href="escaner-cv.html" class="active">Escáner de CV <span style="color: var(--accent); font-weight: 700; font-size: 0.75rem;">(Gratis)</span></a></li>
                     <li><a href="index.html#blog">Reflexiones</a></li>

@@ -239,13 +239,36 @@ document.addEventListener("DOMContentLoaded", () => {
             const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             pageCount = pdf.numPages;
 
+            let leftColCount = 0;
+            let rightColCount = 0;
+
             for (let i = 1; i <= pageCount; i++) {
                 updateLoadingStatus(`Extrayendo texto de la página ${i} de ${pageCount}...`, 30 + Math.floor((i / pageCount) * 20));
                 const page = await pdf.getPage(i);
                 const textContent = await page.getTextContent();
+                
+                // Track horizontal coordinates of text elements to detect multi-column design
+                textContent.items.forEach(item => {
+                    const x = item.transform[4];
+                    if (x > 35 && x < 240) {
+                        leftColCount++;
+                    } else if (x > 310 && x < 560) {
+                        rightColCount++;
+                    }
+                });
+
                 const pageText = textContent.items.map(item => item.str).join(" ");
                 extractedText += pageText + "\n";
             }
+
+            // Detección de caracteres de barras de nivel de habilidad o tablas
+            const specialSymbolsRegex = /[●○■□★☆]|[|│┃]/g;
+            const symbolMatches = extractedText.match(specialSymbolsRegex) || [];
+            const hasGridSymbols = symbolMatches.length >= 3;
+            
+            // Si hay un volumen importante de texto en ambas columnas (típico de plantilla a 2 columnas)
+            const hasTwoColumns = leftColCount > 15 && rightColCount > 15;
+            const qDesign = (hasTwoColumns || hasGridSymbols) ? "yes" : "no";
 
             updateLoadingStatus("Procesando heurísticas de ATS...", 65);
             await sleep(400); // Dar sensación de escaneo real
@@ -256,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
             updateLoadingStatus("Generando informe interactivo final...", 95);
             await sleep(300);
 
-            // Ejecutar el motor de análisis
-            runCVAnalysis(extractedText, pageCount);
+            // Ejecutar el motor de análisis pasando qDesign detectado automáticamente
+            runCVAnalysis(extractedText, pageCount, qDesign);
 
         } catch (error) {
             console.error("Error al extraer texto del PDF:", error);
@@ -347,11 +370,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 4. Motor de Heurísticas y Análisis del CV
     // ==========================================
-    const runCVAnalysis = (text, pages) => {
+    const runCVAnalysis = (text, pages, qDesign) => {
         // Parámetros del Formulario
         const qPhoto = document.querySelector('input[name="q-photo"]:checked').value;
         const qLang = document.getElementById("q-lang").value;
-        const qDesign = document.querySelector('input[name="q-design"]:checked').value;
         const qJobDesc = document.getElementById("q-job-desc") ? document.getElementById("q-job-desc").value.trim() : "";
 
         // Normalizar texto
@@ -627,7 +649,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             
             const cvLanguageDetected = cvEnglishHits > cvSpanishHits ? "en" : "es";
-            const finalCvLang = (qLang === "en" || cvLanguageDetected === "en") ? "en" : "es";
+            let finalCvLang = cvLanguageDetected;
+            if (qLang === "en") {
+                finalCvLang = "en";
+            } else if (qLang === "es") {
+                finalCvLang = "es";
+            } else if (qLang === "both" || qLang === "auto") {
+                finalCvLang = cvLanguageDetected;
+            }
 
             // --- Análisis de Idiomas ---
             let langRequired = "No especificado";
